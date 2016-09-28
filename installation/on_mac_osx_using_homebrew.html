@@ -36,7 +36,7 @@
     <body>
         
         
-    <div class="book" data-level="1.4" data-basepath=".." data-revision="Wed Sep 28 2016 08:33:57 GMT+0000 (UTC)">
+    <div class="book" data-level="1.4" data-basepath=".." data-revision="Wed Sep 28 2016 09:11:43 GMT+0000 (UTC)">
     
 
 <div class="book-summary">
@@ -2142,10 +2142,12 @@
 brew install crystal-lang
 </code></pre><p>&#x5982;&#x679C;&#x6253;&#x7B97;&#x8CA2;&#x737B;&#x9019;&#x500B;&#x5C08;&#x6848;&#xFF0C;&#x90A3;&#x9EBC;&#x6211;&#x5011;&#x4E5F;&#x53EF;&#x4EE5;&#x540C;&#x6642;&#x5B89;&#x88DD; LLVM&#xFF0C;&#x9019;&#x662F;&#x5F88;&#x6709;&#x5E6B;&#x52A9;&#x7684;&#x3002;&#x53EA;&#x8981;&#x7528;&#x4E0B;&#x9762;&#x7684;&#x6307;&#x4EE4;&#x4F86;&#x66FF;&#x63DB;&#x6700;&#x5F8C;&#x4E00;&#x884C;&#xFF1A;</p>
 <pre><code>brew install crystal-lang --with-llvm
-</code></pre><h2 id="troubleshooting-on-osx-10-11-el-capitan">Troubleshooting on OSX 10.11 (El Capitan)</h2>
-<p>If you get an error like:</p>
-<pre><code>ld: library not found for -levent
-</code></pre><p>you need to reinstall the command line tools and then select the default active toolchain:</p>
+</code></pre><h2 id="%E7%96%91%E9%9B%A3%E6%8E%92%E8%A7%A3">&#x7591;&#x96E3;&#x6392;&#x89E3;</h2>
+<h3 id="mac-os-x-10-11-el-capitan">Mac OS X 10.11 (El Capitan)</h3>
+<ul>
+<li>&#x51FA;&#x73FE; <code>ld: library not found for -levent</code> &#x932F;&#x8AA4;</li>
+</ul>
+<p>&#x8ACB;&#x5617;&#x8A66;&#x91CD;&#x65B0;&#x5B89;&#x88DD; Xcode &#x547D;&#x4EE4;&#x5217;&#x5DE5;&#x5177;&#x4E26;&#x6307;&#x5B9A;&#x9810;&#x8A2D; Toolchain&#xFF1A;</p>
 <pre><code>$ xcode-select --install
 $ xcode-select --switch /Library/Developer/CommandLineTools
 </code></pre>
