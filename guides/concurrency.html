@@ -153,7 +153,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="../installation/on_mac_osx_using_homebrew.html">
+        <li class="chapter " data-level="1.2.4" data-path="../installation/on_gentoo_linux.html">
+            
+                <a href="../installation/on_gentoo_linux.html">
+            
+                    
+                    On Gentoo Linux
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../installation/on_mac_osx_using_homebrew.html">
             
                 <a href="../installation/on_mac_osx_using_homebrew.html">
             
@@ -166,7 +179,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="../installation/on_bash_on_ubuntu_on_windows.html">
+        <li class="chapter " data-level="1.2.6" data-path="../installation/on_bash_on_ubuntu_on_windows.html">
             
                 <a href="../installation/on_bash_on_ubuntu_on_windows.html">
             
@@ -179,7 +192,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.6" data-path="../installation/from_a_targz.html">
+        <li class="chapter " data-level="1.2.7" data-path="../installation/from_a_targz.html">
             
                 <a href="../installation/from_a_targz.html">
             
@@ -192,7 +205,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.7" data-path="../installation/from_source_repository.html">
+        <li class="chapter " data-level="1.2.8" data-path="../installation/from_source_repository.html">
             
                 <a href="../installation/from_source_repository.html">
             
@@ -228,7 +241,7 @@
                 <a href="../overview/">
             
                     
-                    概要
+                    Overview and Examples
             
                 </a>
             
@@ -1931,12 +1944,12 @@
 </ul>
 <h3 id="a-fiber">A Fiber</h3>
 <p>A fiber is an execution unit that is more lightweight than a thread. It&apos;s a small object that has an associated <a href="https://en.wikipedia.org/wiki/Call_stack" target="_blank">stack</a> of 8MB, which is what is usually assigned to an operating system thread.</p>
-<p>Fibers, unlike threads, are cooperative. Threads are pre-emptive: the operating system might interrupt a thread at any time and start executing another one. A fiber must explicitly tell the Runtime Scheduler to switch to another fiber. For example if there&apos;s I/O to be wait, a fiber will tell the scheduler &quot;Look, I have to wait for this I/O to be available, you continue executing other fibers and come back to me when that I/O is ready&quot;.</p>
+<p>Fibers, unlike threads, are cooperative. Threads are pre-emptive: the operating system might interrupt a thread at any time and start executing another one. A fiber must explicitly tell the Runtime Scheduler to switch to another fiber. For example if there&apos;s I/O to be waited on, a fiber will tell the scheduler &quot;Look, I have to wait for this I/O to be available, you continue executing other fibers and come back to me when that I/O is ready&quot;.</p>
 <p>The advantage of being cooperative is that a lot of the overhead of doing a context switch (switching between threads) is gone.</p>
 <p>A Fiber is much more lightweight than a thread: even though it&apos;s assigned 8MB, it starts with a small stack of 4KB.</p>
-<p>On a 64-bit machine it lets us spawn millions and millions of fibers. In a 32-bit machine we can only spawn 512 fibers, which is not a lot. But because 32-bit machines are starting to be obsolete, we plan for the future, for now focusing more on 64-bit machines.</p>
+<p>On a 64-bit machine it lets us spawn millions and millions of fibers. In a 32-bit machine we can only spawn 512 fibers, which is not a lot. But because 32-bit machines are starting to become obsolete, we&apos;ll bet on the future and focus more on 64-bit machines.</p>
 <h3 id="the-runtime-scheduler">The Runtime Scheduler</h3>
-<p>The scheduler has a queue of :</p>
+<p>The scheduler has a queue of:</p>
 <ul>
 <li>Fibers ready to be executed: for example when you spawn a fiber, it&apos;s ready to be executed.</li>
 <li>The event loop: which is another fiber. When there are no other fibers ready to be executed, the event loop checks if there is any async operation that is ready, and then executes the fiber waiting for that operation. The event loop is currently implemented with <code>libevent</code>, which is an abstraction of other event mechanisms like <code>epoll</code> and <code>kqueue</code>.</li>
@@ -1959,8 +1972,8 @@ spawn <span class="hljs-keyword">do</span>
   <span class="hljs-comment">#  ...</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>Here we have two fibers: one reads from a socket and the other does a <code>sleep</code>. When the first fiber reaches the <code>socket.gets</code> line, that fiber gets suspended, the Event Loop is told to continue executing this fiber when there&apos;s data in the socket, and the program continues with the second fiber. This fiber wants to sleep for 5 seconds, so the Event Loop is told to continue with this fiber in 5 seconds. If there aren&apos;t other fibers to execute, the Event Loop will wait until either of these events happen, without consuming CPU time.</p>
-<p>The reason why <code>socket.gets</code> and <code>sleep</code> behave like this is because their implementations talk directly with the Runtime Scheduler and the Event Loop; there&apos;s nothing magical about it. In general, the standard library already takes care of doing all of this so you don&apos;t have to.</p>
+<p>Here we have two fibers: one reads from a socket and the other does a <code>sleep</code>. When the first fiber reaches the <code>socket.gets</code> line, it gets suspended, the Event Loop is told to continue executing this fiber when there&apos;s data in the socket, and the program continues with the second fiber. This fiber wants to sleep for 5 seconds, so the Event Loop is told to continue with this fiber in 5 seconds. If there aren&apos;t other fibers to execute, the Event Loop will wait until either of these events happen, without consuming CPU time.</p>
+<p>The reason why <code>socket.gets</code> and <code>sleep</code> behave like this is because their implementations talk directly with the Runtime Scheduler and the Event Loop, there&apos;s nothing magical about it. In general, the standard library already takes care of doing all of this so you don&apos;t have to.</p>
 <p>Note, however, that fibers don&apos;t get executed right away. For example:</p>
 <pre><code class="lang-crystal">spawn <span class="hljs-keyword">do</span>
   loop <span class="hljs-keyword">do</span>
@@ -2116,7 +2129,7 @@ spawn <span class="hljs-keyword">do</span>
   puts channel.receive
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>The above program spawns two fibers. The first one creates a TCPServer, accepts one connection and the read lines from there, sending them to the channel. There&apos;s a second fiber that reads lines from standard input. The main fibers reads the first 3 messages that are sent to the channel, either from the socket or stdin, and then the program exits. The <code>gets</code> calls will block the fibers and tell the Event Loop to continue from there if data comes.</p>
+<p>The above program spawns two fibers. The first one creates a TCPServer, accepts one connection and reads lines from it, sending them to the channel. There&apos;s a second fiber reading lines from standard input. The main fiber reads the first 3 messages sent to the channel, either from the socket or stdin, then the program exits. The <code>gets</code> calls will block the fibers and tell the Event Loop to continue from there if data comes.</p>
 <p>Likewise, we can wait for multiple fibers to complete execution, and gather their values:</p>
 <pre><code class="lang-crystal">channel = Channel(Int32).new
 
@@ -2160,7 +2173,7 @@ After receive
 After send
 After yield
 </code></pre>
-<p>Here <code>channel.send</code> is executed first, but since there&apos;s no one waiting for a value (yet), execution continues in other fibers. The second fiber is executed, there&apos;s a value on the channel, it&apos;s obtained, and execution continues, first with the first fiber, and then with the main fiber, because <code>Fiber.yield</code> puts a fiber at the end of the execution queue.</p>
+<p>Here <code>channel.send</code> is executed first, but since there&apos;s no one waiting for a value (yet), execution continues in other fibers. The second fiber is executed, there&apos;s a value on the channel, it&apos;s obtained, and execution continues, first with the first fiber, then with the main fiber, because <code>Fiber.yield</code> puts a fiber at the end of the execution queue.</p>
 <h3 id="buffered-channels">Buffered channels</h3>
 <p>The above examples use unbuffered channels: when sending a value, if a fiber is waiting on that channel then execution continues on that fiber.</p>
 <p>With a buffered channel, invoking <code>send</code> won&apos;t switch to another fiber unless the buffer is full:</p>
@@ -2189,7 +2202,7 @@ Before send 3
 2
 After send
 3
-</code></pre><p>Note that the first 2 sends are executed without switching to another fiber. However, in the third send the channel&apos;s buffer is full, so execution goes to the main fiber. Here the two values are received and the channel is depleted. At the third <code>receive</code> the main fiber blocks and execution goes to the other fiber, which sends another values, finishes, etc.</p>
+</code></pre><p>Note that the first 2 sends are executed without switching to another fiber. However, in the third send the channel&apos;s buffer is full, so execution goes to the main fiber. Here the two values are received and the channel is depleted. At the third <code>receive</code> the main fiber blocks and execution goes to the other fiber, which sends more values, finishes, etc.</p>
 
                                 
                                 </section>
@@ -2229,7 +2242,7 @@ After send
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Concurrency","level":"1.8.2","depth":2,"previous":{"title":"Performance","level":"1.8.1","depth":2,"path":"guides/performance.md","ref":"guides/performance.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-42353458-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.x.x"},"file":{"path":"guides/concurrency.md","mtime":"2017-01-07T18:34:49.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-07T18:35:47.087Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Concurrency","level":"1.8.2","depth":2,"previous":{"title":"Performance","level":"1.8.1","depth":2,"path":"guides/performance.md","ref":"guides/performance.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-42353458-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.x.x"},"file":{"path":"guides/concurrency.md","mtime":"2017-07-05T06:04:14.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-05T06:06:07.497Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -155,7 +155,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="../installation/on_mac_osx_using_homebrew.html">
+        <li class="chapter " data-level="1.2.4" data-path="../installation/on_gentoo_linux.html">
+            
+                <a href="../installation/on_gentoo_linux.html">
+            
+                    
+                    On Gentoo Linux
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../installation/on_mac_osx_using_homebrew.html">
             
                 <a href="../installation/on_mac_osx_using_homebrew.html">
             
@@ -168,7 +181,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5" data-path="../installation/on_bash_on_ubuntu_on_windows.html">
+        <li class="chapter " data-level="1.2.6" data-path="../installation/on_bash_on_ubuntu_on_windows.html">
             
                 <a href="../installation/on_bash_on_ubuntu_on_windows.html">
             
@@ -181,7 +194,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.6" data-path="../installation/from_a_targz.html">
+        <li class="chapter " data-level="1.2.7" data-path="../installation/from_a_targz.html">
             
                 <a href="../installation/from_a_targz.html">
             
@@ -194,7 +207,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.7" data-path="../installation/from_source_repository.html">
+        <li class="chapter " data-level="1.2.8" data-path="../installation/from_source_repository.html">
             
                 <a href="../installation/from_source_repository.html">
             
@@ -230,7 +243,7 @@
                 <a href="../overview/">
             
                     
-                    概要
+                    Overview and Examples
             
                 </a>
             
@@ -1916,23 +1929,23 @@
 <h2 id="premature-optimization">Premature optimization</h2>
 <p>Donald Knuth once said:</p>
 <blockquote>
-<p>We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%</p>
+<p>We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%.</p>
 </blockquote>
 <p>However, if you are writing a program and you realize that writing a semantically equivalent, faster version involves just minor changes, you shouldn&apos;t miss that opportunity.</p>
-<p>And always be sure to profile your program to learn what are its bottlenecks. For profiling, on Mac OSX you can use <a href="https://developer.apple.com/library/prerelease/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/Instrument-TimeProfiler.html" target="_blank">Instruments Time Profiler</a> that comes with XCode. On Linux, a program that can profile C/C++ programs, like <a href="https://sourceware.org/binutils/docs/gprof/" target="_blank">gprof</a>, should work.</p>
-<p>Make sure to always profile programs by compiling or running programs with the <code>--release</code> flag, which turns on optimizations.</p>
+<p>And always be sure to profile your program to learn what its bottlenecks are. For profiling, on Mac OSX you can use <a href="https://developer.apple.com/library/prerelease/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/Instrument-TimeProfiler.html" target="_blank">Instruments Time Profiler</a>, which comes with XCode. On Linux, a program that can profile C/C++ programs, like <a href="https://sourceware.org/binutils/docs/gprof/" target="_blank">gprof</a>, should work.</p>
+<p>Make sure to always profile programs by compiling or running them with the <code>--release</code> flag, which turns on optimizations.</p>
 <h2 id="avoiding-memory-allocations">Avoiding memory allocations</h2>
-<p>One of the best optimizations you can do in a program is avoiding extra/useless memory allocation. A memory allocation happens when you create an instance of a <strong>class</strong>, which ends up allocating heap memory. Creating an instance of a <strong>struct</strong> uses stack memory and doesn&apos;t have a performance penalty. If you don&apos;t know what&apos;s the difference between stack and heap memory, be sure to <a href="https://www.google.com.ar/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#q=stack%20vs%20heap%20memory" target="_blank">read this</a>.</p>
-<p>Allocating heap memory is slow, and it puts more pressure on the the Garbage Collector (GC) as it will later have to free that memory.</p>
+<p>One of the best optimizations you can do in a program is avoiding extra/useless memory allocation. A memory allocation happens when you create an instance of a <strong>class</strong>, which ends up allocating heap memory. Creating an instance of a <strong>struct</strong> uses stack memory and doesn&apos;t incur a performance penalty. If you don&apos;t know the difference between stack and heap memory, be sure to <a href="https://www.google.com/search?q=stack+vs+heap+memory" target="_blank">read this</a>.</p>
+<p>Allocating heap memory is slow, and it puts more pressure on the Garbage Collector (GC) as it will later have to free that memory.</p>
 <p>There are several ways to avoid heap memory allocations. The standard library is designed in a way to help you do that.</p>
 <h3 id="dont-create-intermediate-strings-when-writing-to-an-io">Don&apos;t create intermediate strings when writing to an IO</h3>
 <p>To print a number to the standard output you write:</p>
 <pre><code>puts 123
 </code></pre><p>In many programming languages what will happen is that <code>to_s</code>, or a similar method for converting the object to its string representation, will be invoked, and then that string will be written to the standard output. This works, but it has a flaw: it creates an intermediate string, in heap memory, only to write it and then discard it. This, involves a heap memory allocation and gives a bit of work to the GC.</p>
-<p>In Crystal, <code>puts</code> will invoke <code>to_s(io)</code>, on the object, passing it the IO to which to write the string representation.</p>
+<p>In Crystal, <code>puts</code> will invoke <code>to_s(io)</code> on the object, passing it the IO to which the string representation should be written.</p>
 <p>So, you should never do this:</p>
 <pre><code>puts 123.to_s
-</code></pre><p>as it will create an intermediate strings. Always append an object directly to an IO.</p>
+</code></pre><p>as it will create an intermediate string. Always append an object directly to an IO.</p>
 <p>When writing custom types, always be sure to override <code>to_s(io)</code>, not <code>to_s</code>, and avoid creating intermediate strings in that method. For example:</p>
 <pre><code class="lang-crystal"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span></span>
   <span class="hljs-comment"># Good</span>
@@ -1947,18 +1960,18 @@
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to_s</span></span>(io)
     x = <span class="hljs-number">1</span>
     y = <span class="hljs-number">2</span>
-    <span class="hljs-comment"># using a string interpolation creates an intermediate string,</span>
+    <span class="hljs-comment"># using a string interpolation creates an intermediate string.</span>
     <span class="hljs-comment"># this should be avoided</span>
     io &lt;&lt; <span class="hljs-string">&quot;<span class="hljs-subst">#{x}</span>, <span class="hljs-subst">#{y}</span>&quot;</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>This philosophy of appending to an IO instead of returning an intermediate strings is present in other APIs, such as in the JSON and YAML apis, where one needs to define <code>to_json(io)</code> and <code>to_yaml(io)</code> methods to write this data directly to an IO. And you should use this strategy in your API definitions too.</p>
+<p>This philosophy of appending to an IO instead of returning an intermediate string is present in other APIs, such as in the JSON and YAML APIs, where one needs to define <code>to_json(io)</code> and <code>to_yaml(io)</code> methods to write this data directly to an IO. You should use this strategy in your API definitions too.</p>
 <p>Let&apos;s compare the times:</p>
 <pre><code class="lang-crystal"><span class="hljs-comment"># io_benchmark.cr</span>
 <span class="hljs-keyword">require</span> <span class="hljs-string">&quot;benchmark&quot;</span>
 
-io = MemoryIO.new
+io = <span class="hljs-symbol">IO:</span>:Memory.new
 
 Benchmark.ips <span class="hljs-keyword">do</span> |x|
   x.report(<span class="hljs-string">&quot;without to_s&quot;</span>) <span class="hljs-keyword">do</span>
@@ -1973,10 +1986,10 @@ Benchmark.ips <span class="hljs-keyword">do</span> |x|
 <span class="hljs-keyword">end</span>
 </code></pre>
 <p>Output:</p>
-<pre><code>$ crystal io_benchmark.cr --release
-without to_s  69.71M (&#xB1; 6.14%)       fastest
-   with to_s  14.68M (&#xB1; 2.38%)  4.75&#xD7; slower
-</code></pre><p>And always remember that it&apos;s not just the time that has improved: memory usage is also decreased.</p>
+<pre><code>$ crystal run --release io_benchmark.cr
+without to_s  77.11M ( 12.97ns) (&#xB1; 1.05%)       fastest
+   with to_s  18.15M ( 55.09ns) (&#xB1; 7.99%)  4.25&#xD7; slower
+</code></pre><p>Always remember that it&apos;s not just the time that has improved: memory usage is also decreased.</p>
 <h3 id="avoid-creating-temporary-objects-over-and-over">Avoid creating temporary objects over and over</h3>
 <p>Consider this program:</p>
 <pre><code class="lang-crystal">lines_with_language_reference = <span class="hljs-number">0</span>
@@ -1987,10 +2000,10 @@ without to_s  69.71M (&#xB1; 6.14%)       fastest
 <span class="hljs-keyword">end</span>
 puts <span class="hljs-string">&quot;Lines that mention crystal, ruby or java: <span class="hljs-subst">#{lines_with_language_reference}</span>&quot;</span>
 </code></pre>
-<p>The above program works but has a big performance problem: on every iteration a new array is created for <code>[&quot;crystal&quot;, &quot;ruby&quot;, &quot;java&quot;]</code>. Remember, an array literal is just syntax sugar for creating an instance of an array and adding some values to it, and this will happen over and over on each iteration.</p>
+<p>The above program works but has a big performance problem: on every iteration a new array is created for <code>[&quot;crystal&quot;, &quot;ruby&quot;, &quot;java&quot;]</code>. Remember: an array literal is just syntax sugar for creating an instance of an array and adding some values to it, and this will happen over and over on each iteration.</p>
 <p>There are two ways to solve this:</p>
 <ol>
-<li><p>Use a tuple. If you use <code>{&quot;crystal&quot;, &quot;ruby&quot;, &quot;java&quot;}</code> in the above program it will work the same way, but since a tuple doesn&apos;t involve heap memory it will be faster, consume less memory and give more chances for the compiler to optimize the program.</p>
+<li><p>Use a tuple. If you use <code>{&quot;crystal&quot;, &quot;ruby&quot;, &quot;java&quot;}</code> in the above program it will work the same way, but since a tuple doesn&apos;t involve heap memory it will be faster, consume less memory, and give more chances for the compiler to optimize the program.</p>
 <pre><code class="lang-crystal">lines_with_language_reference = <span class="hljs-number">0</span>
 <span class="hljs-keyword">while</span> line = gets
  <span class="hljs-keyword">if</span> {<span class="hljs-string">&quot;crystal&quot;</span>, <span class="hljs-string">&quot;ruby&quot;</span>, <span class="hljs-string">&quot;java&quot;</span>}.any? { |string| line.includes?(string) }
@@ -2017,7 +2030,7 @@ puts <span class="hljs-string">&quot;Lines that mention crystal, ruby or java: <
 <p>Explicit array literals in loops is one way to create temporary objects, but these can also be created via method calls. For example <code>Hash#keys</code> will return a new array with the keys each time it&apos;s invoked. Instead of doing that, you can use <code>Hash#each_key</code>, <code>Hash#has_key?</code> and other methods.</p>
 <h3 id="use-structs-when-possible">Use structs when possible</h3>
 <p>If you declare your type as a <strong>struct</strong> instead of a <strong>class</strong>, creating an instance of it will use stack memory, which is much cheaper than heap memory and doesn&apos;t put pressure on the GC.</p>
-<p>You shouldn&apos;t always use a struct, though. Structs are passed by value, so if you pass one to a method and the method makes changes to it, the caller won&apos;t see those changes, so they can be bug-prone. The best thing to do is to only use structs with immutable objects, specially if they are small.</p>
+<p>You shouldn&apos;t always use a struct, though. Structs are passed by value, so if you pass one to a method and the method makes changes to it, the caller won&apos;t see those changes, so they can be bug-prone. The best thing to do is to only use structs with immutable objects, especially if they are small.</p>
 <p>For example:</p>
 <pre><code class="lang-crystal"><span class="hljs-comment"># class_vs_struct.cr</span>
 <span class="hljs-keyword">require</span> <span class="hljs-string">&quot;benchmark&quot;</span>
@@ -2044,20 +2057,20 @@ Benchmark.ips <span class="hljs-keyword">do</span> |x|
 <span class="hljs-keyword">end</span>
 </code></pre>
 <p>Output:</p>
-<pre><code>$ crystal class_vs_struct.cr --release
+<pre><code>$ crystal run --release class_vs_struct.cr
  class  28.17M (&#xB1; 2.86%) 15.29&#xD7; slower
 struct 430.82M (&#xB1; 6.58%)       fastest
 </code></pre><h2 id="iterating-strings">Iterating strings</h2>
-<p>Strings in crystal always contain UTF-8 encoded bytes. UTF-8 is a variable-length encoding: a character may be represented by several bytes, although characters in the ASCII range are always represented with a single byte. Because of this, indexing a string with <code>String#[]</code> is not a <code>O(1)</code> operation, because each time the bytes need to be decoded to find the character at the given position. There&apos;s an optimization that Crystal&apos;s String does here: if it knows all the characters in the string are ASCII, then <code>String#[]</code> can be implemented in <code>O(1)</code>. However, this isn&apos;t generally true.</p>
-<p>For this reason, iterating a String this way is not optimal, and in fact it has an order of <code>O(n^2)</code>:</p>
+<p>Strings in Crystal always contain UTF-8 encoded bytes. UTF-8 is a variable-length encoding: a character may be represented by several bytes, although characters in the ASCII range are always represented by a single byte. Because of this, indexing a string with <code>String#[]</code> is not an <code>O(1)</code> operation, as the bytes need to be decoded each time to find the character at the given position. There&apos;s an optimization that Crystal&apos;s <code>String</code> does here: if it knows all the characters in the string are ASCII, then <code>String#[]</code> can be implemented in <code>O(1)</code>. However, this isn&apos;t generally true.</p>
+<p>For this reason, iterating a String in this way is not optimal, and in fact has a complexity of <code>O(n^2)</code>:</p>
 <pre><code class="lang-crystal">string = ...
 <span class="hljs-keyword">while</span> i &lt; string.size
   char = string[i]
   <span class="hljs-comment"># ...</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>There&apos;s a second problem with the above: computing the <code>size</code> of a String is also slow, because it&apos;s not simply the number of bytes in the string (the <code>bytesize</code>). However, once a String computes its size once it caches it. It&apos;s still slow because of <code>String#[]</code>.</p>
-<p>The way to do it is to either use one of the iteration methods (<code>each_char</code>, <code>each_byte</code>, <code>each_codepoint</code>), or use the more low-level <code>Char::Reader</code> struct. For example, using <code>each_char</code>:</p>
+<p>There&apos;s a second problem with the above: computing the <code>size</code> of a String is also slow, because it&apos;s not simply the number of bytes in the string (the <code>bytesize</code>). However, once a String&apos;s size has been computed, it is cached.</p>
+<p>The way to improve performance in this case is to either use one of the iteration methods (<code>each_char</code>, <code>each_byte</code>, <code>each_codepoint</code>), or use the more low-level <code>Char::Reader</code> struct. For example, using <code>each_char</code>:</p>
 <pre><code class="lang-crystal">string = ...
 string.each_char <span class="hljs-keyword">do</span> |char|
   <span class="hljs-comment"># ...</span>
@@ -2106,7 +2119,7 @@ string.each_char <span class="hljs-keyword">do</span> |char|
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Performance","level":"1.8.1","depth":2,"next":{"title":"Concurrency","level":"1.8.2","depth":2,"path":"guides/concurrency.md","ref":"guides/concurrency.md","articles":[]},"previous":{"title":"Guides","level":"1.8","depth":1,"path":"guides/README.md","ref":"guides/README.md","articles":[{"title":"Performance","level":"1.8.1","depth":2,"path":"guides/performance.md","ref":"guides/performance.md","articles":[]},{"title":"Concurrency","level":"1.8.2","depth":2,"path":"guides/concurrency.md","ref":"guides/concurrency.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["ga"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-42353458-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.x.x"},"file":{"path":"guides/performance.md","mtime":"2017-01-07T18:34:49.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-07T18:35:47.087Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Performance","level":"1.8.1","depth":2,"next":{"title":"Concurrency","level":"1.8.2","depth":2,"path":"guides/concurrency.md","ref":"guides/concurrency.md","articles":[]},"previous":{"title":"Guides","level":"1.8","depth":1,"path":"guides/README.md","ref":"guides/README.md","articles":[{"title":"Performance","level":"1.8.1","depth":2,"path":"guides/performance.md","ref":"guides/performance.md","articles":[]},{"title":"Concurrency","level":"1.8.2","depth":2,"path":"guides/concurrency.md","ref":"guides/concurrency.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["ga"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-42353458-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.x.x"},"file":{"path":"guides/performance.md","mtime":"2017-07-05T06:04:14.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-05T06:06:07.497Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
