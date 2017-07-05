@@ -243,7 +243,7 @@
                 <a href="../overview/">
             
                     
-                    Overview and Examples
+                    概要及範例
             
                 </a>
             
@@ -1927,27 +1927,27 @@
                                 <h1 id="&#x5F9E;&#x539F;&#x59CB;&#x78BC;&#x5B89;&#x88DD;">&#x5F9E;&#x539F;&#x59CB;&#x78BC;&#x5B89;&#x88DD;</h1>
 <p>&#x5982;&#x679C;&#x60F3;&#x8CA2;&#x737B; Crystal&#xFF0C;&#x90A3;&#x6211;&#x5011;&#x53EF;&#x80FD;&#x6703;&#x9078;&#x64C7;&#x5F9E;&#x539F;&#x59CB;&#x78BC;&#x9032;&#x884C;&#x5B89;&#x88DD;&#x3002;</p>
 <ol>
-<li><p><a href="https://crystal-lang.org/docs/installation" target="_blank">Install the latest Crystal release</a>. To compile Crystal, you need Crystal :).</p>
+<li><p><a href=".">&#x5B89;&#x88DD;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684; Crystal</a>&#x3002; &#x6211;&#x5011;&#x9700;&#x8981; Crystal &#x4F86;&#x7DE8;&#x8B6F; Crystal :)</p>
 </li>
-<li><p>Make sure a supported LLVM version is present in the path. Currently, Crystal supports LLVM 3.8, 3.9 and 4.0. When possible, use the latest one. If you are using Mac and the Homebrew formula, this will be automatically configured for you if you install Crystal adding <code>--with-llvm</code> flag.</p>
+<li><p>&#x78BA;&#x8A8D;&#x652F;&#x63F4;&#x7684; LLVM &#x7248;&#x672C;&#x5DF2;&#x5728; <code>$PATH</code> &#x4E2D;&#x3002;&#xFF08;&#x76EE;&#x524D; Crystal &#x652F;&#x63F4; LLVM 3.8 &#x3001; 3.9 &#x4EE5;&#x53CA; 4.0 &#xFF0C;&#x8ACB;&#x5118;&#x53EF;&#x80FD;&#x7684;&#x4F7F;&#x7528;&#x6700;&#x65B0;&#x7684;&#x7248;&#x672C;&#x3002;&#xFF09;</p>
+<ul>
+<li>&#x5982;&#x679C;&#x662F;&#x4F7F;&#x7528; Mac &#x4E2D;&#x7684; Homebrew &#x5957;&#x4EF6;<small>(Formula)</small>&#xFF0C;&#x53EA;&#x8981;&#x5728;&#x5B89;&#x88DD;&#x6642;&#x52A0;&#x4E0A; <code>--with-llvm</code> &#x53C3;&#x6578;&#xFF0C;LLVM &#x7684;&#x8DEF;&#x5F91;&#x5C31;&#x6703;&#x81EA;&#x52D5;&#x88AB;&#x8A2D;&#x5B9A;&#x3002;</li>
+</ul>
 </li>
-</ol>
-<p>&#x5728; $PATH &#x4E2D;&#x4E5F;&#x5FC5;&#x9808;&#x63D0;&#x4F9B; LLVM 3.5 &#x6216; 3.6&#xFF0C;&#x5982;&#x679C;&#x662F;&#x4F7F;&#x7528; Mac &#x4E2D;&#x7684; Homebrew &#x5957;&#x4EF6;<small>(Formula)</small>&#xFF0C;&#x53EA;&#x8981;&#x5728;&#x5B89;&#x88DD;&#x6642;&#x52A0;&#x4E0A; <code>--with-llvm</code> &#x53C3;&#x6578;&#xFF0C;LLVM &#x7684;&#x8DEF;&#x5F91;&#x5C31;&#x6703;&#x81EA;&#x52D5;&#x88AB;&#x8A2D;&#x5B9A;&#x3002;</p>
-<ol>
-<li><p>&#x8ACB;&#x78BA;&#x8A8D;&#x6211;&#x5011;&#x5DF2;&#x7D93;&#x5B89;&#x88DD;&#x4E86;<a href="https://github.com/crystal-lang/crystal/wiki/All-required-libraries" target="_blank">&#x5168;&#x90E8;&#x6240;&#x9700;&#x7684;&#x51FD;&#x5F0F;&#x5EAB;</a>&#x3002;&#x7576;&#x7136;&#xFF0C;&#x6211;&#x5011;&#x4E5F;&#x53EF;&#x4EE5;&#x5148;&#x4F86;&#x770B;&#x770B;<a href="https://github.com/crystal-lang/crystal/blob/master/Contributing.md" target="_blank">&#x8CA2;&#x737B;&#x6307;&#x5357;</a>&#x3002;</p>
+<li><p>&#x8ACB;&#x78BA;&#x8A8D;&#x5DF2;&#x5B89;&#x88DD;<a href="https://github.com/crystal-lang/crystal/wiki/All-required-libraries" target="_blank">&#x5168;&#x90E8;&#x6240;&#x9700;&#x7684;&#x51FD;&#x5F0F;&#x5EAB;</a>&#x3002;&#x5728;&#x7B49;&#x5F85;&#x7684;&#x6642;&#x5019;&#x6211;&#x5011;&#x4E5F;&#x53EF;&#x4EE5;&#x5148;&#x4F86;&#x770B;&#x770B;<a href="https://github.com/crystal-lang/crystal/blob/master/Contributing.md" target="_blank">&#x8CA2;&#x737B;&#x6307;&#x5357;</a>&#x3002;</p>
 </li>
 <li><p>&#x8907;&#x88FD; Crystal &#x7684; Git &#x5132;&#x5B58;&#x5EAB;<small>(Repository)</small>&#xFF1A;</p>
 <pre><code> git clone https://github.com/crystal-lang/crystal.git
 </code></pre></li>
 <li><p>&#x900F;&#x904E; <code>make</code> &#x4F86;&#x5EFA;&#x7F6E;&#x81EA;&#x5DF1;&#x7248;&#x672C;&#x7684;&#x7DE8;&#x8B6F;&#x5668;&#x3002;</p>
 </li>
-<li><p>Run <code>make spec</code> to ensure all specs pass, and you&apos;ve installed everything correctly.</p>
+<li><p>&#x57F7;&#x884C; <code>make spec</code> &#x4EE5;&#x78BA;&#x8A8D;&#x5EFA;&#x7F6E;&#x597D;&#x7684;&#x7DE8;&#x8B6F;&#x5668;&#x6703;&#x901A;&#x904E;&#x6240;&#x6709;&#x6E2C;&#x8A66;&#x3002;</p>
 </li>
-<li><p>Use <code>bin/crystal</code> to run your crystal files</p>
+<li><p>&#x4F7F;&#x7528; <code>bin/crystal</code> &#x4F86;&#x57F7;&#x884C;&#x525B;&#x5EFA;&#x7F6E;&#x597D;&#x7684;&#x7DE8;&#x8B6F;&#x5668;&#x3002;</p>
 </li>
 </ol>
-<p>If you would like more information about the new <code>bin/crystal</code>, check out the <a href="https://crystal-lang.org/docs/using_the_compiler/" target="_blank">using the compiler</a> documentation.</p>
-<p>Note: The actual binary is built in to <code>.build/crystal</code>, but the <code>bin/crystal</code> wrapper script is what you should use to run crystal.</p>
+<p>&#x5982;&#x679C;&#x60F3;&#x77AD;&#x89E3;&#x66F4;&#x591A;&#x95DC;&#x65BC;&#x7DE8;&#x8B6F;&#x5668;&#x7684;&#x8A0A;&#x606F;&#xFF0C;&#x8ACB;&#x53C3;&#x95B1;<a href="../using_the_compiler">&#x4F7F;&#x7528;&#x7DE8;&#x8B6F;&#x5668;</a>&#x4E00;&#x7AE0;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x771F;&#x6B63;&#x7684;&#x7DE8;&#x8B6F;&#x5668;&#x5176;&#x5BE6;&#x5B58;&#x653E;&#x5728; <code>.build/crystal</code>&#xFF0C;&#x4F46;&#x6211;&#x5011;&#x9700;&#x8981;&#x4E00;&#x500B; Wrapper &#x8173;&#x672C;&#xFF08;<code>bin/crystal</code>&#xFF09;&#x4F86;&#x57F7;&#x884C;&#x3002;</p>
 
                                 
                                 </section>
@@ -1991,7 +1991,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"從原始碼安裝","level":"1.2.8","depth":2,"next":{"title":"使用編譯器","level":"1.3","depth":1,"path":"using_the_compiler/README.md","ref":"using_the_compiler/README.md","articles":[]},"previous":{"title":"使用 .tar.gz 檔案安裝","level":"1.2.7","depth":2,"path":"installation/from_a_targz.md","ref":"installation/from_a_targz.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-42353458-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.x.x"},"file":{"path":"installation/from_source_repository.md","mtime":"2017-07-05T06:04:14.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-05T06:06:07.497Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"從原始碼安裝","level":"1.2.8","depth":2,"next":{"title":"使用編譯器","level":"1.3","depth":1,"path":"using_the_compiler/README.md","ref":"using_the_compiler/README.md","articles":[]},"previous":{"title":"使用 .tar.gz 檔案安裝","level":"1.2.7","depth":2,"path":"installation/from_a_targz.md","ref":"installation/from_a_targz.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-42353458-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.x.x"},"file":{"path":"installation/from_source_repository.md","mtime":"2017-07-05T06:44:32.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-05T06:46:22.296Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
