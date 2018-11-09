@@ -7,6 +7,7 @@ rev=$(git rev-parse --short HEAD)
 git config --global user.email "me@davy.tw"
 git config --global user.name "Travis on behalf David Kuo"
 
+gitbook install --gitbook=3.2.2
 gitbook build --gitbook=3.2.2
 git submodule init
 git submodule add -b gh-pages -f --name build "https://$GH_TOKEN@github.com/crystal-tw/docs.git" build
