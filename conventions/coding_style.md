@@ -1,10 +1,11 @@
 # Coding Style
 
-This style is used in the standard library. You can use it in your own project to make it familiar to other developers.
+本風格被用於標準的函式庫中。
+我們可以在自己的專案中使用相同的風格，如此一來這些專案的風格就可以輕鬆融入其他開發者的風格之中。
 
-## Naming
+## 命名規則
 
-__Type names__ are camelcased. For example:
+**型別名稱**使用駝峰式命名。 範例：
 
 ```crystal
 class ParseError < Exception
@@ -27,7 +28,7 @@ enum Time::DayOfWeek
 end
 ```
 
-__Method names__ are underscore-cased. For example:
+**方法名稱**使用小寫底線分隔。 範例：
 
 ```crystal
 class Person
@@ -42,7 +43,7 @@ class Person
 end
 ```
 
-__Variable names__ are underscore-cased. For example:
+**變數名稱**使用小寫底線分隔。 範例：
 
 ```crystal
 class Greeting
@@ -58,39 +59,39 @@ class Greeting
 end
 ```
 
-__Constants__ are screaming-cased. For example:
+**常數**使用全大寫底線分隔 <small>screaming-cased</small>。 範例：
 
 ```crystal
 LUCKY_NUMBERS     = [3, 7, 11]
 DOCUMENTATION_URL = "http://crystal-lang.org/docs"
 ```
 
-### Acronyms
+### 縮寫
 
-In class names, acronyms are _all-uppercase_. For example, `HTTP`, and `LibXML`.
+類別名稱中縮寫，使用**全大寫**。 如 `HTTP`、`LibXML`。
 
-In method names, acronyms are _all-lowercase_.  For example `#from_json`,  `#to_io`.
+方法名稱中縮寫，使用**全小寫**。 如 `#from_json`、`#to_io`。
 
-### Libs
+### 函式庫
 
-`Lib` names are prefixed with `Lib`. For example: `LibC`, `LibEvent2`.
+函式庫命名皆須以 `Lib` 為前綴。 如 `LibC`、`LibEvent2`。
 
-### Directory and File Names
+### 目錄及檔案名稱
 
-Within a project:
+在專案中：
 
-- `/` contains a readme, any project configurations (eg, CI or editor configs), and any other project-level documentation (eg, changelog or contributing guide).
-- `src/` contains the project's source code.
-- `spec/` contains the [project's specs](../guides/testing.md), which can be run with `crystal spec`.
-- `bin/` contains any executables.
+- `/` 包含說明文件，與專案相關的所有設定檔（例如 CI 設定或者編輯器設定），以及所有是專案層級的相關文件（例如更新日誌或貢獻指南）
+- `src/` 包含專案的原始碼
+- `spec/` 包含可以用 `crystal spec` 執行的[專案 specs](../guides/testing.md)
+- `bin/` 包含所有可執行檔案
 
-File paths match the namespace of their contents. Files are named after the class or namespace they define, with _underscore-case_.
+路徑會依照該檔案的命名空間（namespace）分類，而檔名則會以**小寫底線分隔**方式表達該檔案所定義的類別（class）或子命名空間（namespace）。
 
-For example, `HTTP::WebSocket` is defined in `src/http/web_socket.cr`.
+例如，`HTTP::WebSocket` 應該被定義於 `src/http/web_socket.cr` 之中。
 
-## Whitespace
+## 空白字元
 
-Use __two spaces__ to indent code inside namespaces, methods, blocks or other nested contexts. For example:
+使用**兩個空白字元**縮排我們的程式碼，用於命名空間、方法、程式碼區塊（blocks）或是任何巢狀的項目中（nested contexts）。 範例：
 
 ```crystal
 module Scorecard
@@ -101,14 +102,13 @@ module Scorecard
           handle_match(match)
         end
       rescue err : ParseError
-        # handle error ...
+        # 錯誤處理 ...
       end
     end
   end
 end
 ```
-
-Within a class, separate method definitions, constants and inner class definitions with __one newline__. For example:
+在類別中，用**單一換行**分隔方法定義（method definition）、常數（constant）與內部類別（inner class）。 範例：
 
 ```crystal
 module Money
@@ -131,7 +131,7 @@ module Money
     end
 
     def amount
-      # implement conversion ...
+      # 實作轉換 ...
     end
   end
 end
