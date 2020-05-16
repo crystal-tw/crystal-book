@@ -1,4 +1,4 @@
-# Getting started
+# 讓我們開始吧！
 
 Hi and welcome to Crystal's Reference Book!
 

@@ -1,7 +1,7 @@
 # Summary
 
 * [簡介](introduction.md)
-* [概要及範例](getting_started/README.md)
+* [讓我們開始吧！](getting_started/README.md)
    * [HTTP 伺服器](getting_started/http_server.md)
    * [A Command Line Application](getting_started/cli.md)
 * [The shards command](the_shards_command/README.md)
