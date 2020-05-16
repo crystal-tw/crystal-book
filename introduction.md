@@ -10,9 +10,9 @@ Crystal 是一個程式語言語言，並嘗試完成以下目標：
 * 編譯時期展開巨集並產生最佳化程式碼
 * 產生高效原生碼
 
-From here, you can jump to anywhere you want in this document. Although, if you are new to the Crystal Language, we suggest that you continue reading the [Getting started](./getting_started/README.md) section.
+您可以自由的挑選想瞭解的章節。 若您是 Crystal 程式語言的新手，我們會建議您先從[讓我們開始吧！](./getting_started/README.md)一章開始閱讀。
 
-**Crystal's standard library is documented in the [API docs](https://crystal-lang.org/api).**
+**此外，Crystal 標準函式庫的文件都可以從這裡存取到 https://crystal-lang.org/api **
 
 ## 協助翻譯
 
