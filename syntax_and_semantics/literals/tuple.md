@@ -4,12 +4,12 @@
 
 ```crystal
 tuple = {1, "hello", 'x'} # Tuple(Int32, String, Char)
-tuple[0]                  #=> 1       (Int32)
-tuple[1]                  #=> "hello" (String)
-tuple[2]                  #=> 'x'     (Char)
+tuple[0]                  # => 1       (Int32)
+tuple[1]                  # => "hello" (String)
+tuple[2]                  # => 'x'     (Char)
 ```
 
-我們也可以用 [Tuple.new](http://crystal-lang.org/api/Tuple.html#new%28%2Aargs%29-class-method) 來建立空序組。
+我們也可以用 [Tuple.new](https://crystal-lang.org/api/Tuple.html#new%28%2Aargs%3A%2AT%29-class-method) 來建立空序組。
 
 我們還可以使用下面的語法來指定序組使用的型別：
 

@@ -17,7 +17,7 @@ end
 假定 `a` 在執行 `if` 之後是一個 `Int32`，那麼我們可以強制編譯器將其視為一個 `Int32`：
 
 ```crystal
-a_as_int = a as Int32
+a_as_int = a.as(Int32)
 a_as_int.abs          # 可行，編譯器知道 a_as_int 是 Int32
 ```
 
@@ -39,7 +39,7 @@ a_as_int.abs          # 可行，編譯器知道 a_as_int 是 Int32
 
 ```crystal
 ptr = Pointer(Int32).malloc(1)
-ptr.as(Int8*)                    # : Pointer(Int8)
+ptr.as(Int8*)                    # :: Pointer(Int8)
 ```
 
 在上方的例子中，並沒有進行檢查 —— 指標非常的不安全，而這類型的轉型通常只在 C 語言繫結<small>(Binding)</small>或是更底層的程式碼中才需要。
@@ -57,7 +57,7 @@ ptr = Pointer(Void).new(array.object_id)
 
 # 再來我們就可以把指標轉型為原來的型態，
 # 那麼我們應該要得到相同的值
-array2 = ptr as Array(Int32)
+array2 = ptr.as(Array(Int32))
 array2.same?(array) #=> true
 ```
 
@@ -72,7 +72,7 @@ array2.same?(array) #=> true
 ```crystal
 a = 1
 b = a.as(Int32 | Float64)
-b # : Int32 | Float64
+b # :: Int32 | Float64
 ```
 
 上面的範例看起來可能不是很實用，但卻在對應陣列中的元素時非常好用：
@@ -83,7 +83,7 @@ ary = [1, 2, 3]
 # 我們想要建立一個 Int32 | Float64 的陣列 1, 2, 3
 ary2 = ary.map { |x| x as Int32 | Float64 }
 
-ary2 # : Array(Int32 | Float64)
+ary2        # :: Array(Int32 | Float64)
 ary2 << 1.5 # OK
 ```
 

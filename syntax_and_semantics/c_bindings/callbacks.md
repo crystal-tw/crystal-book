@@ -28,8 +28,7 @@ Note, however, that functions passed to C can't form closures. If the compiler d
 
 ```crystal
 y = 2
-X.callback ->(x) { x + y } # Error: can't send closure
-                           # to C function
+X.callback ->(x) { x + y } # Error: can't send closure to C function
 ```
 
 If the compiler can't detect this at compile-time, an exception will be raised at runtime.
@@ -57,9 +56,9 @@ To properly define a wrapper for this function we must send the Proc as the call
 
 ```crystal
 module Ticker
-  @@box : Box(Int32 ->)
-
   # The callback for the user doesn't have a Void*
+  @@box : Pointer(Void)?
+
   def self.on_tick(&callback : Int32 ->)
     # Since Proc is a {Void*, Void*}, we can't turn that into a Void*, so we
     # "box" it: we allocate memory and store the Proc there

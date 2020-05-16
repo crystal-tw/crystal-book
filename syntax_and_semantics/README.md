@@ -13,7 +13,7 @@
 * [型別語法](type_grammar.md)
 * [Type Reflection](type_reflection.md)
 * [Macros](macros.md)
-* [Attributes](attributes.md)
+* [Annotations](annotations.md)
 * [Low Level Primitives](low_level_primitives.md)
 * [Compile-time Flags](compile_time_flags.md)
 * [C bindings](c_bindings/)

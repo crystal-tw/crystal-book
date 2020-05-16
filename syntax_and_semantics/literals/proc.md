@@ -55,7 +55,7 @@ Array(Int32, String -> Char)
 
 ```crystal
 proc = ->(x : Int32, y : Int32) { x + y }
-proc.call(1, 2) #=> 3
+proc.call(1, 2) # => 3
 ```
 
 ## 從現有方法建立
@@ -68,7 +68,7 @@ def one
 end
 
 proc = ->one
-proc.call #=> 1
+proc.call # => 1
 ```
 
 不過當方法帶有參數時，我們還是需要指定型別：
@@ -79,7 +79,7 @@ def plus_one(x)
 end
 
 proc = ->plus_one(Int32)
-proc.call(41) #=> 42
+proc.call(41) # => 42
 ```
 
 程序也可以指定受器<small>(Receiver)</small>：
@@ -88,6 +88,6 @@ proc.call(41) #=> 42
 # 將程序指向 str 的 count 方法
 str = "hello"
 proc = ->str.count(Char)
-proc.call('e') #=> 1
-proc.call('l') #=> 2
+proc.call('e') # => 1
+proc.call('l') # => 2
 ```

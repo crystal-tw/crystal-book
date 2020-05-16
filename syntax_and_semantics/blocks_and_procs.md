@@ -163,7 +163,9 @@ The block variable `second` also includes the `Nil` type because the last `yield
 
 ## Short one-argument syntax
 
-A short syntax exists for specifying a block that receives a single argument and invokes a method on it. This:
+If a block has a single argument and invokes a method on it, the block can be replaced with the short syntax argument.
+
+This:
 
 ```crystal
 method do |argument|
@@ -171,31 +173,48 @@ method do |argument|
 end
 ```
 
-Can be written as this:
+and
+
+```crystal
+method { |argument| argument.some_method }
+```
+
+can both be written as:
 
 ```crystal
 method &.some_method
 ```
 
-Or like this:
+Or like:
 
 ```crystal
 method(&.some_method)
 ```
 
-The above is just syntax sugar and doesn't have any performance penalty.
+In either case, `&.some_method` is an argument passed to `method`.  This argument is syntactically equivalent to the block variants.  It is only syntactic sugar and does not have any performance penalty.
 
-Arguments can be passed to `some_method` as well:
+If the method has other required parameters, the short syntax argument should also be supplied in the method's argument list.
 
 ```crystal
-method &.some_method(arg1, arg2)
+["a", "b"].join(",", &.upcase)
 ```
 
-And operators can be invoked too:
+Is equivalent to:
+```crystal
+["a", "b"].join(",") { |s| s.upcase }
+```
+
+Arguments can be used with the short syntax argument as well:
+
+```crystal
+["i", "o"].join(",", &.upcase(Unicode::CaseOptions::Turkic))
+```
+
+Operators can be invoked too:
 
 ```crystal
 method &.+(2)
-method &.[index]
+method(&.[index])
 ```
 
 ## yield value
@@ -218,12 +237,12 @@ end
 
 The above prints "2" and "3".
 
-A `yield` expression's value is mostly useful for transforming and filtering values. The best examples of this are [Enumerable#map](http://crystal-lang.org/api/Enumerable.html#map%28%26block%20%3A%20T%20-%3E%20U%29-instance-method) and [Enumerable#select](http://crystal-lang.org/api/Enumerable.html#select%28%26block%20%3A%20T%20-%3E%20%29-instance-method):
+A `yield` expression's value is mostly useful for transforming and filtering values. The best examples of this are [Enumerable#map](https://crystal-lang.org/api/Enumerable.html#map%28%26block%3AT-%3EU%29forallU-instance-method) and [Enumerable#select](https://crystal-lang.org/api/Enumerable.html#select%28%26block%3AT-%3E%29-instance-method):
 
 ```crystal
 ary = [1, 2, 3]
-ary.map { |x| x + 1 }         #=> [2, 3, 4]
-ary.select { |x| x % 2 == 1 } #=> [1, 3]
+ary.map { |x| x + 1 }         # => [2, 3, 4]
+ary.select { |x| x % 2 == 1 } # => [1, 3]
 ```
 
 A dummy transformation method:
@@ -233,7 +252,7 @@ def transform(value)
   yield value
 end
 
-transform(1) { |x| x + 1 } #=> 2
+transform(1) { |x| x + 1 } # => 2
 ```
 
 The result of the last expression is `2` because the last expression of the `transform` method is `yield`, whose value is the last expression of the block.
@@ -248,7 +267,7 @@ def transform_int(start : Int32, &block : Int32 -> Int32)
   result * 2
 end
 
-transform_int(3) { |x| x + 2 } #=> 10
+transform_int(3) { |x| x + 2 } # => 10
 transform_int(3) { |x| "foo" } # Error: expected block to return Int32, not String
 ```
 
@@ -284,8 +303,8 @@ def twice
   yield 2
 end
 
-twice { |i| i + 1 } #=> 3
-twice { |i| break "hello" } #=> "hello"
+twice { |i| i + 1 }         # => 3
+twice { |i| break "hello" } # => "hello"
 ```
 
 The first call's value is 3 because the last expression of the `twice` method is `yield`, which gets the value of the block. The second call's value is "hello" because a `break` was performed.
@@ -299,21 +318,21 @@ value = twice do |i|
   end
   i + 1
 end
-value #:: Int32 | String
+value # :: Int32 | String
 ```
 
 If a `break` receives many arguments, they are automatically transformed to a [Tuple](http://crystal-lang.org/api/Tuple.html):
 
 ```crystal
 values = twice { break 1, 2 }
-values #=> {1, 2}
+values # => {1, 2}
 ```
 
 If a `break` receives no arguments, it's the same as receiving a single `nil` argument:
 
 ```crystal
 value = twice { break }
-value #=> nil
+value # => nil
 ```
 
 ## next
@@ -335,7 +354,7 @@ twice do |i|
   puts "Got #{i}"
 end
 
-# Ouptut:
+# Output:
 # Skipping 1
 # Got 2
 ```
@@ -364,7 +383,7 @@ end
 # 3
 ```
 
-If a `next` receives many arguments, they are automaticaly transformed to a [Tuple](http://crystal-lang.org/api/Tuple.html). If it receives no arguments it's the same as receiving a single `nil` argument.
+If a `next` receives many arguments, they are automatically transformed to a [Tuple](http://crystal-lang.org/api/Tuple.html). If it receives no arguments it's the same as receiving a single `nil` argument.
 
 ## with ... yield
 
@@ -416,6 +435,25 @@ end
 ```
 
 That means that any type that responds to `[]` with integers can be unpacked in a block argument.
+
+For [Tuple](http://crystal-lang.org/api/Tuple.html) arguments you can take advantage of auto-splatting and do not need parentheses:
+
+```crystal
+array = [{1, "one", true}, {2, "two", false}]
+array.each do |number, word, bool|
+  puts "#{number}: #{word} #{bool}"
+end
+```
+
+[Hash(K, V)#each](http://crystal-lang.org/api/Hash.html#each(&):Nil-instance-method) passes `Tuple(K, V)` to the block so iterating key-value pairs works with auto-splatting:
+
+```crystal
+h = {"foo" => "bar"}
+h.each do |key, value|
+  key   # => "foo"
+  value # => "bar"
+end
+```
 
 ## Performance
 

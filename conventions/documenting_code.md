@@ -2,7 +2,7 @@
 
 Crystal can generate documentation from comments using a subset of [Markdown](https://daringfireball.net/projects/markdown/).
 
-To generate documentation for a project, invoke `crystal docs`. By default this will create a `docs` directory, with a `docs/index.html` entry point. For more details see [Using the compiler - Creating documentation](../using_the_compiler/#creating-documentation).
+To generate documentation for a project, invoke `crystal docs`. By default this will create a `docs` directory, with a `docs/index.html` entry point. For more details see [Using the compiler – Creating documentation](../using_the_compiler/#crystal-docs).
 
 * Documentation should be positioned right above definitions of classes, modules, and methods. Leave no blanks between them.
 
@@ -96,10 +96,10 @@ For example:
 Unicorn.new.speak # => "I'm a unicorn"
 ```
 
-* Use `ditto` to use the same comment as in the previous declaration.
+* Use `:ditto:` to use the same comment as in the previous declaration.
 
 ```crystal
-# ditto
+# :ditto:
 def number_of_horns
   horns
 end
@@ -114,6 +114,63 @@ class Unicorn
   end
 end
 ```
+
+### Inheriting Documentation
+
+When an instance method has no doc comment, but a method with the same signature exists in a parent type, the documentation is inherited from the parent method.
+
+For example:
+
+```crystal
+abstract class Animal
+  # Returns the name of `self`.
+  abstract def name : String
+end
+
+class Unicorn < Animal
+  def name : String
+    "unicorn"
+  end
+end
+```
+
+The documentation for `Unicorn#name` would be:
+
+```
+Description copied from class `Animal`
+
+Returns the name of `self`.
+```
+
+The child method can use `:inherit:` to explicitly copy the parent's documentation, without the `Description copied from ...` text.  `:inherit:` can also be used to inject the parent's documentation into additional documentation on the child.
+
+For example:
+
+```crystal
+abstract class Parent
+  # Some documentation common to every *id*.
+  abstract def id : Int32
+end
+
+class Child < Parent
+  # Some documentation specific to *id*'s usage within `Child`.
+  #
+  # :inherit:
+  def id : Int32
+    -1
+  end
+end
+```
+
+The documentation for `Child#id` would be:
+
+```
+Some documentation specific to *id*'s usage within `Child`.
+
+Some documentation common to every *id*.
+```
+
+> **NOTE:** Inheriting documentation only works on _instance_, non-constructor methods.
 
 ### Flagging Classes, Modules, and Methods
 
@@ -212,7 +269,7 @@ class Unicorn
     @horns
   end
 
-  # ditto
+  # :ditto:
   def number_of_horns
     horns
   end

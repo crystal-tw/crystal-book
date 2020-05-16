@@ -4,8 +4,8 @@
 
 ```crystal
 tuple = {name: "Crystal", year: 2011} # NamedTuple(name: String, year: Int32)
-tuple[:name] # => "Crystal" (String)
-tuple[:year] # => 2011      (Int32)
+tuple[:name]                          # => "Crystal" (String)
+tuple[:year]                          # => 2011      (Int32)
 ```
 
 如同[序組](./tuple.md)，我們也可以使用下面的語法來指定命名序組使用的型別：

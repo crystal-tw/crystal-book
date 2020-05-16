@@ -10,6 +10,8 @@ Crystal 是一個程式語言語言，並嘗試完成以下目標：
 * 編譯時期展開巨集並產生最佳化程式碼
 * 產生高效原生碼
 
+**Crystal's standard library is documented in the [API docs](https://crystal-lang.org/api).**
+
 ## 協助翻譯
 
 若內容中有任何錯誤或對於某些章節需要更多說明，

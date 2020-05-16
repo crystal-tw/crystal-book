@@ -9,8 +9,8 @@ module Earth
   RADIUS = 6_371_000
 end
 
-PI #=> 3.14
-Earth::RADIUS #=> 6_371_000
+PI            # => 3.14
+Earth::RADIUS # => 6_371_000
 ```
 
 Although not enforced by the compiler, constants are usually named with all capital letters and underscores to separate words.
@@ -26,7 +26,7 @@ TEN = begin
   a
 end
 
-TEN #=> 10
+TEN # => 10
 ```
 
 # Pseudo Constants
@@ -52,7 +52,6 @@ def pseudo_constants(caller_line = __LINE__, end_of_caller = __END_LINE__)
   puts "Directory file is in: #{__DIR__}"
 end
 
-
 begin
   pseudo_constants
 end
@@ -63,4 +62,12 @@ end
 # End of caller block is at: 14
 # File path is: /crystal_code/pseudo_constants.cr
 # Directory file is in: /crystal_code
+```
+
+# Dynamic assignment
+
+Dynamically assigning values to constants using the [chained assignment](assignment.md#chained-assignment) or the [multiple assignment](assignment.md#multiple-assignment) is not supported and results in a syntax error.
+
+```crystal
+ONE, TWO, THREE = 1, 2, 3 # Syntax error: Multiple assignment is not allowed for constants
 ```

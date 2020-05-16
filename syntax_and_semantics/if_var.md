@@ -35,7 +35,7 @@ Of course, reassigning a variable inside the `then` branch makes that variable h
 
 ## Limitations
 
-The above logic **doesn’t** work with instance variables, class variables and variables bound in a closure. The value of these kinds of variables could potentially be affected by another fiber after the condition was checked, rendering it `nil`.
+The above logic works **only for local variables**. It doesn’t work with instance variables, class variables, or variables bound in a closure. The value of these kinds of variables could potentially be affected by another fiber after the condition was checked, rendering it `nil`. It also does not work with constants.
 
 ```crystal
 if @a
@@ -47,7 +47,7 @@ if @@a
 end
 
 a = nil
-closure = ->(){ a = "foo" }
+closure = ->{ a = "foo" }
 
 if a
   # here `a` can be nil
@@ -76,8 +76,8 @@ That logic also doesn't work with proc and method calls, including getters and p
 
 ```crystal
 if method # first call to a method that can return Int32 or Nil
-          # here we know that the first call did not return Nil
-  method  # second call can still return Int32 or Nil
+  # here we know that the first call did not return Nil
+  method # second call can still return Int32 or Nil
 end
 ```
 
