@@ -3,7 +3,7 @@
 * [簡介](introduction.md)
 * [讓我們開始吧！](getting_started/README.md)
    * [HTTP 伺服器](getting_started/http_server.md)
-   * [A Command Line Application](getting_started/cli.md)
+   * [命令列應用程式](getting_started/cli.md)
 * [The shards command](the_shards_command/README.md)
 * [使用編譯器](using_the_compiler/README.md)
 * [語法及語意](syntax_and_semantics/README.md)

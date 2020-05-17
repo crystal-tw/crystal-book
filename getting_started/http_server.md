@@ -1,6 +1,6 @@
 # HTTP 伺服器
 
-一個更有趣的例子是 HTTP 伺服器：
+這邊有一個有趣的例子是打造一個簡單的 HTTP 伺服器：
 
 ```crystal
 require "http/server"
@@ -15,7 +15,7 @@ puts "Listening on http://#{address}"
 server.listen
 ```
 
-在讀完整份文件後就能理解上述的程式碼了，但是我們能夠發現一些事情。
+在讀完整份文件後就能理解上述的程式碼了，但在那之前我們還是能夠推測一些用法：
 
 * 我們可以[引入 (Require)](../syntax_and_semantics/requiring_files.md)其他文件裡面的程式碼：
 
@@ -62,3 +62,5 @@ end
 ```crystal
 "Hello world! The time is #{Time.local}"
 ```
+
+Crystal 語言中還有其他[語法](../syntax_and_semantics/literals.md)可以表達其他種類的物件，例如陣列、雜湊、範圍、序組等等。

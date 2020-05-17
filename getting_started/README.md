@@ -1,16 +1,16 @@
 # 讓我們開始吧！
 
-Hi and welcome to Crystal's Reference Book!
+歡迎來到 Crystal 的世界！
 
-First let's make sure to [install the compiler](https://crystal-lang.org/install/) correctly so that we may try all the examples listed in this book.
+首先，我們必須先確定[我們已經安裝好編譯器](https://crystal-lang.org/install/)後，我們就可以開始嘗試接下來的所有範例 ：）
 
-Once installed, the Crystal compiler should be available as `crystal` command.
+一旦編譯器被安裝至我們的裝置後，我們應該要有一個可以使用的指令 `crystal` 來執行我們的 Crystal 編譯器。
 
-Let's try it!
+來試試看吧！
 
-## Crystal version
+## Crystal 版本
 
-We may check the Crystal compiler version. If Crystal is installed correctly then we should see something like this:
+我們可以先從確認 Crystal 編譯器的版本開始。 如果我們的編譯器有被正確的安裝的話，依照下面的步驟應該會顯示結果如下：
 
 ```terminal-session
 $ crystal --version
@@ -20,11 +20,11 @@ LLVM: 10.0.0
 Default target: x86_64-apple-macosx
 ```
 
-Great!
+讚ㄛ！
 
-## Crystal help
+## Crystal 說明
 
-Now, if we want to list all the options given by the compiler, we may run `crystal` program without any arguments:
+再來，我們可以先列出所有編譯器可以執行的指令，直接執行 `crystal` 而不帶任何參數試試看：
 
 ```terminal-session
 $ crystal
@@ -47,27 +47,28 @@ Run a command followed by --help to see command specific information, ex:
     crystal <command> --help
 ```
 
-More details about using the compiler can be found on the manpage `man crystal` or in our [compiler manual](../using_the_compiler/README.md).
+更多有關編譯器的指令及使用說明，可以在 manpage 中找到（使用 `man crystal`），或是在[編譯器手冊](../using_the_compiler/README.md)一章中找到更多資訊。
 
-## Hello Crystal
+## 哈囉 Crystal
 
-The following example is the classic Hello World. In Crystal it looks like this:
+以下是一個簡單的 Hello World 範例，在 Crystal 中看起來像是這樣：
 
 ```crystal
 # hello_world.cr
 
-puts "Hello World!"
+puts "你好，世界！"
 ```
 
-We may run our example like this:
+然後使用下面的指令執行看看：
 
 ```terminal-session
 $ crystal hello_world.cr
-Hello World!
+你好，世界！
 ```
 
-**Note:** The main routine is simply the program itself. There's no need to define a "main" function or something similar.
+**提醒：** 程式的入口就是程式碼本身，我們不需要像部分其他的程式語言一樣再另外定義所謂的 main 函數。
 
-Here we have two more examples to continue our first steps in Crystal:
-- [HTTP Server](./http_server.md)
-- [Command Line Application](./cli.md)
+接下來我們還有另外兩個簡單的範例可以讓我們更加熟悉 Crystal：
+
+- [HTTP 伺服器](./http_server.md)
+- [命令列應用程式](./cli.md)
