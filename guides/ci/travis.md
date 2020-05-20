@@ -37,7 +37,7 @@ script:
 
 With this configuration, Travis CI will run the tests using both Crystal `latest` and `nightly` releases on every push to a branch on your Github repository.
 
-**Note:** When [creating a Crystal project](../../using_the_compiler/#creating-a-crystal-project) using `crystal init`, Crystal creates a `.travis.yml` file for us.
+**Note:** When [creating a Crystal project](../../using_the_compiler/#產生一個專案或函式庫) using `crystal init`, Crystal creates a `.travis.yml` file for us.
 
 ### Using a specific Crystal release
 

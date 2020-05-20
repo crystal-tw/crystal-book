@@ -318,7 +318,7 @@ In let_it_cli.cr:5:24
 Error: undefined method 'upper_case' for Nil (compile-time type is (String | Nil))
 ```
 
-啊哈，其實這裡的使用者輸入是一個 `String | Nil` 的[聯合型別](./syntax_and_semantics/type_grammar.md)，所以我們必須分別針對 `Nil` 跟空字串來個別做處理：
+啊哈，其實這裡的使用者輸入是一個 `String | Nil` 的[聯合型別](../syntax_and_semantics/type_grammar.md)，所以我們必須分別針對 `Nil` 跟空字串來個別做處理：
 
 ```crystal
 # 檔案：let_it_cli.cr

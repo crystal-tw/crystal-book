@@ -22,7 +22,7 @@ Crystal 中有許多可以用來表達基本型別常值的寫法。
 | [序組 (Tuple)](./literals/tuple.md)       | `{1, "hello", 'x'}`                         |
 | [命名序組 (NamedTuple)](./literals/named_tuple.md) | `{name: "Crystal", year: 2011}`, `{"this is a key": 1}`|
 | [程序 (Proc)](./literals/proc.md)         | `->(x : Int32, y : Int32) { x + y }`        |
-| [Command](./literals/command.html)        | `` `echo foo` ``, `%x(echo foo)`                        |
+| [Command](./literals/command.md)        | `` `echo foo` ``, `%x(echo foo)`                        |
 
 ## 譯註
 

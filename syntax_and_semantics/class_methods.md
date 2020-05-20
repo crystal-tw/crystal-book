@@ -29,5 +29,5 @@ When called from within the same class or module scope the receiver can be `self
 
 # Constructors
 
-Constructors are normal class methods which [create a new instance of the class](new,_initialize_and_allocate.md).
+Constructors are normal class methods which [create a new instance of the class](new_initialize_and_allocate.md).
 By default all classes in Crystal have at least one constructor called `new`, but they may also define other constructors with different names.
