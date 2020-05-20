@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>在 Arch Linux 環境下安裝 · GitBook</title>
+        <title>Continuous Integration · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -34,6 +34,8 @@
 
     
         
+        <link rel="stylesheet" href="../styles/website.css">
+        
     
         
     
@@ -57,10 +59,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="on_gentoo_linux.html" />
+    <link rel="next" href="ci/travis.html" />
     
     
-    <link rel="prev" href="on_redhat_and_centos.html" />
+    <link rel="prev" href="hosting/gitlab.html" />
     
 
     </head>
@@ -102,12 +104,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="../getting_started/">
             
-                <a href="./">
+                <a href="../getting_started/">
             
                     
-                    安裝
+                    讓我們開始吧！
             
                 </a>
             
@@ -116,197 +118,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="on_debian_and_ubuntu.html">
+        <li class="chapter " data-level="1.2.1" data-path="../getting_started/http_server.html">
             
-                <a href="on_debian_and_ubuntu.html">
-            
-                    
-                    在 Debian／Ubuntu 環境下安裝
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="on_redhat_and_centos.html">
-            
-                <a href="on_redhat_and_centos.html">
-            
-                    
-                    在 RedHat／CentOS 環境下安裝
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.2.3" data-path="on_arch_linux.html">
-            
-                <a href="on_arch_linux.html">
-            
-                    
-                    在 Arch Linux 環境下安裝
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="on_gentoo_linux.html">
-            
-                <a href="on_gentoo_linux.html">
-            
-                    
-                    On Gentoo Linux
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="on_alpine_linux.html">
-            
-                <a href="on_alpine_linux.html">
-            
-                    
-                    On Alpine Linux
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="on_freebsd.html">
-            
-                <a href="on_freebsd.html">
-            
-                    
-                    On FreeBSD
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="on_mac_osx_using_homebrew.html">
-            
-                <a href="on_mac_osx_using_homebrew.html">
-            
-                    
-                    在 macOS 環境下使用 Homebrew 安裝
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="on_linux_using_linuxbrew.html">
-            
-                <a href="on_linux_using_linuxbrew.html">
-            
-                    
-                    On Linux using Linuxbrew
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="on_bash_on_ubuntu_on_windows.html">
-            
-                <a href="on_bash_on_ubuntu_on_windows.html">
-            
-                    
-                    在適用於 Linux 的 Windows 子系統上安裝
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.10" data-path="from_a_targz.html">
-            
-                <a href="from_a_targz.html">
-            
-                    
-                    使用 .tar.gz 檔案安裝
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.11" data-path="from_source_repository.html">
-            
-                <a href="from_source_repository.html">
-            
-                    
-                    從原始碼安裝
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../using_the_compiler/">
-            
-                <a href="../using_the_compiler/">
-            
-                    
-                    使用編譯器
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="../overview/">
-            
-                <a href="../overview/">
-            
-                    
-                    概要及範例
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="../overview/hello_world.html">
-            
-                <a href="../overview/hello_world.html">
-            
-                    
-                    Hello World!
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../overview/http_server.html">
-            
-                <a href="../overview/http_server.html">
+                <a href="../getting_started/http_server.html">
             
                     
                     HTTP 伺服器
@@ -317,8 +131,47 @@
             
         </li>
     
+        <li class="chapter " data-level="1.2.2" data-path="../getting_started/cli.html">
+            
+                <a href="../getting_started/cli.html">
+            
+                    
+                    命令列應用程式
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../the_shards_command/">
+            
+                <a href="../the_shards_command/">
+            
+                    
+                    The shards command
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../using_the_compiler/">
+            
+                <a href="../using_the_compiler/">
+            
+                    
+                    使用編譯器
+            
+                </a>
+            
+
             
         </li>
     
@@ -560,25 +413,6 @@
                 </a>
             
 
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.3.1" data-path="../syntax_and_semantics/multiple_assignment.html">
-            
-                <a href="../syntax_and_semantics/multiple_assignment.html">
-            
-                    
-                    多項賦值
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
             
         </li>
     
@@ -1494,16 +1328,35 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.12" data-path="../syntax_and_semantics/attributes.html">
+        <li class="chapter " data-level="1.5.12" data-path="../syntax_and_semantics/annotations.html">
             
-                <a href="../syntax_and_semantics/attributes.html">
+                <a href="../syntax_and_semantics/annotations.html">
             
                     
-                    Attributes
+                    Annotations
             
                 </a>
             
 
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.12.1" data-path="../syntax_and_semantics/annotations/built_in_annotations.html">
+            
+                <a href="../syntax_and_semantics/annotations/built_in_annotations.html">
+            
+                    
+                    Built-in annotations
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -1560,7 +1413,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.13.4" data-path="../syntax_and_semantics/declare_var.html">
+        <li class="chapter " data-level="1.5.13.4" data-path="../syntax_and_semantics/offsetof.html">
+            
+                <a href="../syntax_and_semantics/offsetof.html">
+            
+                    
+                    offsetof
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.5" data-path="../syntax_and_semantics/declare_var.html">
             
                 <a href="../syntax_and_semantics/declare_var.html">
             
@@ -1814,7 +1680,7 @@
                 <a href="../conventions/">
             
                     
-                    Conventions
+                    使用慣例
             
                 </a>
             
@@ -1841,7 +1707,7 @@
                 <a href="../conventions/documenting_code.html">
             
                     
-                    Documenting code
+                    撰寫文件
             
                 </a>
             
@@ -1868,7 +1734,20 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.7.1" data-path="../database/connection_pool.html">
+        <li class="chapter " data-level="1.7.1" data-path="../database/connection.html">
+            
+                <a href="../database/connection.html">
+            
+                    
+                    Connection
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../database/connection_pool.html">
             
                 <a href="../database/connection_pool.html">
             
@@ -1881,14 +1760,27 @@
             
         </li>
     
+        <li class="chapter " data-level="1.7.3" data-path="../database/transactions.html">
+            
+                <a href="../database/transactions.html">
+            
+                    
+                    Transactions
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="../guides/">
+        <li class="chapter " data-level="1.8" data-path="./">
             
-                <a href="../guides/">
+                <a href="./">
             
                     
                     Guides
@@ -1900,9 +1792,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.8.1" data-path="../guides/performance.html">
+        <li class="chapter " data-level="1.8.1" data-path="performance.html">
             
-                <a href="../guides/performance.html">
+                <a href="performance.html">
             
                     
                     Performance
@@ -1913,9 +1805,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.2" data-path="../guides/concurrency.html">
+        <li class="chapter " data-level="1.8.2" data-path="concurrency.html">
             
-                <a href="../guides/concurrency.html">
+                <a href="concurrency.html">
             
                     
                     Concurrency
@@ -1926,9 +1818,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.3" data-path="../guides/testing.html">
+        <li class="chapter " data-level="1.8.3" data-path="testing.html">
             
-                <a href="../guides/testing.html">
+                <a href="testing.html">
             
                     
                     Testing
@@ -1939,9 +1831,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.4" data-path="../guides/writing_shards.html">
+        <li class="chapter " data-level="1.8.4" data-path="writing_shards.html">
             
-                <a href="../guides/writing_shards.html">
+                <a href="writing_shards.html">
             
                     
                     Writing Shards
@@ -1949,6 +1841,83 @@
                 </a>
             
 
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.4.1" data-path="hosting/github.html">
+            
+                <a href="hosting/github.html">
+            
+                    
+                    Hosting on GitHub
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4.2" data-path="hosting/gitlab.html">
+            
+                <a href="hosting/gitlab.html">
+            
+                    
+                    Hosting on GitLab
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.8.5" data-path="continuous_integration.html">
+            
+                <a href="continuous_integration.html">
+            
+                    
+                    Continuous Integration
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.5.1" data-path="ci/travis.html">
+            
+                <a href="ci/travis.html">
+            
+                    
+                    Using Travis CI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5.2" data-path="ci/circleci.html">
+            
+                <a href="ci/circleci.html">
+            
+                    
+                    Using CircleCI
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -1987,7 +1956,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >在 Arch Linux 環境下安裝</a>
+        <a href=".." >Continuous Integration</a>
     </h1>
 </div>
 
@@ -2002,11 +1971,90 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x5728;-arch-linux-&#x74B0;&#x5883;&#x4E2D;&#x5B89;&#x88DD;">&#x5728; Arch Linux &#x74B0;&#x5883;&#x4E2D;&#x5B89;&#x88DD;</h1>
-<p>Arch Linux &#x7684; Community &#x8EDF;&#x9AD4;&#x5009;&#x5EAB;&#x4E2D;&#x5305;&#x542B;&#x6709; Crystal &#x7684;&#x7DE8;&#x8B6F;&#x5668;&#xFF0C;&#x540C;&#x6642;&#x4F60;&#x4E5F;&#x9700;&#x8981;&#x5728;&#x5009;&#x5EAB;&#x4E2D;&#x53D6;&#x5F97; <code>shards</code> &#x2014;&#x2014; Crystal &#x7684;&#x76F8;&#x4F9D;&#x7BA1;&#x7406;&#x5668;&#x3002;</p>
-<h2 id="&#x5B89;&#x88DD;">&#x5B89;&#x88DD;</h2>
-<pre><code>sudo pacman -S crystal shards
+                                <h1 id="continuous-integration">Continuous Integration</h1>
+<p>The ability of having immediate feedback on what we are working should be one of the most important characteristics in software development. Imagine making one change to our source code and having to wait 2 weeks to see if it broke something? oh! That would be a nightmare! For this, Continuous Integration will help a team to have immediate and frequent feedback about the status of what they are building.</p>
+<p>Martin Fowler <a href="https://www.martinfowler.com/articles/continuousIntegration.html" target="_blank">defines Continuous Integration</a> as
+<em>a software development practice where members of a team integrate their work frequently, usually each person integrates at least daily - leading to multiple integrations per day. Each integration is verified by an automated build (including test) to detect integration errors as quickly as possible. Many teams find that this approach leads to significantly reduced integration problems and allows a team to develop cohesive software more rapidly.</em></p>
+<p>In the next subsections, we are going to present 2 continuous integration tools: <a href="https://travis-ci.org/" target="_blank">Travis CI</a> and <a href="https://circleci.com/" target="_blank">Circle CI</a> and use them with a Crystal example application.</p>
+<p>These tools not only will let us build and test our code each time the source has changed but also deploy the result (if the build was successful) or use automatic builds, and maybe test against different platforms, to mention a few.</p>
+<h2 id="the-example-application">The example application</h2>
+<p>We are going to use Conway&apos;s Game of Life as the example application. More precisely, we are going to use only the first iterations in <a href="http://codingdojo.org/kata/GameOfLife/" target="_blank">Conway&apos;s Game of Life Kata</a> solution using <a href="https://martinfowler.com/bliki/TestDrivenDevelopment.html" target="_blank">TDD</a>.</p>
+<p>Note that we won&apos;t be using TDD in the example itself, but we will mimic as if the example code is the result of the first iterations.</p>
+<p>Another important thing to mention is that we are using <code>crystal init</code> to <a href="../using_the_compiler#&#x7522;&#x751F;&#x4E00;&#x500B;&#x5C08;&#x6848;&#x6216;&#x51FD;&#x5F0F;&#x5EAB;">create the application</a>.</p>
+<p>And here&apos;s the implementation:</p>
+<pre><code class="lang-crystal"><span class="hljs-comment"># src/game_of_life.cr</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Location</span></span>
+  getter x : Int32
+  getter y : Int32
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">self</span></span>.random
+    Location.new(Random.rand(<span class="hljs-number">10</span>), Random.rand(<span class="hljs-number">10</span>))
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">initialize</span></span>(@x, @y)
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">World</span></span>
+  @living_cells : Array(Location)
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">self</span></span>.empty
+    new
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">initialize</span></span>(living_cells = [] <span class="hljs-keyword">of</span> Location)
+    @living_cells = living_cells
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">set_living_at</span></span>(a_location)
+    @living_cells &lt;&lt; a_location
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_empty?</span></span>
+    @living_cells.size == <span class="hljs-number">0</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
 </code></pre>
+<p>And the specs:</p>
+<pre><code class="lang-crystal"><span class="hljs-comment"># spec/game_of_life_spec.cr</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;./spec_helper&quot;</span>
+
+describe <span class="hljs-string">&quot;a new world&quot;</span> <span class="hljs-keyword">do</span>
+  it <span class="hljs-string">&quot;should be empty&quot;</span> <span class="hljs-keyword">do</span>
+    world = World.new
+    world.is_empty?.should be_true
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+describe <span class="hljs-string">&quot;an empty world&quot;</span> <span class="hljs-keyword">do</span>
+  it <span class="hljs-string">&quot;should not be empty after adding a cell&quot;</span> <span class="hljs-keyword">do</span>
+    world = World.empty
+    world.set_living_at(Location.random)
+    world.is_empty?.should be_false
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+</code></pre>
+<p>And this is all we need for our continuous integration examples! Let&apos;s start!</p>
+<h2 id="continuous-integration-step-by-step">Continuous Integration step by step</h2>
+<p>Here&apos;s the list of items we want to achieve:</p>
+<ol>
+<li>Build and run specs using 3 different Crystal&apos;s versions:<ul>
+<li>latest</li>
+<li>nightly</li>
+<li>0.31.1 (using a Docker image)</li>
+</ul>
+</li>
+<li>Install shards packages</li>
+<li>Install binary dependencies</li>
+<li>Use a database (for example MySQL)</li>
+<li>Cache dependencies to make the build run faster</li>
+</ol>
+<p>From here choose your next steps:</p>
+<ul>
+<li>I want to use <a href="ci/travis.html">Travis CI</a></li>
+<li>I want to use <a href="ci/circleci.html">CircleCI</a></li>
+</ul>
+
                                 
                                 </section>
                             
@@ -2033,12 +2081,12 @@
 
             
                 
-                <a href="on_redhat_and_centos.html" class="navigation navigation-prev " aria-label="Previous page: 在 RedHat／CentOS 環境下安裝">
+                <a href="hosting/gitlab.html" class="navigation navigation-prev " aria-label="Previous page: Hosting on GitLab">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="on_gentoo_linux.html" class="navigation navigation-next " aria-label="Next page: On Gentoo Linux">
+                <a href="ci/travis.html" class="navigation navigation-next " aria-label="Next page: Using Travis CI">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -2049,7 +2097,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"在 Arch Linux 環境下安裝","level":"1.2.3","depth":2,"next":{"title":"On Gentoo Linux","level":"1.2.4","depth":2,"path":"installation/on_gentoo_linux.md","ref":"installation/on_gentoo_linux.md","articles":[]},"previous":{"title":"在 RedHat／CentOS 環境下安裝","level":"1.2.2","depth":2,"path":"installation/on_redhat_and_centos.md","ref":"installation/on_redhat_and_centos.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","edit-link","offline"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"offline":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-128950624-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"編輯此頁","base":"https://github.com/crystal-tw/docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.x.x"},"file":{"path":"installation/on_arch_linux.md","mtime":"2018-11-09T08:26:47.079Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2018-11-09T08:28:22.560Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Continuous Integration","level":"1.8.5","depth":2,"next":{"title":"Using Travis CI","level":"1.8.5.1","depth":3,"path":"guides/ci/travis.md","ref":"guides/ci/travis.md","articles":[]},"previous":{"title":"Hosting on GitLab","level":"1.8.4.2","depth":3,"path":"guides/hosting/gitlab.md","ref":"guides/hosting/gitlab.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","edit-link","offline"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"offline":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-128950624-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"編輯此頁","base":"https://github.com/crystal-tw/docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.2.2"},"file":{"path":"guides/continuous_integration.md","mtime":"2020-05-20T10:34:58.862Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2020-05-20T10:35:57.575Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

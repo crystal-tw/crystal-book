@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>多項賦值 · GitBook</title>
+        <title>offsetof · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -34,6 +34,8 @@
 
     
         
+        <link rel="stylesheet" href="../styles/website.css">
+        
     
         
     
@@ -57,10 +59,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="local_variables.html" />
+    <link rel="next" href="declare_var.html" />
     
     
-    <link rel="prev" href="assignment.html" />
+    <link rel="prev" href="instance_sizeof.html" />
     
 
     </head>
@@ -102,12 +104,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="../installation/">
+        <li class="chapter " data-level="1.2" data-path="../getting_started/">
             
-                <a href="../installation/">
+                <a href="../getting_started/">
             
                     
-                    安裝
+                    讓我們開始吧！
             
                 </a>
             
@@ -116,197 +118,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="../installation/on_debian_and_ubuntu.html">
+        <li class="chapter " data-level="1.2.1" data-path="../getting_started/http_server.html">
             
-                <a href="../installation/on_debian_and_ubuntu.html">
-            
-                    
-                    在 Debian／Ubuntu 環境下安裝
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="../installation/on_redhat_and_centos.html">
-            
-                <a href="../installation/on_redhat_and_centos.html">
-            
-                    
-                    在 RedHat／CentOS 環境下安裝
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../installation/on_arch_linux.html">
-            
-                <a href="../installation/on_arch_linux.html">
-            
-                    
-                    在 Arch Linux 環境下安裝
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="../installation/on_gentoo_linux.html">
-            
-                <a href="../installation/on_gentoo_linux.html">
-            
-                    
-                    On Gentoo Linux
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="../installation/on_alpine_linux.html">
-            
-                <a href="../installation/on_alpine_linux.html">
-            
-                    
-                    On Alpine Linux
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../installation/on_freebsd.html">
-            
-                <a href="../installation/on_freebsd.html">
-            
-                    
-                    On FreeBSD
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="../installation/on_mac_osx_using_homebrew.html">
-            
-                <a href="../installation/on_mac_osx_using_homebrew.html">
-            
-                    
-                    在 macOS 環境下使用 Homebrew 安裝
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../installation/on_linux_using_linuxbrew.html">
-            
-                <a href="../installation/on_linux_using_linuxbrew.html">
-            
-                    
-                    On Linux using Linuxbrew
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="../installation/on_bash_on_ubuntu_on_windows.html">
-            
-                <a href="../installation/on_bash_on_ubuntu_on_windows.html">
-            
-                    
-                    在適用於 Linux 的 Windows 子系統上安裝
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.10" data-path="../installation/from_a_targz.html">
-            
-                <a href="../installation/from_a_targz.html">
-            
-                    
-                    使用 .tar.gz 檔案安裝
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.11" data-path="../installation/from_source_repository.html">
-            
-                <a href="../installation/from_source_repository.html">
-            
-                    
-                    從原始碼安裝
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../using_the_compiler/">
-            
-                <a href="../using_the_compiler/">
-            
-                    
-                    使用編譯器
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="../overview/">
-            
-                <a href="../overview/">
-            
-                    
-                    概要及範例
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="../overview/hello_world.html">
-            
-                <a href="../overview/hello_world.html">
-            
-                    
-                    Hello World!
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../overview/http_server.html">
-            
-                <a href="../overview/http_server.html">
+                <a href="../getting_started/http_server.html">
             
                     
                     HTTP 伺服器
@@ -317,8 +131,47 @@
             
         </li>
     
+        <li class="chapter " data-level="1.2.2" data-path="../getting_started/cli.html">
+            
+                <a href="../getting_started/cli.html">
+            
+                    
+                    命令列應用程式
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../the_shards_command/">
+            
+                <a href="../the_shards_command/">
+            
+                    
+                    The shards command
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../using_the_compiler/">
+            
+                <a href="../using_the_compiler/">
+            
+                    
+                    使用編譯器
+            
+                </a>
+            
+
             
         </li>
     
@@ -560,25 +413,6 @@
                 </a>
             
 
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter active" data-level="1.5.3.1" data-path="multiple_assignment.html">
-            
-                <a href="multiple_assignment.html">
-            
-                    
-                    多項賦值
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
             
         </li>
     
@@ -1494,16 +1328,35 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.12" data-path="attributes.html">
+        <li class="chapter " data-level="1.5.12" data-path="annotations.html">
             
-                <a href="attributes.html">
+                <a href="annotations.html">
             
                     
-                    Attributes
+                    Annotations
             
                 </a>
             
 
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.12.1" data-path="annotations/built_in_annotations.html">
+            
+                <a href="annotations/built_in_annotations.html">
+            
+                    
+                    Built-in annotations
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -1560,7 +1413,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.13.4" data-path="declare_var.html">
+        <li class="chapter active" data-level="1.5.13.4" data-path="offsetof.html">
+            
+                <a href="offsetof.html">
+            
+                    
+                    offsetof
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.5" data-path="declare_var.html">
             
                 <a href="declare_var.html">
             
@@ -1814,7 +1680,7 @@
                 <a href="../conventions/">
             
                     
-                    Conventions
+                    使用慣例
             
                 </a>
             
@@ -1841,7 +1707,7 @@
                 <a href="../conventions/documenting_code.html">
             
                     
-                    Documenting code
+                    撰寫文件
             
                 </a>
             
@@ -1868,12 +1734,38 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.7.1" data-path="../database/connection_pool.html">
+        <li class="chapter " data-level="1.7.1" data-path="../database/connection.html">
+            
+                <a href="../database/connection.html">
+            
+                    
+                    Connection
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../database/connection_pool.html">
             
                 <a href="../database/connection_pool.html">
             
                     
                     Connection pool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../database/transactions.html">
+            
+                <a href="../database/transactions.html">
+            
+                    
+                    Transactions
             
                 </a>
             
@@ -1950,6 +1842,83 @@
             
 
             
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.4.1" data-path="../guides/hosting/github.html">
+            
+                <a href="../guides/hosting/github.html">
+            
+                    
+                    Hosting on GitHub
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4.2" data-path="../guides/hosting/gitlab.html">
+            
+                <a href="../guides/hosting/gitlab.html">
+            
+                    
+                    Hosting on GitLab
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../guides/continuous_integration.html">
+            
+                <a href="../guides/continuous_integration.html">
+            
+                    
+                    Continuous Integration
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.5.1" data-path="../guides/ci/travis.html">
+            
+                <a href="../guides/ci/travis.html">
+            
+                    
+                    Using Travis CI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5.2" data-path="../guides/ci/circleci.html">
+            
+                <a href="../guides/ci/circleci.html">
+            
+                    
+                    Using CircleCI
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
         </li>
     
 
@@ -1987,7 +1956,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >多項賦值</a>
+        <a href=".." >offsetof</a>
     </h1>
 </div>
 
@@ -2002,49 +1971,18 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x591A;&#x9805;&#x8CE6;&#x503C;">&#x591A;&#x9805;&#x8CE6;&#x503C;</h1>
-<p>&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x9017;&#x865F;&#xFF08;<code>,</code>&#xFF09;&#x4F86;&#x540C;&#x6642;&#x9032;&#x884C;&#x591A;&#x9805;&#x8B8A;&#x6578;&#x7684;&#x8CE6;&#x503C;&#xFF08;&#x7576;&#x7136;&#xFF0C;&#x4E5F;&#x5305;&#x62EC;&#x5BA3;&#x544A;&#xFF09;&#xFF1A;</p>
-<pre><code class="lang-crystal">name, age = <span class="hljs-string">&quot;Crystal&quot;</span>, <span class="hljs-number">1</span>
-
-<span class="hljs-comment"># &#x76F8;&#x7576;&#x65BC;&#xFF1A;</span>
-temp1 = <span class="hljs-string">&quot;Crystal&quot;</span>
-temp2 = <span class="hljs-number">1</span>
-name  = temp1
-age   = temp2
+                                <h1 id="offsetof">offsetof</h1>
+<p>An <code>offsetof</code> expression returns the byte offset of an instance variable in a struct or class type. It accepts the type as first argument and the instance variable name prefixed by an <code>@</code> as second argument:</p>
+<pre><code class="lang-cr">offsetof(Type, @ivar)
 </code></pre>
-<p>&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x767C;&#x73FE;&#x5728;&#x904E;&#x7A0B;&#x4E2D;&#x4F7F;&#x7528;&#x4E86;&#x4E00;&#x4E9B;&#x8B8A;&#x6578;&#x4F86;&#x66AB;&#x5B58;&#x9019;&#x4E9B;&#x53F3;&#x503C;&#xFF08;&#x4E5F;&#x5C31;&#x662F;&#x5373;&#x5C07;&#x88AB;&#x8CE6;&#x4E88;&#x7684;&#x503C;&#xFF09;&#xFF0C;&#x6240;&#x4EE5;&#x591A;&#x9805;&#x8CE6;&#x503C;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;&#x4F86;&#x4EA4;&#x63DB;&#x8B8A;&#x6578;&#x7684;&#x5167;&#x5BB9;&#xFF1A;</p>
-<pre><code class="lang-crystal">a = <span class="hljs-number">1</span>
-b = <span class="hljs-number">2</span>
-a, b = b, a
-a <span class="hljs-comment">#=&gt; 2</span>
-b <span class="hljs-comment">#=&gt; 1</span>
-</code></pre>
-<p>&#x5982;&#x679C;&#x53F3;&#x5074;&#x53EA;&#x6709;&#x4E00;&#x500B;&#x8868;&#x9054;&#x5F0F;&#x7684;&#x8A71;&#xFF0C;&#x5C07;&#x6703;&#x5957;&#x7528;&#x4E0B;&#x9762;&#x4ECB;&#x7D39;&#x7684;&#x8A9E;&#x6CD5;&#x7CD6;&#xFF1A;&#xFF08;&#x6CE8;&#x610F;&#xFF1A;&#x6211;&#x5011;&#x5047;&#x5B9A;&#x53F3;&#x503C;&#x4E00;&#x5B9A;&#x662F;&#x53EF;&#x7D22;&#x5F15;&#x7684;&#x578B;&#x5225;&#xFF09;</p>
-<pre><code class="lang-crystal">name, age, source = <span class="hljs-string">&quot;Crystal,1,github&quot;</span>.split(<span class="hljs-string">&quot;,&quot;</span>)
+<p>This is a low-level primitive and only useful if a C API needs to directly interface with the data layout of a Crystal type.</p>
+<p>Example:</p>
+<pre><code class="lang-cr"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Foo</span></span>
+  @x = <span class="hljs-number">0_i64</span>
+  @y = <span class="hljs-number">34_i32</span>
+<span class="hljs-keyword">end</span>
 
-<span class="hljs-comment"># &#x7B49;&#x540C;&#x65BC;&#x4E0B;&#x9762;&#x7684;&#x505A;&#x6CD5;&#xFF1A;</span>
-temp = <span class="hljs-string">&quot;Crystal,1,github&quot;</span>.split(<span class="hljs-string">&quot;,&quot;</span>)
-name   = temp[<span class="hljs-number">0</span>]
-age    = temp[<span class="hljs-number">1</span>]
-source = temp[<span class="hljs-number">2</span>]
-</code></pre>
-<p>&#x5728;&#x5C0D;&#x65BC;&#x7D50;&#x5C3E;&#x5E36;&#x6709;&#x7B49;&#x865F;&#x7684;&#x65B9;&#x6CD5;&#x4E0A;&#x4E5F;&#x53EF;&#x4EE5;&#x9032;&#x884C;&#x591A;&#x9805;&#x8CE6;&#x503C;&#xFF1A;</p>
-<pre><code class="lang-crystal">person.name, person.age = <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-number">32</span>
-
-<span class="hljs-comment"># &#x7B49;&#x540C;&#x65BC;&#xFF1A;</span>
-temp1 = <span class="hljs-string">&quot;John&quot;</span>
-temp2 = <span class="hljs-number">32</span>
-person.name = temp1
-person.age = temp2
-</code></pre>
-<p>&#x7576;&#x7136;&#xFF0C;&#x5728;&#x7D22;&#x5F15;&#x5B58;&#x53D6;&#x5B50;&#x4E0A;&#xFF08;<code>[]=</code>&#xFF09;&#x4E5F;&#x53EF;&#x4EE5;&#x5982;&#x6B64;&#x61C9;&#x7528;&#xFF1A;</p>
-<pre><code class="lang-crystal">objects[<span class="hljs-number">1</span>], objects[<span class="hljs-number">2</span>] = <span class="hljs-number">3</span>, <span class="hljs-number">4</span>
-
-<span class="hljs-comment"># &#x7B49;&#x540C;&#x65BC;&#xFF1A;</span>
-temp1 = <span class="hljs-number">3</span>
-temp2 = <span class="hljs-number">4</span>
-objects[<span class="hljs-number">1</span>] = temp1
-objects[<span class="hljs-number">2</span>] = temp2
+offsetof(Foo, @y) <span class="hljs-comment"># =&gt; 8</span>
 </code></pre>
 
                                 
@@ -2073,12 +2011,12 @@ objects[<span class="hljs-number">2</span>] = temp2
 
             
                 
-                <a href="assignment.html" class="navigation navigation-prev " aria-label="Previous page: 賦值">
+                <a href="instance_sizeof.html" class="navigation navigation-prev " aria-label="Previous page: instance_sizeof">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="local_variables.html" class="navigation navigation-next " aria-label="Next page: 區域變數">
+                <a href="declare_var.html" class="navigation navigation-next " aria-label="Next page: Uninitialized variable declaration">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -2089,7 +2027,7 @@ objects[<span class="hljs-number">2</span>] = temp2
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"多項賦值","level":"1.5.3.1","depth":3,"next":{"title":"區域變數","level":"1.5.4","depth":2,"path":"syntax_and_semantics/local_variables.md","ref":"syntax_and_semantics/local_variables.md","articles":[]},"previous":{"title":"賦值","level":"1.5.3","depth":2,"path":"syntax_and_semantics/assignment.md","ref":"syntax_and_semantics/assignment.md","articles":[{"title":"多項賦值","level":"1.5.3.1","depth":3,"path":"syntax_and_semantics/multiple_assignment.md","ref":"syntax_and_semantics/multiple_assignment.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["ga","edit-link","offline"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"offline":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-128950624-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"編輯此頁","base":"https://github.com/crystal-tw/docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.x.x"},"file":{"path":"syntax_and_semantics/multiple_assignment.md","mtime":"2018-11-09T08:26:47.087Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2018-11-09T08:28:22.560Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"offsetof","level":"1.5.13.4","depth":3,"next":{"title":"Uninitialized variable declaration","level":"1.5.13.5","depth":3,"path":"syntax_and_semantics/declare_var.md","ref":"syntax_and_semantics/declare_var.md","articles":[]},"previous":{"title":"instance_sizeof","level":"1.5.13.3","depth":3,"path":"syntax_and_semantics/instance_sizeof.md","ref":"syntax_and_semantics/instance_sizeof.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","edit-link","offline"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"offline":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-128950624-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"編輯此頁","base":"https://github.com/crystal-tw/docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.2.2"},"file":{"path":"syntax_and_semantics/offsetof.md","mtime":"2020-05-20T10:34:58.866Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2020-05-20T10:35:57.575Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
