@@ -1,4 +1,4 @@
-# Documenting code
+# 撰寫文件
 
 Crystal 能夠使用部分的 [Markdown](https://daringfireball.net/projects/markdown/) 語法註解自動產生文件。
 
