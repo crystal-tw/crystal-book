@@ -1,6 +1,6 @@
 # 字串 <small>String</small>
 
-字串（[String](http://crystal-lang/api/String.html)）相當於一組不可變<small>(Immutable)</small>的 UTF-8 字元序列。
+字串（[String](http://crystal-lang.org/api/String.html)）相當於一組不可變<small>(Immutable)</small>的 UTF-8 字元序列。
 
 字串通常由字串常值來表達——即由一對雙引號（`"`）括住數個 UTF-8 字元：
 
@@ -178,11 +178,7 @@ XML
 <<-STRING # => "Hello\n  world"
   Hello
     world
-<<<<<<< HEAD
-STRING # => "Hello\n  world"
-=======
   STRING
->>>>>>> upstream/master
 
 <<-STRING # => "  Hello\n    world"
     Hello
