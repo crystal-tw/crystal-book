@@ -18,7 +18,7 @@ alias RecArray = Array(Int32) | Array(RecArray)
 ary = [] of RecArray
 ary.push [1, 2, 3]
 ary.push ary
-ary #=> [[1, 2, 3], [...]]
+ary # => [[1, 2, 3], [...]]
 ```
 
 Json 是一個常見的遞迴型別範例：

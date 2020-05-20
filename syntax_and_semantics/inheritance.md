@@ -35,8 +35,7 @@ class Employee < Person
 end
 
 Employee.new "John", "Acme" # OK
-Employee.new "Peter" # Error: wrong number of arguments
-                     # for 'Employee:Class#new' (1 for 2)
+Employee.new "Peter"        # Error: wrong number of arguments for 'Employee:Class#new' (1 for 2)
 ```
 
 You can override methods in a derived class:
@@ -114,12 +113,12 @@ end
 class Bar < Foo
 end
 
-foo_arr = [Bar.new] of Foo # => [#<Bar:0x10215bfe0>] : Array(Foo)
-bar_arr = [Bar.new] # => [#<Bar:0x10215bfd0>] : Array(Bar)
+foo_arr = [Bar.new] of Foo  # => [#<Bar:0x10215bfe0>] : Array(Foo)
+bar_arr = [Bar.new]         # => [#<Bar:0x10215bfd0>] : Array(Bar)
 bar_arr2 = [Foo.new] of Bar # compiler error
 ```
 
-A Foo array can hold both Foo's and Bar's, but an array of Bar can only hold Bar and it's subclasses.
+A Foo array can hold both Foo's and Bar's, but an array of Bar can only hold Bar and its subclasses.
 
 One place this might trip you up is when automatic casting comes into play. For example, the following won't work:
 
@@ -132,13 +131,16 @@ end
 
 class Test
   @arr : Array(Foo)
+
   def initialize
     @arr = [Bar.new]
   end
 end
 ```
 
-because in the initialize the default type for @arr is `Array(Bar)` but the required type is `Array(Foo)`. You can solve this by specifying the type explicitly:
+we've declared `@arr` as type `Array(Foo)` so we may be tempted to think that we can start putting `Bar`s in there. Not quite. In the `initialize`, the type of the `[Bar.new]` expression is `Array(Bar)`, period. And `Array(Bar)` is *not* assignable to an `Array(Foo)` instance var. 
+
+What's the right way to do this? Change the expression so that it *is* of the right type: `Array(Foo)` (see example above).
 
 ```crystal
 class Foo
@@ -149,10 +151,13 @@ end
 
 class Test
   @arr : Array(Foo)
+
   def initialize
     @arr = [Bar.new] of Foo
   end
 end
 ```
 
-The way Crystal handles the bigger topic of [covariance and contravariance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)) in general, has more tricks and pitfalls to it, so you may be interested in [this issue / discussion](https://github.com/crystal-lang/crystal/issues/3803) for more reading.
+This is just one type (Array) and one operation (assignment), the logic of the above will be applied differently for other types and assignments, in general [Covariance and Contravariance][1] is not fully supported.
+
+[1]: https://en.wikipedia.org/wiki/Covariance_and_contravariance_%28computer_science%29

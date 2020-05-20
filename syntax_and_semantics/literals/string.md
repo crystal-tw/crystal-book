@@ -13,20 +13,20 @@
 如同[字元](./char.md)，反斜線（`\`）也可以拿來表達一些特定的字元：
 
 ```crystal
-"\"" # 雙引號
-"\\" # 反斜線
-"\a" # 蜂鳴器警報
-"\b" # 退格
-"\e" # 跳脫
-"\f" # 換頁
-"\n" # 換行
-"\r" # 輸入鍵 (Enter)
-"\t" # Tab
-"\v" # 垂直 Tab
-"\NNN" # 八進位 ASCII 字元
-"\xNN" # 十六進位 ASCII 字元
-"\uNNNN" # 十六進位萬國碼字元
-"\u{NNNN...}" # 十六進位萬國碼字元
+"\""                  # 雙引號
+"\\"                  # 反斜線
+"\a"                  # 蜂鳴器警報
+"\b"                  # 退格
+"\e"                  # 跳脫
+"\f"                  # 換頁
+"\n"                  # 換行
+"\r"                  # 輸入鍵 (Enter)
+"\t"                  # Tab
+"\v"                  # 垂直 Tab
+"\888"                # 八進位 ASCII 字元
+"\xFF"                # 十六進位 ASCII 字元
+"\uFFFF"              # 十六進位萬國碼字元
+"\u{0}".."\u{10FFFF}" # 十六進位萬國碼字元
 ```
 
 其他接在反斜線後方的跳脫字元都表示該字元本身。
@@ -64,7 +64,7 @@ b = 2
 "sum: #{a} + #{b} = #{a + b}" # => "sum: 1 + 2 = 3"
 ```
 
-字串也可以透過 [String#%](https://crystal-lang.org/api/master/String.html#%25%28other%29-instance-method) 方法來執行插值。
+字串也可以透過 [String#%](https://crystal-lang.org/api/String.html#%25%28other%29-instance-method) 方法來執行插值。
 
 任何表達式都可以被放置於插值區塊中，但儘量保持插值表達式越短越能夠能保持可讀性。
 
@@ -92,7 +92,7 @@ end
 # 百分比字串常值表示法
 
 除了使用雙引號來表達字串以外，Crystal 亦支援使用百分比符號（`%`）及成對的符號相夾來表示。
-合法的符號為小括號（`()`）、中括號（`[]`）、大括號（`{}`）、角括號（`<>`）以及垂直條（`|`）。
+合法的符號為小括號（`()`）、中括號（`[]`）、大括號（`{}`）、角括號（`<>`）以及垂直條（`||`）。
 除了垂直條，其他的符號都可以在字串中成對使用而不會結束字串。
 
 字串中需要使用雙引號時，就可以使用這個方法來避免使用跳脫字元：
@@ -111,6 +111,22 @@ end
 name = "world"
 %q(hello \n #{name}) # => "hello \\n \#{name}"
 %Q(hello \n #{name}) # => "hello \n world"
+```
+
+## Percent string array literal
+
+Besides the single string literal, there is also a percent literal to create an [Array](https://crystal-lang.org/api/Array.html) of strings. It is indicated by `%w` and a pair of delimiters. Valid delimiters are as same as [百分比字串常值表示法](#百分比字串常值表示法).
+
+```crystal
+%w(foo bar baz)  # => ["foo", "bar", "baz"]
+%w(foo\nbar baz) # => ["foo\\nbar", "baz"]
+%w(foo(bar) baz) # => ["foo(bar)", "baz"]
+```
+
+Note that literal denoted by `%w` does not apply interpolation nor escapes expect spaces. Since strings are separated by a single space character (` `) which must be escaped to use it as a part of a string.
+
+```crystal
+%w(foo\ bar baz) # => ["foo bar", "baz"]
 ```
 
 ## 多行字串
@@ -159,31 +175,35 @@ XML
 與結束標識符之相同數量的行首空白將自動被忽略。如：
 
 ```crystal
-<<-STRING
+<<-STRING # => "Hello\n  world"
   Hello
     world
+<<<<<<< HEAD
 STRING # => "Hello\n  world"
+=======
+  STRING
+>>>>>>> upstream/master
 
-<<-STRING
+<<-STRING # => "  Hello\n    world"
     Hello
       world
-  STRING # => "  Hello\n    world"
+  STRING
 ```
 
 我們可以在 Heredoc 結束後直接呼叫方法，或是將其置於括號中：
 
 ```crystal
-<<-SOME
+<<-SOME.upcase # => "HELLO"
 hello
-SOME.upcase # => "HELLO"
+SOME
 
 def upcase(string)
   string.upcase
 end
 
-upcase(<<-SOME
+upcase(<<-SOME) # => "HELLO"
   hello
-  SOME) # => "HELLO"
+  SOME
 ```
 
 在 Heredoc 中亦支援跳脫及內插表達式。
@@ -191,7 +211,7 @@ upcase(<<-SOME
 同時，只要將 Heredoc 的標識符用單引號（`'`）括起就能不執行跳脫及內插：
 
 ```crystal
-<<-'HERE'
+<<-'HERE' # => "hello \\n \#{world}"
   hello \n #{world}
-  HERE # => "hello \n #{world}"
+  HERE
 ```

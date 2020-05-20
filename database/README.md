@@ -67,14 +67,15 @@ To execute sql statements you can use `Database#exec`
 db.exec "create table contacts (name varchar(30), age int)"
 ```
 
-To avoid sql injection use parameters to submit data
+To avoid [SQL injection](https://owasp.org/www-community/attacks/SQL_Injection) values can be provided as query parameters.
+The syntax for using query parameters depends on the database driver because they are typically just passed through to the database. MySQL uses `?` for parameter expansion and assignment is based on argument order. PostgreSQL uses `$n` where `n` is the ordinal number of the argument (starting with 1).
 
 ```crystal
+# MySQL
 db.exec "insert into contacts values (?, ?)", "John", 30
-db.exec "insert into contacts values (?, ?)", "Sarah", 33
+# Postgres
+db.exec "insert into contacts values ($1, $2)", "Sarah", 33
 ```
-
-Note: When using the pg driver, use `$1`, `$2`, etc. instead of `?`
 
 ## Query
 
@@ -115,7 +116,7 @@ name, age = rs.read(String, Int32)
 Or read a single row:
 
 ```crystal
-name, age = db.query_one "select name, age from contacts order by age desc limit 1", as: { String, Int32 }
+name, age = db.query_one "select name, age from contacts order by age desc limit 1", as: {String, Int32}
 ```
 
 Or read a scalar value without dealing explicitly with the ResultSet:

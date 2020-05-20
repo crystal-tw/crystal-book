@@ -1,5 +1,5 @@
 {
-    "gitbook": "3.x.x",
+    "gitbook": "3.2.2",
     "links": {
         "contributePrefix": "https://github.com/crystal-lang/crystal-book/"
     },
@@ -12,5 +12,8 @@
             "base": "https://github.com/crystal-tw/docs/edit/master",
             "label": "編輯此頁"
         }
+    },
+    "structure": {
+        "readme": "introduction.md"
     }
 }

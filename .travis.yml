@@ -2,9 +2,12 @@ sudo: false
 cache:
   directories:
     - $HOME/.npm
+    - $TRAVIS_BUILD_DIR/tmp/.htmlproofer
 before_install: |
   npm install -g gitbook-cli@2.3.0
   npm install
+  gitbook install --gitbook=3.2.2
+  NOKOGIRI_USE_SYSTEM_LIBRARIES=true gem install html-proofer
 script: test $TRAVIS_PULL_REQUEST != "false" || ./.travis_build.sh
 branches:
   only:

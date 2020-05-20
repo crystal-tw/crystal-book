@@ -14,10 +14,8 @@
 當所有的鍵或值都是相同型別時， `K`/`V` 則為該型別；否則為所有型別的型別集合。
 
 ```crystal
-{1 => 2, 3 => 4}     # Hash(Int32, Int32)
-{1 => 2, 'a' => 3}   # Hash(Int32 | Char, Int32)
-{1 => 'a', 2 => 2}   # Hash(Int32, Int32 | Char)
-{1 => 'a', 'b' => 2} # Hash(Int32 | Char, Int32 | Char)
+{1 => 2, 3 => 4}   # Hash(Int32, Int32)
+{1 => 2, 'a' => 3} # Hash(Int32 | Char, Int32)
 ```
 
 我們也可以透過在陣列後方接著的 `of` 手動指定型別，以 `=>` 對應描述 `K` 與 `V` 的型別。這讓我們可以先建立陣列後再將元素塞入。
@@ -61,11 +59,11 @@ MyHash{"foo" => 1, "bar" => "baz"}
 ```crystal
 my_hash = MyHash(typeof("foo", "bar"), typeof(1, "baz")).new
 my_hash["foo"] = 1
-my_hash["bar"] = baz
+my_hash["bar"] = "baz"
 ```
 
 在泛型的應用上我們也可以手動指定型別：
 
 ```crystal
-MyHash(String, String | Int32) {"foo" => "bar"}
+MyHash(String, String | Int32){"foo" => "bar"}
 ```

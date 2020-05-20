@@ -1,12 +1,12 @@
 # Visibility
 
-Methods are public by default: the compiler will always let you invoke them, even if there is no `public` keyword.
+Methods are public by default: the compiler will always let you invoke them. There is no `public` keyword for this reason.
 
-Methods can be marked as `private` or `protected`.
+Methods _can_ be marked as `private` or `protected`.
 
 ## Private methods
 
-A `private` method can only be invoked without a receiver, that is, without something before the dot:
+A `private` method can only be invoked without a receiver, that is, without something before the dot. The only exception is `self` as a receiver:
 
 ```crystal
 class Person
@@ -15,8 +15,8 @@ class Person
   end
 
   def say_hello
-    say "hello" # OK, no receiver
-    self.say "hello" # Error, self is a receiver
+    say "hello"      # OK, no receiver
+    self.say "hello" # OK, self is a receiver, but it's allowed.
 
     other = Person.new "Other"
     other.say "hello" # Error, other is a receiver
@@ -70,7 +70,7 @@ A `protected` method can only be invoked on:
 2. instances in the same namespace (class, struct, module, etc.) as the current type
 
 ```crystal
-### Example of 1
+# Example of 1
 
 class Person
   protected def say(message)
@@ -78,7 +78,7 @@ class Person
   end
 
   def say_hello
-    say "hello" # OK, implicit self is a Person
+    say "hello"      # OK, implicit self is a Person
     self.say "hello" # OK, self is a Person
 
     other = Person.new "Other"
@@ -89,16 +89,14 @@ end
 class Animal
   def make_a_person_talk
     person = Person.new
-    person.say "hello" # Error, person is a Person
-                       # but current type is an Animal
+    person.say "hello" # Error: person is a Person but current type is an Animal
   end
 end
 
 one_more = Person.new "One more"
-one_more.say "hello" # Error, one_more is a Person
-                     # but current type is the Program
+one_more.say "hello" # Error: one_more is a Person but current type is the Program
 
-### Example of 2
+# Example of 2
 
 module Namespace
   class Foo
@@ -118,16 +116,45 @@ end
 Namespace::Bar.new.bar
 ```
 
-A `protected` class method can be invoked from an instance method and the other way around:
+A `protected` method can only be invoked from the scope of its class or its descendants. That includes the class scope and bodies of class methods and instance methods of the same type the protected method is defined on, as well as all types including or inherinting that type and all types in that namespace.
 
 ```crystal
-class Person
-  protected def self.say(message)
-    puts message
+class Parent
+  protected def self.protected_method
   end
 
-  def say_hello
-    Person.say "hello" # OK
+  Parent.protected_method # OK
+
+  def instance_method
+    Parent.protected_method # OK
+  end
+
+  def self.class_method
+    Parent.protected_method # OK
+  end
+end
+
+class Child < Parent
+  Parent.protected_method # OK
+
+  def instance_method
+    Parent.protected_method # OK
+  end
+
+  def self.class_method
+    Parent.protected_method # OK
+  end
+end
+
+class Parent::Sub
+  Parent.protected_method # OK
+
+  def instance_method
+    Parent.protected_method # OK
+  end
+
+  def self.class_method
+    Parent.protected_method # OK
   end
 end
 ```
@@ -142,7 +169,7 @@ private def greet
   puts "Hello"
 end
 
-greet #=> "Hello"
+greet # => "Hello"
 
 # In file two.cr
 require "./one"
@@ -164,7 +191,7 @@ private class Greeter
   end
 end
 
-Greeter.greet #=> "Hello"
+Greeter.greet # => "Hello"
 
 # In file two.cr
 require "./one"

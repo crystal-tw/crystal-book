@@ -45,7 +45,7 @@ is the same as:
 alias Int32OrNil = Int32 | ::Nil
 ```
 
-In regular code, `Int32?` is a syntax error.
+In regular code, `Int32?` is an `Int32 | ::Nil` union type itself.
 
 ## Pointer
 
@@ -194,6 +194,6 @@ end
 `typeof` is allowed in the type grammar. It returns a union type of the type of the passed expressions:
 
 ```crystal
-typeof(1 + 2) # => Int32
+typeof(1 + 2)  # => Int32
 typeof(1, "a") # => (Int32 | String)
 ```

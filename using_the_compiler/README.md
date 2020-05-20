@@ -1,9 +1,5 @@
 # 使用編譯器
 
-一旦我們[安裝](../installation/)了編譯器之後，我們就有了 `crystal` 執行檔可以使用。
-
-在接下來的內容裡，金錢符號（`$`）會被用來表示命令列。
-
 ## 編譯並執行
 
 想要編譯並且直接執行程式，我們可以執行 [`crystal run`](#crystal-run) 並在後面加上檔案名稱：
@@ -50,9 +46,11 @@ The `--static` flag can be used to build a statically-linked executable:
 $ crystal build hello_world.cr --release --static
 ```
 
-**NOTE:** Building statically-linked executables is currently only supported on Alpine Linux.
+**NOTE:** Building fully statical linked executables is currently only supported on Alpine Linux.
 
 More information about statically linking [can be found on the wiki](https://github.com/crystal-lang/crystal/wiki/Static-Linking).
+
+The compiler uses the `CRYSTAL_LIBRARY_PATH` environment variable as a first lookup destination for static and dynamic libraries that are to be linked. This can be used to provide static versions of libraries that are also available as dynamic libraries.
 
 ### 產生一個專案或函式庫
 
@@ -140,12 +138,16 @@ Hello Crystal!
 
 **Common options:**
 
-* `--o <output_file>`: Define the name of the binary executable.
+* `--cross-compile`: Generate a .o file, and print the command to generate an executable to stdout.
+* `-D FLAG, --define FLAG`: Define a compile-time flag.
+* `-o <output_file>`: Define the name of the binary executable.
 * `--release`: Compile in release mode, doing extra work to apply optimizations to the generated code.
+* `--link-flags FLAGS`: Additional flags to passs to the linker.
 * `--lto=thin`: Use ThinLTO, improving performance on release builds.
 * `--no-debug`: Skip any symbolic debug info, reducing the output file size.
 * `--progress`: Show progress during compilation.
 * `--static`: Link statically.
+* `--verbose`: Display executed commands.
 
 More options are described in the integrated help: `crystal build --help` or man page `man crystal`.
 
@@ -179,7 +181,7 @@ NOTE: When running interactively, stdin can usually be closed by typing the end 
 * `--progress`: Show progress during compilation.
 * `--static`: Link statically.
 
-More options are described in the integrated help: `crystal build --help` or man page `man crystal`.
+More options are described in the integrated help: `crystal eval --help` or man page `man crystal`.
 
 ### `crystal version`
 
@@ -203,7 +205,7 @@ Default target: x86_64-unknown-linux-gnu
 
 The `crystal init` command initializes a Crystal project folder.
 
-```bash
+```
 crystal init (lib|app) <name> [<dir>]
 ```
 
@@ -213,7 +215,7 @@ in its repository and no build target in `shard.yml`, but instructions for using
 
 Example:
 ```shell-session
-$ crystal init lib mylib
+$ crystal init lib my_cool_lib
     create  my_cool_lib/.gitignore
     create  my_cool_lib/.editorconfig
     create  my_cool_lib/LICENSE
@@ -248,6 +250,8 @@ crystal docs src/my_app.cr
 
 **Common options:**
 
+* `--project-name=NAME`: Set the project name. The default value is extracted from `shard.yml` if available. In case no default can be found, this option is mandatory.
+* `--project-version=VERSION`: Set the project version. The default value is extracted from current git commit or `shard.yml` if available. In case no default can be found, this option is mandatory.
 * `--output=DIR, -o DIR`: Set the output directory (default: `./docs`)
 * `--canonical-base-url=URL, -b URL`: Set the [canonical base url](https://en.wikipedia.org/wiki/Canonical_link_element)
 
@@ -275,9 +279,10 @@ Example:
 $ crystal env
 CRYSTAL_CACHE_DIR="/home/crystal/.cache/crystal"
 CRYSTAL_PATH="/usr/bin/../share/crystal/src:lib"
-CRYSTAL_VERSION="0.25.1"
+CRYSTAL_VERSION="0.28.0"
+CRYSTAL_LIBRARY_PATH="/usr/bin/../lib/crystal/lib"
 $ crystal env CRYSTAL_VERSION
-0.25.1
+0.28.0
 ```
 
 ### `crystal spec`
@@ -300,12 +305,19 @@ Run `crystal spec --options` for available options.
 the other arguments by a double dash (`--`).
 
 * `--verbose`: Prints verbose output, including all example names.
-* `--example <name>`: Runs examples whose full nested names include `name`.
-* `--line <line>`: Runs examples whose line matches `line`.
 * `--profile`: Prints the 10 slowest specs.
 * `--fail-fast`: Abort the spec run on first failure.
-* `--location <file>:<line>`: Runs example(s) at `line` in `file` (multiple options allowed).
 * `--junit_output <output_dir>`: Generates JUnit XML output.
+
+The following options can be combined to filter the list of specs to run.
+
+* `--example <name>`: Runs examples whose full nested names include `name`.
+* `--line <line>`: Runs examples whose line matches `line`.
+* `--location <file>:<line>`: Runs example(s) at `line` in `file` (multiple options allowed).
+* `--tag <tag>`: Runs examples with the specified tag, or excludes examples by adding `~` before the tag (multiple options allowed).
+  * `--tag a --tag b` will include specs tagged with `a` OR `b`.
+  * `--tag ~a --tag ~b` will include specs not tagged with `a` AND not tagged with `b`.
+  * `--tag a --tag ~b` will include specs tagged with `a`, but not tagged with `b`
 
 Example:
 
@@ -339,7 +351,7 @@ The `crystal play` command starts a webserver serving an interactive Crystal pla
 crystal play [--port <port>] [--binding <host>] [--verbose] [file]
 ```
 
-![](crystal-play.png)
+![Screenshot of Crystal playground](crystal-play.png)
 
 ### `crystal tool`
 
@@ -355,8 +367,18 @@ crystal play [--port <port>] [--binding <host>] [--verbose] [file]
 The `crystal tool format` command applies default format to Crystal source files.
 
 ```
-crystal fool format [--check] [<path>...]
+crystal tool format [--check] [<path>...]
 ```
 
 `path` can be a file or folder name and include all Crystal files in that folder tree. Omitting `path` is equal to
 specifying the current working directory.
+
+## Environment variables
+
+The following environment variables are used by the Crystal compiler if set in the environment. Otherwise the compiler will populate them with default values. Their values can be inspected using [`crystal env`](#crystal-env).
+
+* `CRYSTAL_CACHE_DIR`: Defines path where Crystal caches partial compilation results for faster subsequent builds. This path is also used to temporarily store executables when Crystal programs are run with [`crystal run`](#crystal-run) rather than [`crystal build`](#crystal-build).
+  Default value is the first directory that either exists or can be created of `${XDG_CACHE_HOME}/crystal` (if `XDG_CACHE_HOME` is defined), `${HOME}/.cache/crystal`, `${HOME}/.crystal`, `./.crystal`. If `CRYSTAL_CACHE_DIR` is set but points to a path that is not writeable, the default values are used instead.
+* `CRYSTAL_PATH`: Defines paths where Crystal searches for required files.
+* `CRYSTAL_VERSION` is only available as output of [`crystal env`](#crystal-env). The compiler neither sets nor reads it.
+* `CRYSTAL_LIBRARY_PATH`: The compiler uses the paths in this variable as a first lookup destination for static and dynamic libraries that are to be linked. For example, if static libraries are put in `build/libs`, setting the environment variable accordingly will tell the compiler to look for libraries there.
