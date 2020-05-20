@@ -13,37 +13,20 @@
 如同[字元](./char.md)，反斜線（`\`）也可以拿來表達一些特定的字元：
 
 ```crystal
-<<<<<<< HEAD
-"\"" # 雙引號
-"\\" # 反斜線
-"\a" # 蜂鳴器警報
-"\b" # 退格
-"\e" # 跳脫
-"\f" # 換頁
-"\n" # 換行
-"\r" # 輸入鍵 (Enter)
-"\t" # Tab
-"\v" # 垂直 Tab
-"\NNN" # 八進位 ASCII 字元
-"\xNN" # 十六進位 ASCII 字元
-"\uNNNN" # 十六進位萬國碼字元
-"\u{NNNN...}" # 十六進位萬國碼字元
-=======
-"\""                  # double quote
-"\\"                  # backslash
-"\a"                  # alert
-"\b"                  # backspace
-"\e"                  # escape
-"\f"                  # form feed
-"\n"                  # newline
-"\r"                  # carriage return
-"\t"                  # tab
-"\v"                  # vertical tab
-"\888"                # octal ASCII character
-"\xFF"                # hexadecimal ASCII character
-"\uFFFF"              # hexadecimal unicode character
-"\u{0}".."\u{10FFFF}" # hexadecimal unicode character
->>>>>>> upstream/master
+"\""                  # 雙引號
+"\\"                  # 反斜線
+"\a"                  # 蜂鳴器警報
+"\b"                  # 退格
+"\e"                  # 跳脫
+"\f"                  # 換頁
+"\n"                  # 換行
+"\r"                  # 輸入鍵 (Enter)
+"\t"                  # Tab
+"\v"                  # 垂直 Tab
+"\888"                # 八進位 ASCII 字元
+"\xFF"                # 十六進位 ASCII 字元
+"\uFFFF"              # 十六進位萬國碼字元
+"\u{0}".."\u{10FFFF}" # 十六進位萬國碼字元
 ```
 
 其他接在反斜線後方的跳脫字元都表示該字元本身。
@@ -81,11 +64,7 @@ b = 2
 "sum: #{a} + #{b} = #{a + b}" # => "sum: 1 + 2 = 3"
 ```
 
-<<<<<<< HEAD
-字串也可以透過 [String#%](https://crystal-lang.org/api/master/String.html#%25%28other%29-instance-method) 方法來執行插值。
-=======
-String interpolation is also possible with [String#%](https://crystal-lang.org/api/String.html#%25%28other%29-instance-method).
->>>>>>> upstream/master
+字串也可以透過 [String#%](https://crystal-lang.org/api/String.html#%25%28other%29-instance-method) 方法來執行插值。
 
 任何表達式都可以被放置於插值區塊中，但儘量保持插值表達式越短越能夠能保持可讀性。
 
