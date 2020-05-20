@@ -1,0 +1,55 @@
+name: Build and Check
+on:
+  push:
+    branches-ignore:
+      - master
+  pull_request:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10'
+      - name: Cache node modules
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - run: npm install -g gitbook-cli@2.3.0
+      - run: npm install
+      - run: gitbook install --gitbook=3.2.2
+      - run: gitbook build --gitbook=3.2.2
+      - name: Record git revision
+        run: echo "${GITHUB_SHA}" > _book/.rev
+      - name: Upload HTML GitBook
+        uses: actions/upload-artifact@v1
+        with:
+          name: book
+          path: _book
+  validate-html:
+    name: Validate HTML
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download HTML GitBook
+        uses: actions/download-artifact@v1
+        with:
+          name: book
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+      - run: gem install html-proofer
+      - name: Validate without external links
+        run: htmlproofer book --disable_external
+      - name: Validate external links (failures allowed)
+        run: htmlproofer book --external_only || true
