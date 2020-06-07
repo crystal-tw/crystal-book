@@ -1,8 +1,8 @@
 # 資料庫
 
-要連結一個關聯式資料庫，我們需要根據資料庫的種類，挑選特定的 shard 來使用。[crystal-lang/crystal-db](https://github.com/crystal-lang/crystal-db) 提供了統一的 API 來介接各種的資料庫驅動程式。
+要連接一個關聯式資料庫，我們需要根據資料庫的種類，挑選特定的 shard 來使用。[crystal-lang/crystal-db](https://github.com/crystal-lang/crystal-db) 提供了統一的 API 來連接各種的資料庫驅動程式。
 
-以下為幾個符合 crystal-db API 實作的套件。
+以下為幾個符合 crystal-db API 實作的套件：
 
 * sqlite 套件 [crystal-lang/crystal-sqlite3](https://github.com/crystal-lang/crystal-sqlite3)
 * mysql & mariadb 套件 [crystal-lang/crystal-mysql](https://github.com/crystal-lang/crystal-mysql)
@@ -45,7 +45,7 @@ end
 * `mysql://user:password@server:port/database`
 * `postgres://server:port/database`
 
-取而代之的是我們可以使用不帶程式區塊的方式呼叫 `DB.open`，只要我們記得在最後呼叫 `Database#close` 即可。
+或者是我們可以使用不帶程式區塊的方式呼叫 `DB.open`，只要我們記得在最後呼叫 `Database#close` 即可。
 
 ```crystal
 require "db"
@@ -66,7 +66,8 @@ end
 ```crystal
 db.exec "create table contacts (name varchar(30), age int)"
 ```
-為了避免 [SQL injection](https://owasp.org/www-community/attacks/SQL_Injection) 我們可以用參數化的方式來傳遞我們想傳遞的值。參數化的語法取決於你所使用的資料庫驅動，因為這些驅動會原封不動的將語句傳遞給資料庫。在 MySQL 中使用 `?` 當作
+
+為了避免 [SQL 注入攻擊](https://owasp.org/www-community/attacks/SQL_Injection) 我們可以用參數化的方式來傳遞我們想傳遞的值。參數化的語法取決於你所使用的資料庫驅動，因為這些驅動會原封不動的將語句傳遞給資料庫。在 MySQL 中使用 `?` 當作
 參數展開並且根據引數的順序賦值。PostgreSQL 使用 `$n`，其中 `n` 是根據引數數量從 1 開始的一連串數字。
 
 ```crystal
@@ -78,9 +79,9 @@ db.exec "insert into contacts values ($1, $2)", "Sarah", 33
 
 ## 查詢
 
-我們可以使用 `Database#query` 執行查詢並且拿回結果，這些引數可以在 `Database#exec` 中被使用。
+我們可以操作 `Database#query` 方法執行查詢並且拿回結果，而我們也能夠使用相同的參數來操作 `Database#exec` 方法。
 
-`Database#query` 會回傳一組需要被關閉的 `ResultSet`，如同在 `Database#open` 中，若是 `Database#open` 是藉由 block 呼叫，則 `ResultSet` 會被隱含地關閉。
+如同 `Database#open` 方法，`Database#query` 會回傳一組需要被關閉的 `ResultSet`，同樣的若是藉由程式區塊呼叫方法，則 Crystal 會自動地幫我們關閉 `ResultSet`。
 
 ```crystal
 db.query "select name, age from contacts order by age desc" do |rs|
@@ -89,6 +90,7 @@ db.query "select name, age from contacts order by age desc" do |rs|
   end
 end
 ```
+
 當從資料庫讀取資料時，Crystal 在編譯時並不曉得資料的型別資訊，所以我們會需要使用 `rs.read(T)` 來特定型別 `T` 作為我們預期從資料庫拿到的結果。
 
 ```crystal
@@ -122,4 +124,5 @@ name, age = db.query_one "select name, age from contacts order by age desc limit
 ```crystal
 max_age = db.scalar "select max(age) from contacts"
 ```
+
 而在 `DB::QueryMethods` 定義了所有能用來執行資料庫語句的方法。
