@@ -1971,71 +1971,71 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="database">Database</h1>
-<p>To access a relational database you will need a shard designed for the database server you want to use. The package <a href="https://github.com/crystal-lang/crystal-db" target="_blank">crystal-lang/crystal-db</a> offers a unified api across different drivers.</p>
-<p>The following packages are compliant with crystal-db</p>
+                                <h1 id="&#x8CC7;&#x6599;&#x5EAB;">&#x8CC7;&#x6599;&#x5EAB;</h1>
+<p>&#x8981;&#x9023;&#x63A5;&#x4E00;&#x500B;&#x95DC;&#x806F;&#x5F0F;&#x8CC7;&#x6599;&#x5EAB;&#xFF0C;&#x6211;&#x5011;&#x9700;&#x8981;&#x6839;&#x64DA;&#x8CC7;&#x6599;&#x5EAB;&#x7684;&#x7A2E;&#x985E;&#xFF0C;&#x6311;&#x9078;&#x7279;&#x5B9A;&#x7684; shard &#x4F86;&#x4F7F;&#x7528;&#x3002;<a href="https://github.com/crystal-lang/crystal-db" target="_blank">crystal-lang/crystal-db</a> &#x63D0;&#x4F9B;&#x4E86;&#x7D71;&#x4E00;&#x7684; API &#x4F86;&#x9023;&#x63A5;&#x5404;&#x7A2E;&#x7684;&#x8CC7;&#x6599;&#x5EAB;&#x9A45;&#x52D5;&#x7A0B;&#x5F0F;&#x3002;</p>
+<p>&#x4EE5;&#x4E0B;&#x70BA;&#x5E7E;&#x500B;&#x7B26;&#x5408; crystal-db API &#x5BE6;&#x4F5C;&#x7684;&#x5957;&#x4EF6;&#xFF1A;</p>
 <ul>
-<li><a href="https://github.com/crystal-lang/crystal-sqlite3" target="_blank">crystal-lang/crystal-sqlite3</a> for sqlite</li>
-<li><a href="https://github.com/crystal-lang/crystal-mysql" target="_blank">crystal-lang/crystal-mysql</a> for mysql &amp; mariadb</li>
-<li><a href="https://github.com/will/crystal-pg" target="_blank">will/crystal-pg</a> for postgres</li>
+<li>sqlite &#x5957;&#x4EF6; <a href="https://github.com/crystal-lang/crystal-sqlite3" target="_blank">crystal-lang/crystal-sqlite3</a></li>
+<li>mysql &amp; mariadb &#x5957;&#x4EF6; <a href="https://github.com/crystal-lang/crystal-mysql" target="_blank">crystal-lang/crystal-mysql</a></li>
+<li>postgres &#x5957;&#x4EF6; <a href="https://github.com/will/crystal-pg" target="_blank">will/crystal-pg</a></li>
 </ul>
-<p>This guide presents the api of crystal-db, the sql commands might need to be adapted for the concrete driver due to differences between postgres, mysql and sqlite.</p>
-<p>Also some drivers may offer additional functionality like postgres <code>LISTEN</code>/<code>NOTIFY</code>.</p>
-<h2 id="installing-the-shard">Installing the shard</h2>
-<p>Choose the appropriate driver from the list above and add it as any shard to your application&apos;s <code>shard.yml</code></p>
-<p>There is no need to explicitly require <code>crystal-lang/crystal-db</code></p>
-<p>During this guide <code>crystal-lang/crystal-mysql</code> will be used.</p>
+<p>&#x9019;&#x4EFD;&#x6587;&#x4EF6;&#x6703;&#x4ECB;&#x7D39; crystal-db &#x7684; API&#xFF0C;&#x6211;&#x5011;&#x4E4B;&#x6240;&#x4EE5;&#x6703;&#x9700;&#x8981; crystal-db &#x662F;&#x56E0;&#x70BA;&#x4E0D;&#x540C;&#x7684;&#x8CC7;&#x6599;&#x5EAB;&#xFF08;&#x5982;&#xFF1A;postgres&#x3001;mysql &#x548C; sqlite&#xFF09;&#x4E4B;&#x9593;&#x7684; SQL &#x8A9E;&#x6CD5;&#x7D30;&#x7BC0;&#x4E0D;&#x76E1;&#x76F8;&#x540C;&#x9700;&#x8981;&#x8F49;&#x63DB;&#x3002;</p>
+<p>&#x4E26;&#x4E14;&#x67D0;&#x4E9B;&#x7684;&#x8CC7;&#x6599;&#x5EAB;&#x9A45;&#x52D5;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E9B;&#x6BD4;&#x8F03;&#x7279;&#x5225;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x5982; postgres &#x4E2D;&#x7684; <code>LISTEN</code> &#x548C; <code>NOTIFY</code>&#x3002;</p>
+<h2 id="&#x5B89;&#x88DD;-shard">&#x5B89;&#x88DD; shard</h2>
+<p>&#x5F9E;&#x4E0A;&#x8FF0;&#x7684;&#x5217;&#x8868;&#x9078;&#x64C7;&#x5408;&#x9069;&#x7684;&#x9A45;&#x52D5;&#x7A0B;&#x5F0F;&#xFF0C;&#x5C07;&#x5B83;&#x52A0;&#x5165;&#x5230; <code>shard.yml</code> &#x6A94;&#x6848;&#x4E2D;&#xFF0C;&#x5C31;&#x50CF;&#x4F60;&#x5728;&#x65B0;&#x589E;&#x5176;&#x4ED6;&#x7684; shard &#x6642;&#x505A;&#x7684;&#x4E00;&#x6A23;&#x3002;</p>
+<p>&#x5728;&#x4F7F;&#x7528;&#x9019;&#x4E9B; shard &#x6642;&#x6211;&#x5011;&#x4E0D;&#x9700;&#x8981;&#x660E;&#x78BA;&#x7684;&#x5728; <code>shard.yml</code> &#x5BA3;&#x544A;&#x4F7F;&#x7528; <code>crystal-lang/crystal-db</code>&#x3002;</p>
+<p>&#x800C;&#x5728;&#x9019;&#x4EFD;&#x6307;&#x5357;&#x4E2D;&#x6211;&#x5011;&#x6703;&#x4F7F;&#x7528; <code>crystal-lang/crystal-mysql</code>&#x3002;</p>
 <pre><code class="lang-yaml"><span class="hljs-attr">dependencies:</span>
 <span class="hljs-attr">  mysql:</span>
 <span class="hljs-attr">    github:</span> crystal-lang/crystal-mysql
 </code></pre>
-<h2 id="open-database">Open database</h2>
-<p><code>DB.open</code> will allow you to easily connect to a database using a connection uri. The schema of the uri determines the expected driver. The following sample connects to a local mysql database named test with user root and password blank.</p>
+<h2 id="&#x958B;&#x555F;&#x8CC7;&#x6599;&#x5EAB;">&#x958B;&#x555F;&#x8CC7;&#x6599;&#x5EAB;</h2>
+<p><code>DB.open</code> &#x6307;&#x4EE4;&#x8B93;&#x6211;&#x5011;&#x80FD;&#x5920;&#x7C21;&#x55AE;&#x5730;&#x85C9;&#x7531;&#x8CC7;&#x6599;&#x5EAB; uri &#x4F86;&#x9023;&#x4E0A;&#x8CC7;&#x6599;&#x5EAB;&#x3002;Uri &#x7684; schema &#x6703;&#x6C7A;&#x5B9A;&#x9810;&#x671F;&#x8981;&#x4F7F;&#x7528;&#x7684;&#x9A45;&#x52D5;&#x3002;&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x500B;&#x7528; root &#x5E33;&#x865F;&#x53CA;&#x7A7A;&#x767D;&#x5BC6;&#x78BC;&#x9023;&#x7DDA;&#x81F3;&#x672C;&#x6A5F;&#x7684; mysql &#x8CC7;&#x6599;&#x5EAB;&#x7684;&#x7BC4;&#x4F8B;&#x3002;</p>
 <pre><code class="lang-crystal"><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;db&quot;</span>
 <span class="hljs-keyword">require</span> <span class="hljs-string">&quot;mysql&quot;</span>
 
 DB.open <span class="hljs-string">&quot;mysql://root@localhost/test&quot;</span> <span class="hljs-keyword">do</span> |db|
-  <span class="hljs-comment"># ... use db to perform queries</span>
+  <span class="hljs-comment"># ... &#x4F7F;&#x7528; db &#x57F7;&#x884C;&#x67E5;&#x8A62;</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>Other connection uris are</p>
+<p>&#x5176;&#x4ED6;&#x7684;&#x9023;&#x7DDA; uri</p>
 <ul>
 <li><code>sqlite3:///path/to/data.db</code></li>
 <li><code>mysql://user:password@server:port/database</code></li>
 <li><code>postgres://server:port/database</code></li>
 </ul>
-<p>Alternatively you can use a non yielding <code>DB.open</code> method as long as <code>Database#close</code> is called at the end.</p>
+<p>&#x6216;&#x8005;&#x662F;&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E0D;&#x5E36;&#x7A0B;&#x5F0F;&#x5340;&#x584A;&#x7684;&#x65B9;&#x5F0F;&#x547C;&#x53EB; <code>DB.open</code>&#xFF0C;&#x53EA;&#x8981;&#x6211;&#x5011;&#x8A18;&#x5F97;&#x5728;&#x6700;&#x5F8C;&#x547C;&#x53EB; <code>Database#close</code> &#x5373;&#x53EF;&#x3002;</p>
 <pre><code class="lang-crystal"><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;db&quot;</span>
 <span class="hljs-keyword">require</span> <span class="hljs-string">&quot;mysql&quot;</span>
 
 db = DB.open <span class="hljs-string">&quot;mysql://root@localhost/test&quot;</span>
 <span class="hljs-keyword">begin</span>
-  <span class="hljs-comment"># ... use db to perform queries</span>
+  <span class="hljs-comment"># ... &#x4F7F;&#x7528; db &#x57F7;&#x884C;&#x67E5;&#x8A62;</span>
 <span class="hljs-keyword">ensure</span>
   db.close
 <span class="hljs-keyword">end</span>
 </code></pre>
-<h2 id="exec">Exec</h2>
-<p>To execute sql statements you can use <code>Database#exec</code></p>
+<h2 id="&#x57F7;&#x884C;-sql">&#x57F7;&#x884C; SQL</h2>
+<p>&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>Database#exec</code> &#x57F7;&#x884C; sql &#x8A9E;&#x53E5;</p>
 <pre><code class="lang-crystal">db.exec <span class="hljs-string">&quot;create table contacts (name varchar(30), age int)&quot;</span>
 </code></pre>
-<p>To avoid <a href="https://owasp.org/www-community/attacks/SQL_Injection" target="_blank">SQL injection</a> values can be provided as query parameters.
-The syntax for using query parameters depends on the database driver because they are typically just passed through to the database. MySQL uses <code>?</code> for parameter expansion and assignment is based on argument order. PostgreSQL uses <code>$n</code> where <code>n</code> is the ordinal number of the argument (starting with 1).</p>
+<p>&#x70BA;&#x4E86;&#x907F;&#x514D; <a href="https://owasp.org/www-community/attacks/SQL_Injection" target="_blank">SQL &#x6CE8;&#x5165;&#x653B;&#x64CA;</a> &#x6211;&#x5011;&#x53EF;&#x4EE5;&#x7528;&#x53C3;&#x6578;&#x5316;&#x7684;&#x65B9;&#x5F0F;&#x4F86;&#x50B3;&#x905E;&#x6211;&#x5011;&#x60F3;&#x50B3;&#x905E;&#x7684;&#x503C;&#x3002;&#x53C3;&#x6578;&#x5316;&#x7684;&#x8A9E;&#x6CD5;&#x53D6;&#x6C7A;&#x65BC;&#x4F60;&#x6240;&#x4F7F;&#x7528;&#x7684;&#x8CC7;&#x6599;&#x5EAB;&#x9A45;&#x52D5;&#xFF0C;&#x56E0;&#x70BA;&#x9019;&#x4E9B;&#x9A45;&#x52D5;&#x6703;&#x539F;&#x5C01;&#x4E0D;&#x52D5;&#x7684;&#x5C07;&#x8A9E;&#x53E5;&#x50B3;&#x905E;&#x7D66;&#x8CC7;&#x6599;&#x5EAB;&#x3002;&#x5728; MySQL &#x4E2D;&#x4F7F;&#x7528; <code>?</code> &#x7576;&#x4F5C;
+&#x53C3;&#x6578;&#x5C55;&#x958B;&#x4E26;&#x4E14;&#x6839;&#x64DA;&#x5F15;&#x6578;&#x7684;&#x9806;&#x5E8F;&#x8CE6;&#x503C;&#x3002;PostgreSQL &#x4F7F;&#x7528; <code>$n</code>&#xFF0C;&#x5176;&#x4E2D; <code>n</code> &#x662F;&#x6839;&#x64DA;&#x5F15;&#x6578;&#x6578;&#x91CF;&#x5F9E; 1 &#x958B;&#x59CB;&#x7684;&#x4E00;&#x9023;&#x4E32;&#x6578;&#x5B57;&#x3002;</p>
 <pre><code class="lang-crystal"><span class="hljs-comment"># MySQL</span>
 db.exec <span class="hljs-string">&quot;insert into contacts values (?, ?)&quot;</span>, <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-number">30</span>
 <span class="hljs-comment"># Postgres</span>
 db.exec <span class="hljs-string">&quot;insert into contacts values ($1, $2)&quot;</span>, <span class="hljs-string">&quot;Sarah&quot;</span>, <span class="hljs-number">33</span>
 </code></pre>
-<h2 id="query">Query</h2>
-<p>To perform a query and get the result set use <code>Database#query</code>, arguments can be used as in <code>Database#exec</code>.</p>
-<p><code>Database#query</code> returns a <code>ResultSet</code> that needs to be closed. As in <code>Database#open</code>, if called with a block, the <code>ResultSet</code> will be closed implicitly.</p>
+<h2 id="&#x67E5;&#x8A62;">&#x67E5;&#x8A62;</h2>
+<p>&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x64CD;&#x4F5C; <code>Database#query</code> &#x65B9;&#x6CD5;&#x57F7;&#x884C;&#x67E5;&#x8A62;&#x4E26;&#x4E14;&#x62FF;&#x56DE;&#x7D50;&#x679C;&#xFF0C;&#x800C;&#x6211;&#x5011;&#x4E5F;&#x80FD;&#x5920;&#x4F7F;&#x7528;&#x76F8;&#x540C;&#x7684;&#x53C3;&#x6578;&#x4F86;&#x64CD;&#x4F5C; <code>Database#exec</code> &#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x5982;&#x540C; <code>Database#open</code> &#x65B9;&#x6CD5;&#xFF0C;<code>Database#query</code> &#x6703;&#x56DE;&#x50B3;&#x4E00;&#x7D44;&#x9700;&#x8981;&#x88AB;&#x95DC;&#x9589;&#x7684; <code>ResultSet</code>&#xFF0C;&#x540C;&#x6A23;&#x7684;&#x82E5;&#x662F;&#x85C9;&#x7531;&#x7A0B;&#x5F0F;&#x5340;&#x584A;&#x547C;&#x53EB;&#x65B9;&#x6CD5;&#xFF0C;&#x5247; Crystal &#x6703;&#x81EA;&#x52D5;&#x5730;&#x5E6B;&#x6211;&#x5011;&#x95DC;&#x9589; <code>ResultSet</code>&#x3002;</p>
 <pre><code class="lang-crystal">db.query <span class="hljs-string">&quot;select name, age from contacts order by age desc&quot;</span> <span class="hljs-keyword">do</span> |rs|
   rs.each <span class="hljs-keyword">do</span>
-    <span class="hljs-comment"># ... perform for each row in the ResultSet</span>
+    <span class="hljs-comment"># ... &#x5229;&#x7528; ResultSet &#x5C0D;&#x6BCF;&#x4E00;&#x884C;&#x9032;&#x884C;&#x64CD;&#x4F5C;</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>When reading values from the database there is no type information during compile time that crystal can use. You will need to call <code>rs.read(T)</code> with the type <code>T</code> you expect to get from the database.</p>
+<p>&#x7576;&#x5F9E;&#x8CC7;&#x6599;&#x5EAB;&#x8B80;&#x53D6;&#x8CC7;&#x6599;&#x6642;&#xFF0C;Crystal &#x5728;&#x7DE8;&#x8B6F;&#x6642;&#x4E26;&#x4E0D;&#x66C9;&#x5F97;&#x8CC7;&#x6599;&#x7684;&#x578B;&#x5225;&#x8CC7;&#x8A0A;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x5011;&#x6703;&#x9700;&#x8981;&#x4F7F;&#x7528; <code>rs.read(T)</code> &#x4F86;&#x7279;&#x5B9A;&#x578B;&#x5225; <code>T</code> &#x4F5C;&#x70BA;&#x6211;&#x5011;&#x9810;&#x671F;&#x5F9E;&#x8CC7;&#x6599;&#x5EAB;&#x62FF;&#x5230;&#x7684;&#x7D50;&#x679C;&#x3002;</p>
 <pre><code class="lang-crystal">db.query <span class="hljs-string">&quot;select name, age from contacts order by age desc&quot;</span> <span class="hljs-keyword">do</span> |rs|
   rs.each <span class="hljs-keyword">do</span>
     name = rs.read(String)
@@ -2046,17 +2046,17 @@ db.exec <span class="hljs-string">&quot;insert into contacts values ($1, $2)&quo
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>There are many convenient query methods built on top of <code>#query</code>.</p>
-<p>You can read multiple columns at once:</p>
+<p>Crystal &#x6709;&#x9700;&#x591A;&#x65B9;&#x4FBF;&#x7684;&#x67E5;&#x8A62;&#x65B9;&#x6CD5;&#x5EFA;&#x7ACB;&#x5728; <code>#query</code> &#x4E4B;&#x4E0A;&#x3002;</p>
+<p>&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x4E00;&#x6B21;&#x8B80;&#x53D6;&#x591A;&#x884C;&#xFF1A;</p>
 <pre><code class="lang-crystal">name, age = rs.read(String, Int32)
 </code></pre>
-<p>Or read a single row:</p>
+<p>&#x6216;&#x662F;&#x4E00;&#x6B21;&#x8B80;&#x53D6;&#x4E00;&#x884C;&#xFF1A;</p>
 <pre><code class="lang-crystal">name, age = db.query_one <span class="hljs-string">&quot;select name, age from contacts order by age desc limit 1&quot;</span>, <span class="hljs-symbol">as:</span> {String, Int32}
 </code></pre>
-<p>Or read a scalar value without dealing explicitly with the ResultSet:</p>
+<p>&#x6211;&#x5011;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x9700;&#x8981;&#x901A;&#x904E; ResultSet &#x4F86;&#x7372;&#x5F97;&#x4E00;&#x500B;&#x55AE;&#x7D14;&#x7684;&#x503C;&#xFF1A;</p>
 <pre><code class="lang-crystal">max_age = db.scalar <span class="hljs-string">&quot;select max(age) from contacts&quot;</span>
 </code></pre>
-<p>All available methods to perform statements in a database are defined in <code>DB::QueryMethods</code>.</p>
+<p>&#x800C;&#x5728; <code>DB::QueryMethods</code> &#x5B9A;&#x7FA9;&#x4E86;&#x6240;&#x6709;&#x80FD;&#x7528;&#x4F86;&#x57F7;&#x884C;&#x8CC7;&#x6599;&#x5EAB;&#x8A9E;&#x53E5;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
 
                                 
                                 </section>
@@ -2100,7 +2100,7 @@ db.exec <span class="hljs-string">&quot;insert into contacts values ($1, $2)&quo
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Database","level":"1.7","depth":1,"next":{"title":"Connection","level":"1.7.1","depth":2,"path":"database/connection.md","ref":"database/connection.md","articles":[]},"previous":{"title":"撰寫文件","level":"1.6.2","depth":2,"path":"conventions/documenting_code.md","ref":"conventions/documenting_code.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","edit-link","offline"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"offline":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-128950624-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"編輯此頁","base":"https://github.com/crystal-tw/docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.2.2"},"file":{"path":"database/README.md","mtime":"2020-05-20T10:34:58.862Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2020-05-20T10:35:57.575Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Database","level":"1.7","depth":1,"next":{"title":"Connection","level":"1.7.1","depth":2,"path":"database/connection.md","ref":"database/connection.md","articles":[]},"previous":{"title":"撰寫文件","level":"1.6.2","depth":2,"path":"conventions/documenting_code.md","ref":"conventions/documenting_code.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","edit-link","offline"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"offline":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-128950624-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"編輯此頁","base":"https://github.com/crystal-tw/docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.2.2"},"file":{"path":"database/README.md","mtime":"2020-06-17T14:27:29.647Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2020-06-17T14:28:25.323Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -1971,22 +1971,21 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="transactions">Transactions</h1>
-<p>When working with databases, it is common to need to group operations in such a way that if one fails, then we can go back to the latest safe state.
-This solution is described in the <strong>transaction paradigm</strong>, and is implemented by most database engines as it is necessary to meet ACID properties (Atomicity, Consistency, Isolation, Durability) <sup><a href="#fn_ACID" id="reffn_ACID">ACID</a></sup></p>
-<p>With this in mind, we present the following example:</p>
-<p>We have two accounts (each represented by a name and an amount of money).</p>
+                                <h1 id="&#x4EA4;&#x6613;">&#x4EA4;&#x6613;</h1>
+<p>&#x7576;&#x6211;&#x5011;&#x5728;&#x4F7F;&#x7528;&#x8CC7;&#x6599;&#x5EAB;&#x6642;&#xFF0C;&#x5E38;&#x5E38;&#x6703;&#x9700;&#x8981;&#x5C07;&#x64CD;&#x4F5C;&#x4E00;&#x7D44;&#x4E00;&#x7D44;&#x57F7;&#x884C;&#xFF0C;&#x85C9;&#x7531;&#x9019;&#x6A23;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x7576;&#x5176;&#x4E2D;&#x4E00;&#x500B;&#x64CD;&#x4F5C;&#x5931;&#x6557;&#x6642;&#xFF0C;&#x6211;&#x5011;&#x9084;&#x80FD;&#x5920;&#x5C07;&#x8CC7;&#x6599;&#x5EAB;&#x8FD4;&#x56DE;&#x5230;&#x539F;&#x672C;&#x5B89;&#x5168;&#x7684;&#x72C0;&#x614B;&#x3002;&#x5728;<strong>&#x4EA4;&#x6613;&#x5178;&#x7BC4;</strong>&#x7576;&#x4E2D;&#x8A73;&#x7D30;&#x5730;&#x63CF;&#x8FF0;&#x4E86;&#x9019;&#x500B;&#x505A;&#x6CD5;&#xFF0C;&#x800C;&#x8A31;&#x591A;&#x7684;&#x8CC7;&#x6599;&#x5EAB;&#x5F15;&#x64CE;&#x90FD;&#x6709;&#x5BE6;&#x4F5C;&#x9019;&#x500B;&#x88AB;&#x7A31;&#x4F5C; ACID &#x7684;&#x7279;&#x6027;&#x3002;&#xFF08;&#x539F;&#x5B50;&#x6027; <small>Atomicity</small>&#x3001;&#x4E00;&#x81F4;&#x6027; <small>Consistency</small>&#x3001;&#x9694;&#x96E2;&#x6027; <small>Isolation</small>&#x3001;&#x6301;&#x4E45;&#x6027; <small>Durability</small>&#xFF09;<sup><a href="#fn_ACID" id="reffn_ACID">ACID</a></sup></p>
+<p>&#x5E36;&#x8457;&#x9019;&#x500B;&#x6982;&#x5FF5;&#xFF0C;&#x6211;&#x5011;&#x4F86;&#x770B;&#x770B;&#x4EE5;&#x4E0B;&#x7684;&#x7BC4;&#x4F8B;&#xFF1A;</p>
+<p>&#x9019;&#x908A;&#x6211;&#x5011;&#x6709;&#x5169;&#x500B;&#x5E33;&#x6236;&#xFF08;&#x6BCF;&#x4E00;&#x500B;&#x5E33;&#x6236;&#x90FD;&#x542B;&#x6709;&#x59D3;&#x540D;&#x548C;&#x5E33;&#x6236;&#x91D1;&#x984D;&#xFF09;</p>
 <pre><code class="lang-crystal">db = get_bank_db
 
 create_account db, <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-symbol">amount:</span> <span class="hljs-number">100</span>
 create_account db, <span class="hljs-string">&quot;Sarah&quot;</span>, <span class="hljs-symbol">amount:</span> <span class="hljs-number">100</span>
 </code></pre>
-<p>In one moment a transfer is made from one account to the other. For example, <em>John transfers $50 to Sarah</em></p>
-<p>We have two accounts (each represented by a name and an amount of money).</p>
+<p>&#x5728;&#x67D0;&#x500B;&#x6642;&#x9593;&#x9EDE;&#xFF0C;&#x767C;&#x751F;&#x4E00;&#x7B46;&#x8F49;&#x5E33;&#x4EA4;&#x6613;&#x3002;&#x4F8B;&#x5982;&#xFF1A;<strong>John &#x8F49;&#x4E86; $50 &#x7D66; Sarah</strong></p>
+<p>&#x9019;&#x908A;&#x6211;&#x5011;&#x6709;&#x5169;&#x500B;&#x5E33;&#x6236;&#xFF08;&#x6BCF;&#x4E00;&#x500B;&#x5E33;&#x6236;&#x90FD;&#x542B;&#x6709;&#x59D3;&#x540D;&#x548C;&#x5E33;&#x6236;&#x91D1;&#x984D;&#xFF09;</p>
 <pre><code class="lang-crystal">deposit db, <span class="hljs-string">&quot;Sarah&quot;</span>, <span class="hljs-number">50</span>
 withdraw db, <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-number">50</span>
 </code></pre>
-<p>It is important to have in mind that if one of the operations fails then the final state would be inconsistent. So we need to execute the <strong>two operations</strong> (deposit and withdraw) as <strong>one operation</strong>. And if an error occurs then we would like to go back in time as if that one operation was never executed.</p>
+<p>&#x9019;&#x908A;&#x6709;&#x5F88;&#x91CD;&#x8981;&#x7684;&#x4E00;&#x9EDE;&#x5C31;&#x662F;&#xFF0C;&#x7576;&#x53EA;&#x6709;&#x5176;&#x4E2D;&#x7684;&#x4E00;&#x9805;&#x64CD;&#x4F5C;&#x5931;&#x6557;&#x6642;&#xFF0C;&#x6703;&#x5C0E;&#x81F4;&#x6700;&#x5F8C;&#x7684;&#x72C0;&#x614B;&#x8B8A;&#x5F97;&#x4E0D;&#x4E00;&#x81F4;&#x3002;&#x6240;&#x4EE5;&#x6211;&#x5011;&#x9700;&#x8981;&#x5C07;&#x9019;<strong>&#x5169;&#x500B;&#x64CD;&#x4F5C;</strong>&#xFF08;&#x51FA;&#x5E33;&#x548C;&#x5165;&#x5E33;&#xFF09;&#x7576;&#x4F5C;<strong>&#x4E00;&#x500B;&#x64CD;&#x4F5C;</strong>&#x4F86;&#x57F7;&#x884C;&#x3002;&#x5982;&#x679C;&#x767C;&#x751F;&#x5931;&#x6557;&#xFF0C;&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x53CA;&#x6642;&#x8FD4;&#x56DE;&#x539F;&#x672C;&#x7684;&#x72C0;&#x614B;&#xFF0C;&#x5C31;&#x597D;&#x50CF;&#x9019;&#x500B;&#x64CD;&#x4F5C;&#x5F9E;&#x4F86;&#x6C92;&#x6709;&#x88AB;&#x57F7;&#x884C;&#x4E00;&#x6A23;&#x3002;</p>
 <pre><code class="lang-crystal">db = get_bank_db
 
 create_account db, <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-symbol">amount:</span> <span class="hljs-number">100</span>
@@ -2000,11 +1999,11 @@ db.transaction <span class="hljs-keyword">do</span> |tx|
   withdraw cnn, <span class="hljs-string">&quot;John&quot;</span>, transfer_amount
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>In the above example, we start a transaction simply by calling the method <code>Database#transaction</code> (how we get the <code>database</code> object is encapsulated in the method <code>get_bank_db</code> and is out of the scope of this document).
-The <code>block</code> is the body of the transaction. When the <code>block</code> gets executed (without any error) then an <strong>implicit commit</strong> is finally executed to persist the changes in the database.
-If an exception is raised by one of the operations, then an <strong>implicit rollback</strong> is executed, bringing the database to the state before the transaction started.</p>
-<h2 id="exception-handling-and-rolling-back">Exception handling and rolling back</h2>
-<p>As we mentioned early, an <strong>implicit rollback</strong> gets executed when an exception is raised, and it&#x2019;s worth mentioning that the exception may be rescued by us.</p>
+<p>&#x5728;&#x4E0A;&#x9762;&#x7684;&#x7BC4;&#x4F8B;&#x4E2D;&#xFF0C;&#x6211;&#x5011;&#x7528; <code>Database#transaction</code> &#x958B;&#x59CB;&#x4E00;&#x500B;&#x4EA4;&#x6613;&#xFF08;&#x6211;&#x5011;&#x53EA;&#x9700;&#x8981;&#x77E5;&#x9053; <code>database</code> &#x7269;&#x4EF6;&#x662F;&#x5F9E;&#x65B9;&#x6CD5; <code>get_bank_db</code> &#x4E2D;&#x53D6;&#x5F97;&#xFF0C;&#x800C;&#x9019;&#x500B;&#x65B9;&#x6CD5;&#x7684;&#x5167;&#x5BB9;&#x5728;&#x7BC4;&#x4F8B;&#x4E2D;&#x4E26;&#x4E0D;&#x91CD;&#x8981;&#xFF09;&#x3002;
+&#x5728; <code>block</code> &#x4E2D;&#x70BA;&#x4EA4;&#x6613;&#x7684;&#x5167;&#x5BB9;&#xFF0C;&#x7576; <code>block</code> &#x88AB;&#x6210;&#x529F;&#x57F7;&#x884C;&#xFF08;&#x610F;&#x5373;&#x6C92;&#x6709;&#x767C;&#x751F;&#x4EFB;&#x4F55;&#x932F;&#x8AA4;&#xFF09;&#xFF0C;&#x90A3;&#x9EBC; Crystal &#x6703;&#x57F7;&#x884C;&#x4E00;&#x500B;<strong>&#x96B1;&#x542B;&#x7684; commit</strong>&#xFF0C;&#x4E26;&#x4E14;&#x6703;&#x6C38;&#x4E45;&#x7684;&#x6539;&#x8B8A;&#x8CC7;&#x6599;&#x5EAB;&#x5167;&#x5BB9;&#x3002;
+&#x5982;&#x679C;&#x64CD;&#x4F5C;&#x767C;&#x751F;&#x4E86;&#x4F8B;&#x5916;&#x72C0;&#x6CC1;&#xFF0C;&#x90A3;&#x9EBC; Crystal &#x5247;&#x6703;&#x57F7;&#x884C;&#x4E00;&#x500B;<strong>&#x96B1;&#x542B;&#x7684; rollback</strong>&#xFF0C;&#x5C07;&#x8CC7;&#x6599;&#x5EAB;&#x5E36;&#x56DE;&#x539F;&#x672C;&#x57F7;&#x884C;&#x4EA4;&#x6613;&#x524D;&#x7684;&#x72C0;&#x614B;&#x3002;</p>
+<h2 id="&#x4F8B;&#x5916;&#x8655;&#x7406;&#x8207;-rollback">&#x4F8B;&#x5916;&#x8655;&#x7406;&#x8207; Rollback</h2>
+<p>&#x5982;&#x540C;&#x6211;&#x5011;&#x4E4B;&#x524D;&#x63D0;&#x5230;&#x7684;&#xFF0C;&#x7576;&#x4F8B;&#x5916;&#x767C;&#x751F;&#x6642;&#xFF0C;Crystal &#x6703;&#x57F7;&#x884C;&#x4E00;&#x500B;<strong>&#x96B1;&#x542B;&#x7684; rollback</strong>&#xFF0C;&#x5728; <code>rescue</code> &#x4E2D;&#xFF0C;&#x5217;&#x51FA;&#x662F;&#x767C;&#x751F;&#x4E86;&#x4EC0;&#x9EBC;&#x6A23;&#x7684;&#x4F8B;&#x5916;&#x5C0E;&#x81F4;&#x5931;&#x6557;&#xFF0C;&#x5C0D;&#x6211;&#x5011;&#x4F86;&#x8AAA;&#x53EF;&#x80FD;&#x6703;&#x662F;&#x4E00;&#x4EF6;&#x6709;&#x610F;&#x7FA9;&#x7684;&#x4E8B;&#x60C5;&#x3002;</p>
 <pre><code class="lang-crystal">db = get_bank_db
 
 create_account db, <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-symbol">amount:</span> <span class="hljs-number">100</span>
@@ -2016,14 +2015,14 @@ create_account db, <span class="hljs-string">&quot;Sarah&quot;</span>, <span cla
 
     transfer_amount = <span class="hljs-number">1000</span>
     deposit(cnn, <span class="hljs-string">&quot;Sarah&quot;</span>, transfer_amount)
-    <span class="hljs-comment"># John does not have enough money in his account!</span>
+    <span class="hljs-comment"># John &#x7684;&#x5E33;&#x6236;&#x6C92;&#x6709;&#x8DB3;&#x5920;&#x7684;&#x9918;&#x984D;!</span>
     withdraw(cnn, <span class="hljs-string">&quot;John&quot;</span>, transfer_amount)
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">rescue</span> ex
-  puts <span class="hljs-string">&quot;Transfer has been rolled back due to: <span class="hljs-subst">#{ex}</span>&quot;</span>
+  puts <span class="hljs-string">&quot;&#x4EA4;&#x6613;&#x88AB; rollback &#x7531;&#x65BC;&#xFF1A; <span class="hljs-subst">#{ex}</span>&quot;</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>We may also raise an exception in the body of the transaction:</p>
+<p>&#x7576;&#x7136;&#xFF0C;&#x6211;&#x5011;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x4EA4;&#x6613;&#x4E2D;&#x7522;&#x751F;&#x4F8B;&#x5916;&#x72C0;&#x6CC1;&#xFF1A;</p>
 <pre><code class="lang-crystal">db = get_bank_db
 
 create_account db, <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-symbol">amount:</span> <span class="hljs-number">100</span>
@@ -2036,14 +2035,14 @@ create_account db, <span class="hljs-string">&quot;Sarah&quot;</span>, <span cla
     transfer_amount = <span class="hljs-number">50</span>
     deposit(cnn, <span class="hljs-string">&quot;Sarah&quot;</span>, transfer_amount)
     withdraw(cnn, <span class="hljs-string">&quot;John&quot;</span>, transfer_amount)
-    raise Exception.new <span class="hljs-string">&quot;Because ...&quot;</span>
+    raise Exception.new <span class="hljs-string">&quot;&#x7531;&#x65BC; ...&quot;</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">rescue</span> ex
-  puts <span class="hljs-string">&quot;Transfer has been rolled back due to: <span class="hljs-subst">#{ex}</span>&quot;</span>
+  puts <span class="hljs-string">&quot;&#x4EA4;&#x6613;&#x88AB; rollback &#x7531;&#x65BC;&#xFF1A; <span class="hljs-subst">#{ex}</span>&quot;</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>As the previous example, the exception cause the transaction to rollback and then is rescued by us.</p>
-<p>There is one <code>exception</code> with a different behaviour. If a <code>DB::Rollback</code> is raised within the block, the implicit rollback will happen, but the exception will not be raised outside the block.</p>
+<p>&#x5728;&#x4E0A;&#x9762;&#x7684;&#x7BC4;&#x4F8B;&#x4E2D;&#xFF0C;&#x4F8B;&#x5916;&#x5C0E;&#x81F4;&#x4EA4;&#x6613;&#x88AB; rollback &#x4E26;&#x7531;&#x6211;&#x5011; <code>rescue</code>&#x3002;</p>
+<p>&#x6709;&#x4E00;&#x500B; <code>exception</code> &#x6703;&#x6709;&#x4E0D;&#x4E00;&#x6A23;&#x7684;&#x884C;&#x70BA;&#x3002;&#x7576; <code>DB::Rollback</code> &#x5728;&#x5340;&#x584A;&#x4E2D;&#x88AB;&#x7522;&#x751F;&#xFF0C;&#x5247; Crystal &#x6703;&#x57F7;&#x884C;&#x4E00;&#x500B;<strong>&#x96B1;&#x542B;&#x7684; rollback</strong>&#xFF0C;&#x4F46;&#x662F;&#x9019;&#x500B;&#x4F8B;&#x5916;&#x4E26;&#x4E0D;&#x6703;&#x8DD1;&#x5230;&#x5340;&#x584A;&#x7684;&#x5916;&#x90E8;&#x3002;</p>
 <pre><code class="lang-crystal">db = get_bank_db
 
 create_account db, <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-symbol">amount:</span> <span class="hljs-number">100</span>
@@ -2057,15 +2056,15 @@ create_account db, <span class="hljs-string">&quot;Sarah&quot;</span>, <span cla
     deposit(cnn, <span class="hljs-string">&quot;Sarah&quot;</span>, transfer_amount)
     withdraw(cnn, <span class="hljs-string">&quot;John&quot;</span>, transfer_amount)
 
-    <span class="hljs-comment"># rollback exception</span>
+    <span class="hljs-comment"># rollback &#x4F8B;&#x5916;</span>
     raise <span class="hljs-symbol">DB:</span>:Rollback.new
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">rescue</span> ex
-  <span class="hljs-comment"># ex is never a DB::Rollback</span>
+  <span class="hljs-comment"># ex &#x4E0D;&#x6703;&#x662F; DB::Rollback &#x985E;&#x5225;</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<h2 id="explicit-commit-and-rollback">Explicit commit and rollback</h2>
-<p>In all the previous examples, the rolling back is <strong>implicit</strong>, but we can also tell the transaction to rollback:</p>
+<h2 id="&#x76F4;&#x63A5;-commit-&#x8207;-rollback">&#x76F4;&#x63A5; commit &#x8207; rollback</h2>
+<p>&#x5728;&#x4E0A;&#x8FF0;&#x6240;&#x6709;&#x7684;&#x7BC4;&#x4F8B;&#x4E2D;&#xFF0C;rollback &#x90FD;&#x662F;&#x7531; Crystal <strong>&#x96B1;&#x542B;&#x5730;</strong>&#x57F7;&#x884C;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x5011;&#x4E5F;&#x80FD;&#x544A;&#x8A34;&#x4EA4;&#x6613;&#x4F55;&#x6642;&#x8A72; rollback&#xFF1A;</p>
 <pre><code class="lang-crystal">db = get_bank_db
 
 create_account db, <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-symbol">amount:</span> <span class="hljs-number">100</span>
@@ -2081,13 +2080,13 @@ create_account db, <span class="hljs-string">&quot;Sarah&quot;</span>, <span cla
 
     tx.rollback
 
-    puts <span class="hljs-string">&quot;Rolling Back the changes!&quot;</span>
+    puts <span class="hljs-string">&quot;Rollback &#x6240;&#x6709;&#x6539;&#x52D5;!&quot;</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">rescue</span> ex
-  <span class="hljs-comment"># Notice that no exception is used in this case.</span>
+  <span class="hljs-comment"># &#x6CE8;&#x610F;&#xFF0C;&#x5728;&#x9019;&#x500B;&#x4F8B;&#x5B50;&#x4E2D;&#x4E0D;&#x6703;&#x767C;&#x751F;&#x4F8B;&#x5916;</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>And we can also use the <code>commit</code> method:</p>
+<p>&#x800C;&#x6211;&#x5011;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>commit</code> &#x65B9;&#x6CD5;&#xFF1A;</p>
 <pre><code class="lang-crystal">db = get_bank_db
 
 db.transaction <span class="hljs-keyword">do</span> |tx|
@@ -2100,9 +2099,9 @@ db.transaction <span class="hljs-keyword">do</span> |tx|
   tx.commit
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p><strong>NOTE:</strong> After <code>commit</code> or <code>rollback</code> are used, the transaction is no longer usable. The connection is still open but any statement will be performed outside the context of the terminated transaction.</p>
-<h2 id="nested-transactions">Nested transactions</h2>
-<p>As the name suggests, a nested transaction is a transaction created inside the scope of another transaction. Here is an example:</p>
+<p><strong>&#x6CE8;&#x610F;&#xFF1A;</strong> &#x5728;&#x4F7F;&#x7528;&#x4E86; <code>commit</code> &#x6216;&#x662F; <code>rollback</code> &#x65B9;&#x6CD5;&#x5F8C;&#xFF0C;&#x4EA4;&#x6613;&#x6703;&#x8B8A;&#x5F97;&#x4E0D;&#x518D;&#x53EF;&#x7528;&#x3002;&#x9023;&#x7DDA;&#x96D6;&#x7136;&#x4E0D;&#x6703;&#x65B7;&#x958B;&#xFF0C;&#x4F46;&#x4E4B;&#x5F8C;&#x57F7;&#x884C;&#x7684; SQL &#x8A9E;&#x6CD5;&#x90FD;&#x4E0D;&#x88AB;&#x7B97;&#x5728;&#x5DF2;&#x7D50;&#x675F;&#x7684;&#x4EA4;&#x6613;&#x4E2D;&#x3002;</p>
+<h2 id="&#x5DE2;&#x72C0;&#x4EA4;&#x6613;">&#x5DE2;&#x72C0;&#x4EA4;&#x6613;</h2>
+<p>&#x9867;&#x540D;&#x601D;&#x7FA9;&#xFF0C;&#x6240;&#x8B02;&#x5DE2;&#x72C0;&#x4EA4;&#x6613;&#xFF0C;&#x5C31;&#x662F;&#x5728;&#x4EA4;&#x6613;&#x4E2D;&#x53C8;&#x7522;&#x751F;&#x4E86;&#x53E6;&#x4E00;&#x500B;&#x4EA4;&#x6613;&#xFF0C;&#x4EE5;&#x4E0B;&#x662F;&#x4E00;&#x500B;&#x7BC4;&#x4F8B;&#xFF1A;</p>
 <pre><code class="lang-crystal">db = get_bank_db
 
 create_account db, <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-symbol">amount:</span> <span class="hljs-number">100</span>
@@ -2120,8 +2119,8 @@ create_account db, <span class="hljs-string">&quot;Jack&quot;</span>, <span clas
     outer_tx.transaction <span class="hljs-keyword">do</span> |inner_tx|
       inner_cnn = inner_tx.connection
 
-      <span class="hljs-comment"># John =&gt; 50 (pending commit)</span>
-      <span class="hljs-comment"># Sarah =&gt; 150 (pending commit)</span>
+      <span class="hljs-comment"># John =&gt; 50 &#xFF08;&#x672A;&#x57F7;&#x884C;&#x7684; commit&#xFF09;</span>
+      <span class="hljs-comment"># Sarah =&gt; 150 &#xFF08;&#x672A;&#x57F7;&#x884C;&#x7684; commit&#xFF09;</span>
       <span class="hljs-comment"># Jack =&gt; 0</span>
 
       another_transfer_amount = <span class="hljs-number">150</span>
@@ -2130,15 +2129,15 @@ create_account db, <span class="hljs-string">&quot;Jack&quot;</span>, <span clas
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">rescue</span> ex
-  puts <span class="hljs-string">&quot;Exception raised due to: <span class="hljs-subst">#{ex}</span>&quot;</span>
+  puts <span class="hljs-string">&quot;&#x4EA4;&#x6613;&#x88AB; rollback &#x7531;&#x65BC;&#xFF1A; <span class="hljs-subst">#{ex}</span>&quot;</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>Some observations from the above example:
-the <code>inner_tx</code> works with the values updated although the <code>outer_tx</code> is pending the commit.
-The connection used by <code>outer_tx</code> and <code>inner_tx</code> is <strong>the same connection</strong>. This is because the <code>inner_tx</code> inherits the connection from the <code>outer_tx</code> when created.</p>
-<h3 id="rollback-nested-transactions">Rollback nested transactions</h3>
-<p>As we&#x2019;ve already seen, a rollback may be fired at any time (by an exception or by sending the message <code>rollback</code> explicitly)</p>
-<p>So let&#x2019;s present an example with a <strong>rollback fired by an exception placed at the outer-transaction</strong>:</p>
+<p>&#x5F9E;&#x4E0A;&#x9762;&#x7684;&#x7BC4;&#x4F8B;&#x4E2D;&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x89C0;&#x5BDF;&#x5230;&#xFF1A;
+&#x96D6;&#x7136; <code>outer_tx</code> &#x7684;&#x64CD;&#x4F5C;&#x4E26;&#x6C92;&#x6709;&#x88AB; commit&#xFF0C;&#x4F46;&#x662F; <code>inner_tx</code> &#x4ECD;&#x662F;&#x57FA;&#x65BC; <code>outer_tx</code> &#x64CD;&#x4F5C;&#x5F8C;&#x7684;&#x503C;&#x4F86;&#x9032;&#x884C;&#x64CD;&#x4F5C;&#x3002; 
+&#x4E14; <code>outer_tx</code> &#x548C; <code>inner_tx</code> &#x6240;&#x4F7F;&#x7528;&#x7684;&#x9023;&#x7DDA;&#x662F;<strong>&#x540C;&#x4E00;&#x689D;&#x9023;&#x7DDA;</strong>&#x3002;&#x9019;&#x662F;&#x56E0;&#x70BA; <code>inner_tx</code> &#x5728;&#x88AB;&#x5EFA;&#x7ACB;&#x6642;&#x7E7C;&#x627F;&#x4E86;&#x5F9E; <code>outer_tx</code> &#x4E2D;&#x7684;&#x9023;&#x7DDA;&#x3002;</p>
+<h3 id="rollback-&#x5DE2;&#x72C0;&#x4EA4;&#x6613;">Rollback &#x5DE2;&#x72C0;&#x4EA4;&#x6613;</h3>
+<p>&#x5982;&#x540C;&#x6211;&#x5011;&#x6240;&#x898B;&#x7684;&#xFF0C;rollback &#x53EF;&#x4EE5;&#x5728;&#x4EFB;&#x4F55;&#x6642;&#x5019;&#x767C;&#x751F;&#xFF08;&#x85C9;&#x7531;&#x4F8B;&#x5916;&#x6216;&#x8005;&#x76F4;&#x63A5;&#x57F7;&#x884C; <code>rollback</code> &#x65B9;&#x6CD5;&#xFF09;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x8B93;&#x6211;&#x5011;&#x770B;&#x770B;&#x9019;&#x500B;&#x7BC4;&#x4F8B;&#xFF0C;&#x5B83;&#x5F9E;<strong>&#x5916;&#x5C64;&#x7684;&#x4EA4;&#x6613;&#x7522;&#x751F;&#x4E00;&#x500B;&#x4F8B;&#x5916;&#x5F15;&#x767C; rollback</strong>&#xFF1A;</p>
 <pre><code class="lang-crystal">db = get_bank_db
 
 create_account db, <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-symbol">amount:</span> <span class="hljs-number">100</span>
@@ -2156,8 +2155,8 @@ create_account db, <span class="hljs-string">&quot;Jack&quot;</span>, <span clas
     outer_tx.transaction <span class="hljs-keyword">do</span> |inner_tx|
       inner_cnn = inner_tx.connection
 
-      <span class="hljs-comment"># John =&gt; 50 (pending commit)</span>
-      <span class="hljs-comment"># Sarah =&gt; 150 (pending commit)</span>
+      <span class="hljs-comment"># John =&gt; 50 &#xFF08;&#x672A;&#x57F7;&#x884C;&#x7684; commit&#xFF09;</span>
+      <span class="hljs-comment"># Sarah =&gt; 150 &#xFF08;&#x672A;&#x57F7;&#x884C;&#x7684; commit&#xFF09;</span>
       <span class="hljs-comment"># Jack =&gt; 0</span>
 
       another_transfer_amount = <span class="hljs-number">150</span>
@@ -2165,14 +2164,14 @@ create_account db, <span class="hljs-string">&quot;Jack&quot;</span>, <span clas
       withdraw(inner_cnn, <span class="hljs-string">&quot;Sarah&quot;</span>, another_transfer_amount)
     <span class="hljs-keyword">end</span>
 
-    raise Exception.new(<span class="hljs-string">&quot;Rollback all the things!&quot;</span>)
+    raise Exception.new(<span class="hljs-string">&quot;Rollback &#x6240;&#x6709;&#x7684;&#x6771;&#x897F;&#xFF01;&quot;</span>)
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">rescue</span> ex
-  puts <span class="hljs-string">&quot;Exception raised due to: <span class="hljs-subst">#{ex}</span>&quot;</span>
+  puts <span class="hljs-string">&quot;&#x767C;&#x751F;&#x4F8B;&#x5916;&#xFF0C;&#x7531;&#x65BC;&#xFF1A; <span class="hljs-subst">#{ex}</span>&quot;</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>The rollback place in the <code>outer_tx</code> block, rolled back all the changes including the ones in the <code>inner_tx</code> block (the same happens if we use an <strong>explicit</strong> rollback).</p>
-<p>If the <strong>rollback is fired by an exception at the inner_tx block</strong> all the changes including the ones in the <code>outer_tx</code> are rollbacked.</p>
+<p>&#x9019;&#x500B; rollback &#x5728; <code>outer_tx</code> &#x5340;&#x584A;&#x4E2D;&#x767C;&#x751F;&#xFF0C;&#x5B83; rollback &#x4E86;&#x6240;&#x6709;&#x7684;&#x6539;&#x52D5;&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x542B;&#x4E86; <code>inner_tx</code> &#x7684;&#x5340;&#x584A;&#x7522;&#x751F;&#x7684;&#x6539;&#x52D5;&#xFF08;<strong>&#x76F4;&#x63A5;&#x57F7;&#x884C; rollback</strong> &#x4E5F;&#x6703;&#x662F;&#x540C;&#x6A23;&#x7684;&#x60C5;&#x6CC1;&#xFF09;&#x3002;</p>
+<p>&#x5982;&#x679C; <strong>rollback &#x662F;&#x85C9;&#x7531;&#x5728; inner_tx &#x5340;&#x584A;&#x4E2D;&#x7684;&#x4F8B;&#x5916;&#x767C;&#x751F;&#x7684;</strong>&#xFF0C;&#x6240;&#x6709;&#x7684;&#x6539;&#x52D5;&#xFF0C;&#x5305;&#x542B; <code>outer_tx</code> &#x6240;&#x7522;&#x751F;&#x7684;&#x6539;&#x52D5;&#xFF0C;&#x90FD;&#x6703;&#x88AB; rollback&#x3002;</p>
 <pre><code class="lang-crystal">db = get_bank_db
 
 create_account db, <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-symbol">amount:</span> <span class="hljs-number">100</span>
@@ -2190,22 +2189,22 @@ create_account db, <span class="hljs-string">&quot;Jack&quot;</span>, <span clas
     outer_tx.transaction <span class="hljs-keyword">do</span> |inner_tx|
       inner_cnn = inner_tx.connection
 
-      <span class="hljs-comment"># John =&gt; 50 (pending commit)</span>
-      <span class="hljs-comment"># Sarah =&gt; 150 (pending commit)</span>
+      <span class="hljs-comment"># John =&gt; 50 &#xFF08;&#x672A;&#x57F7;&#x884C;&#x7684; commit&#xFF09;</span>
+      <span class="hljs-comment"># Sarah =&gt; 150 &#xFF08;&#x672A;&#x57F7;&#x884C;&#x7684; commit&#xFF09;</span>
       <span class="hljs-comment"># Jack =&gt; 0</span>
 
       another_transfer_amount = <span class="hljs-number">150</span>
       deposit(inner_cnn, <span class="hljs-string">&quot;Jack&quot;</span>, another_transfer_amount)
       withdraw(inner_cnn, <span class="hljs-string">&quot;Sarah&quot;</span>, another_transfer_amount)
 
-      raise Exception.new(<span class="hljs-string">&quot;Rollback all the things!&quot;</span>)
+      raise Exception.new(<span class="hljs-string">&quot;Rollback &#x6240;&#x6709;&#x7684;&#x6771;&#x897F;&#xFF01;&quot;</span>)
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">rescue</span> ex
-  puts <span class="hljs-string">&quot;Exception raised due to: <span class="hljs-subst">#{ex}</span>&quot;</span>
+  puts <span class="hljs-string">&quot;&#x767C;&#x751F;&#x4F8B;&#x5916;&#xFF0C;&#x7531;&#x65BC;&#xFF1A; <span class="hljs-subst">#{ex}</span>&quot;</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>There is a way to rollback the changes in the <code>inner-transaction</code> but keep the ones in the <code>outer-transaction</code>. Use <code>rollback</code> in the <code>inner_tx</code> object. This will rollback <strong>only</strong> then inner-transaction. Here is the example:</p>
+<p>&#x6709;&#x4E00;&#x500B;&#x65B9;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x8B93;&#x6211;&#x5011;&#x53EA; rollback &#x5728; <code>inner_tx</code> &#x4E2D;&#x7684;&#x6539;&#x52D5;&#xFF0C;&#x800C;&#x4FDD;&#x6709; <code>outer_tx</code> &#x7684;&#x6539;&#x52D5;&#x3002;&#x90A3;&#x5C31;&#x662F;&#x5728; <code>inner_tx</code> &#x4E2D;&#x4F7F;&#x7528; <code>rollback</code> &#x65B9;&#x6CD5;&#x3002;&#x9019;&#x6A23;&#x5C31;<strong>&#x53EA;&#x6709;&#x5167;&#x90E8;&#x4EA4;&#x6613;</strong>&#x7684;&#x90E8;&#x5206;&#x6703;&#x88AB; rollback&#x3002;&#x6211;&#x5011;&#x4F86;&#x770B;&#x770B;&#x4EE5;&#x4E0B;&#x7684;&#x7BC4;&#x4F8B;&#xFF1A;</p>
 <pre><code class="lang-crystal">db = get_bank_db
 
 create_account db, <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-symbol">amount:</span> <span class="hljs-number">100</span>
@@ -2223,8 +2222,8 @@ create_account db, <span class="hljs-string">&quot;Jack&quot;</span>, <span clas
     outer_tx.transaction <span class="hljs-keyword">do</span> |inner_tx|
       inner_cnn = inner_tx.connection
 
-      <span class="hljs-comment"># John =&gt; 50 (pending commit)</span>
-      <span class="hljs-comment"># Sarah =&gt; 150 (pending commit)</span>
+      <span class="hljs-comment"># John =&gt; 50 &#xFF08;&#x672A;&#x57F7;&#x884C;&#x7684; commit&#xFF09;</span>
+      <span class="hljs-comment"># Sarah =&gt; 150 &#xFF08;&#x672A;&#x57F7;&#x884C;&#x7684; commit&#xFF09;</span>
       <span class="hljs-comment"># Jack =&gt; 0</span>
 
       another_transfer_amount = <span class="hljs-number">150</span>
@@ -2235,10 +2234,10 @@ create_account db, <span class="hljs-string">&quot;Jack&quot;</span>, <span clas
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">rescue</span> ex
-  puts <span class="hljs-string">&quot;Exception raised due to: <span class="hljs-subst">#{ex}</span>&quot;</span>
+  puts <span class="hljs-string">&quot;&#x767C;&#x751F;&#x4F8B;&#x5916;&#xFF0C;&#x7531;&#x65BC;&#xFF1A; <span class="hljs-subst">#{ex}</span>&quot;</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>The same happens if a <code>DB::Rollback</code> exception is raised in the <code>inner-transaction</code> block.</p>
+<p>&#x5982;&#x679C;&#x662F; <code>inner_tx</code> &#x4E2D;&#x767C;&#x751F;&#x4E86; <code>DB::Rollback</code> &#x4F8B;&#x5916;&#x7684;&#x8A71;&#xFF0C;&#x4E5F;&#x6703;&#x662F;&#x540C;&#x6A23;<strong>&#x53EA;&#x6709;&#x5167;&#x90E8;&#x4EA4;&#x6613;</strong>&#x7684;&#x90E8;&#x5206;&#x6703;&#x88AB; rollback&#x3002;</p>
 <pre><code class="lang-crystal">db = get_bank_db
 
 create_account db, <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-symbol">amount:</span> <span class="hljs-number">100</span>
@@ -2256,20 +2255,20 @@ create_account db, <span class="hljs-string">&quot;Jack&quot;</span>, <span clas
     outer_tx.transaction <span class="hljs-keyword">do</span> |inner_tx|
       inner_cnn = inner_tx.connection
 
-      <span class="hljs-comment"># John =&gt; 50 (pending commit)</span>
-      <span class="hljs-comment"># Sarah =&gt; 150 (pending commit)</span>
+      <span class="hljs-comment"># John =&gt; 50 &#xFF08;&#x672A;&#x57F7;&#x884C;&#x7684; commit&#xFF09;</span>
+      <span class="hljs-comment"># Sarah =&gt; 150 &#xFF08;&#x672A;&#x57F7;&#x884C;&#x7684; commit&#xFF09;</span>
       <span class="hljs-comment"># Jack =&gt; 0</span>
 
       another_transfer_amount = <span class="hljs-number">150</span>
       deposit(inner_cnn, <span class="hljs-string">&quot;Jack&quot;</span>, another_transfer_amount)
       withdraw(inner_cnn, <span class="hljs-string">&quot;Sarah&quot;</span>, another_transfer_amount)
 
-      <span class="hljs-comment"># Rollback exception</span>
+      <span class="hljs-comment"># Rollback &#x4F8B;&#x5916;</span>
       raise <span class="hljs-symbol">DB:</span>:Rollback.new
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">rescue</span> ex
-  puts <span class="hljs-string">&quot;Exception raised due to: <span class="hljs-subst">#{ex}</span>&quot;</span>
+  puts <span class="hljs-string">&quot;&#x767C;&#x751F;&#x4F8B;&#x5916;&#xFF0C;&#x7531;&#x65BC;&#xFF1A; <span class="hljs-subst">#{ex}</span>&quot;</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
 <blockquote id="fn_ACID">
@@ -2318,7 +2317,7 @@ create_account db, <span class="hljs-string">&quot;Jack&quot;</span>, <span clas
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Transactions","level":"1.7.3","depth":2,"next":{"title":"Guides","level":"1.8","depth":1,"path":"guides/README.md","ref":"guides/README.md","articles":[{"title":"Performance","level":"1.8.1","depth":2,"path":"guides/performance.md","ref":"guides/performance.md","articles":[]},{"title":"Concurrency","level":"1.8.2","depth":2,"path":"guides/concurrency.md","ref":"guides/concurrency.md","articles":[]},{"title":"Testing","level":"1.8.3","depth":2,"path":"guides/testing.md","ref":"guides/testing.md","articles":[]},{"title":"Writing Shards","level":"1.8.4","depth":2,"path":"guides/writing_shards.md","ref":"guides/writing_shards.md","articles":[{"title":"Hosting on GitHub","level":"1.8.4.1","depth":3,"path":"guides/hosting/github.md","ref":"guides/hosting/github.md","articles":[]},{"title":"Hosting on GitLab","level":"1.8.4.2","depth":3,"path":"guides/hosting/gitlab.md","ref":"guides/hosting/gitlab.md","articles":[]}]},{"title":"Continuous Integration","level":"1.8.5","depth":2,"path":"guides/continuous_integration.md","ref":"guides/continuous_integration.md","articles":[{"title":"Using Travis CI","level":"1.8.5.1","depth":3,"path":"guides/ci/travis.md","ref":"guides/ci/travis.md","articles":[]},{"title":"Using CircleCI","level":"1.8.5.2","depth":3,"path":"guides/ci/circleci.md","ref":"guides/ci/circleci.md","articles":[]}]}]},"previous":{"title":"Connection pool","level":"1.7.2","depth":2,"path":"database/connection_pool.md","ref":"database/connection_pool.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","edit-link","offline"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"offline":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-128950624-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"編輯此頁","base":"https://github.com/crystal-tw/docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.2.2"},"file":{"path":"database/transactions.md","mtime":"2020-05-20T10:34:58.862Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2020-05-20T10:35:57.575Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Transactions","level":"1.7.3","depth":2,"next":{"title":"Guides","level":"1.8","depth":1,"path":"guides/README.md","ref":"guides/README.md","articles":[{"title":"Performance","level":"1.8.1","depth":2,"path":"guides/performance.md","ref":"guides/performance.md","articles":[]},{"title":"Concurrency","level":"1.8.2","depth":2,"path":"guides/concurrency.md","ref":"guides/concurrency.md","articles":[]},{"title":"Testing","level":"1.8.3","depth":2,"path":"guides/testing.md","ref":"guides/testing.md","articles":[]},{"title":"Writing Shards","level":"1.8.4","depth":2,"path":"guides/writing_shards.md","ref":"guides/writing_shards.md","articles":[{"title":"Hosting on GitHub","level":"1.8.4.1","depth":3,"path":"guides/hosting/github.md","ref":"guides/hosting/github.md","articles":[]},{"title":"Hosting on GitLab","level":"1.8.4.2","depth":3,"path":"guides/hosting/gitlab.md","ref":"guides/hosting/gitlab.md","articles":[]}]},{"title":"Continuous Integration","level":"1.8.5","depth":2,"path":"guides/continuous_integration.md","ref":"guides/continuous_integration.md","articles":[{"title":"Using Travis CI","level":"1.8.5.1","depth":3,"path":"guides/ci/travis.md","ref":"guides/ci/travis.md","articles":[]},{"title":"Using CircleCI","level":"1.8.5.2","depth":3,"path":"guides/ci/circleci.md","ref":"guides/ci/circleci.md","articles":[]}]}]},"previous":{"title":"Connection pool","level":"1.7.2","depth":2,"path":"database/connection_pool.md","ref":"database/connection_pool.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","edit-link","offline"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"offline":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-128950624-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"編輯此頁","base":"https://github.com/crystal-tw/docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.2.2"},"file":{"path":"database/transactions.md","mtime":"2020-06-17T14:27:29.647Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2020-06-17T14:28:25.323Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -1971,41 +1971,41 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="connection-pool">Connection pool</h1>
-<p>When a connection is established it usually means opening a TCP connection or Socket. The socket will handle one statement at a time. If a program needs to perform many queries simultaneously, or if it handles concurrent requests that aim to use a database, it will need more than one active connection.</p>
-<p>Since databases are separate services from the application using them, the connections might go down, the services might be restarted, and other sort of things the program might not want to care about.</p>
-<p>To address this issues usually a connection pool is a neat solution.</p>
-<p>When a database is opened with <code>crystal-db</code> there is already a connection pool working. <code>DB.open</code> returns a <code>DB::Database</code> object which manages the whole connection pool and not just a single connection.</p>
+                                <h1 id="&#x9023;&#x7DDA;&#x6C60;">&#x9023;&#x7DDA;&#x6C60;</h1>
+<p>&#x7576;&#x6211;&#x5011;&#x5EFA;&#x7ACB;&#x8CC7;&#x6599;&#x5EAB;&#x9023;&#x7DDA;&#x6642;&#xFF0C;&#x901A;&#x5E38;&#x9019;&#x4EE3;&#x8868;&#x8457;&#x4E00;&#x689D; TCP &#x9023;&#x7DDA;&#x6216;&#x662F; Socket &#x9023;&#x7DDA;&#x7684;&#x5EFA;&#x7ACB;&#x3002;Socket &#x6703;&#x4E00;&#x6B21;&#x8655;&#x7406;&#x4E00;&#x500B;&#x8CC7;&#x6599;&#x5EAB;&#x8A9E;&#x6CD5;&#x3002;&#x5982;&#x679C;&#x6211;&#x5011;&#x7684;&#x7A0B;&#x5F0F;&#x9700;&#x8981;&#x540C;&#x6642;&#x57F7;&#x884C;&#x5F88;&#x591A;&#x7684;&#x67E5;&#x8A62;&#xFF0C;&#x6216;&#x8005;&#x5B83;&#x9700;&#x8981;&#x8655;&#x7406;&#x4E26;&#x884C;&#x5316;&#x7684;&#x8CC7;&#x6599;&#x5EAB;&#x8ACB;&#x6C42;&#xFF0C;&#x5728;&#x9019;&#x7A2E;&#x60C5;&#x6CC1;&#x4E0B;&#xFF0C;&#x6211;&#x5011;&#x6703;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x4E00;&#x689D;&#x4EE5;&#x4E0A;&#x7684;&#x8CC7;&#x6599;&#x5EAB;&#x9023;&#x7DDA;&#x3002;</p>
+<p>&#x8CC7;&#x6599;&#x5EAB;&#x5F9E;&#x61C9;&#x7528;&#x7A0B;&#x5F0F;&#x4E2D;&#x5206;&#x96E2;&#x5F8C;&#xFF0C;&#x6211;&#x5011;&#x9762;&#x81E8;&#x8A31;&#x591A;&#x7684;&#x554F;&#x984C;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x9023;&#x7DDA;&#x53EF;&#x80FD;&#x65B7;&#x958B;&#x3001;&#x61C9;&#x7528;&#x7A0B;&#x5F0F;&#x91CD;&#x555F;&#xFF0C;&#x4EE5;&#x53CA;&#x8A31;&#x591A;&#x6211;&#x5011;&#x4E0D;&#x5E0C;&#x671B;&#x662F;&#x6211;&#x5011;&#x7684;&#x7A0B;&#x5F0F;&#x8981;&#x8655;&#x7406;&#x7684;&#x554F;&#x984C;&#x3002;</p>
+<p>&#x901A;&#x5E38;&#x4F86;&#x8AAA;&#xFF0C;&#x9023;&#x7DDA;&#x6C60;&#x80FD;&#x5920;&#x4E7E;&#x6DE8;&#x4FD0;&#x843D;&#x7684;&#x5E6B;&#x6211;&#x5011;&#x89E3;&#x6C7A;&#x4E0A;&#x8FF0;&#x7684;&#x554F;&#x984C;&#x3002;</p>
+<p>&#x7576;&#x6211;&#x5011;&#x4F7F;&#x7528; <code>crystal-db</code> &#x958B;&#x555F;&#x8CC7;&#x6599;&#x5EAB;&#x6642;&#xFF0C;&#x5176;&#x5BE6;&#x5DF2;&#x7D93;&#x6709;&#x4E00;&#x500B;&#x53EF;&#x7528;&#x7684;&#x9023;&#x7DDA;&#x6C60;&#x4E86;&#x3002;<code>DB.open</code> &#x56DE;&#x50B3;&#x4E00;&#x500B; <code>DB::Database</code> &#x7269;&#x4EF6;&#xFF0C;<code>DB::Database</code> &#x6703;&#x7BA1;&#x7406;&#x6574;&#x500B;&#x9023;&#x7DDA;&#x6C60;&#x800C;&#x975E;&#x50C5;&#x50C5;&#x4E00;&#x689D;&#x9023;&#x7DDA;&#x3002;</p>
 <pre><code class="lang-crystal">DB.open(<span class="hljs-string">&quot;mysql://root@localhost/test&quot;</span>) <span class="hljs-keyword">do</span> |db|
-  <span class="hljs-comment"># db is a DB::Database</span>
+  <span class="hljs-comment"># db &#x70BA; DB::Database &#x7269;&#x4EF6;</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>When executing statements using <code>db.query</code>, <code>db.exec</code>, <code>db.scalar</code>, etc. the algorithm goes:</p>
+<p>&#x7576;&#x6211;&#x5011;&#x57F7;&#x884C;&#x4E00;&#x4E9B;&#x8CC7;&#x6599;&#x5EAB;&#x8A9E;&#x6CD5;&#x5982; <code>db.query</code>&#x3001; <code>db.exec</code>&#x3001;<code>db.scalar</code> &#x7684;&#x6642;&#x5019;&#xFF0C;&#x6703;&#x57F7;&#x884C;&#x4E0B;&#x9762;&#x7684;&#x6B65;&#x9A5F;&#xFF1A;</p>
 <ol>
-<li>Find an available connection in the pool.<ol>
-<li>Create one if needed and possible.</li>
-<li>If the pool is not allowed to create a new connection, wait a for a connection to become available.<ol>
-<li>But this wait should be aborted if it takes too long.</li>
+<li>&#x5F9E;&#x9023;&#x7DDA;&#x6C60;&#x4E2D;&#x627E;&#x5230;&#x4E00;&#x689D;&#x53EF;&#x7528;&#x7684;&#x9023;&#x7DDA;<ol>
+<li>&#x7576;&#x6709;&#x9700;&#x8981;&#x7684;&#x6642;&#x5019;&#xFF0C;&#x5EFA;&#x7ACB;&#x4E00;&#x689D;&#x9023;&#x7DDA;</li>
+<li>&#x5982;&#x679C;&#x9023;&#x7DDA;&#x6C60;&#x4E0D;&#x5141;&#x8A31;&#x5EFA;&#x7ACB;&#x65B0;&#x7684;&#x9023;&#x7DDA;&#xFF0C;&#x6703;&#x7B49;&#x5F85;&#x4E00;&#x6BB5;&#x6642;&#x9593;&#x76F4;&#x5230;&#x6709;&#x9023;&#x7DDA;&#x662F;&#x53EF;&#x7528;&#x7684;<ol>
+<li>&#x82E5;&#x7B49;&#x5F85;&#x7684;&#x6642;&#x9593;&#x592A;&#x9577;&#xFF0C;&#x5247;&#x6703;&#x81EA;&#x52D5;&#x9000;&#x51FA;</li>
 </ol>
 </li>
 </ol>
 </li>
-<li>Checkout that connection from the pool.</li>
-<li>Execute the SQL command.</li>
-<li>If there is no <code>DB::ResultSet</code> yielded, return the connection to the pool. Otherwise, the connection will be returned to the pool when the ResultSet is closed.</li>
-<li>Return the statement result.</li>
+<li>&#x5207;&#x63DB;&#x5230;&#x8A72;&#x689D;&#x53EF;&#x7528;&#x7684;&#x9023;&#x7DDA;&#x4E0A;</li>
+<li>&#x57F7;&#x884C; SQL &#x8A9E;&#x6CD5;</li>
+<li>&#x5982;&#x679C;&#x6C92;&#x6709;&#x8FD4;&#x56DE;&#x4EFB;&#x4F55;&#x7684; <code>DB::ResultSet</code> &#x5C07;&#x9023;&#x7DDA;&#x9084;&#x56DE;&#x9023;&#x7DDA;&#x6C60;&#x3002;&#x5426;&#x5247;&#xFF0C;&#x5728; ResultSet &#x7D50;&#x675F;&#x524D;&#x9023;&#x7DDA;&#x4E0D;&#x6703;&#x8FD4;&#x56DE;&#x9023;&#x7DDA;&#x6C60;&#x3002;</li>
+<li>&#x56DE;&#x50B3;&#x8CC7;&#x6599;&#x5EAB;&#x8A9E;&#x6CD5;&#x7D50;&#x679C;</li>
 </ol>
-<p>If a connection can&apos;t be created, or if a connection loss occurs while the statement is performed the above process is repeated.</p>
+<p>&#x5982;&#x679C;&#x7121;&#x6CD5;&#x5EFA;&#x7ACB;&#x9023;&#x7DDA;&#xFF0C;&#x6216;&#x662F;&#x5728;&#x904E;&#x7A0B;&#x4E2D;&#x9023;&#x7DDA;&#x6BB5;&#x958B;&#x4E86;&#xFF0C;<code>crystal-db</code> &#x6703;&#x91CD;&#x8907;&#x4E0A;&#x8FF0;&#x7684;&#x904E;&#x7A0B;&#x3002;</p>
 <blockquote>
-<p>The retry logic only happens when the statement is sent through the <code>DB::Database</code> . If it is sent through a <code>DB::Connection</code> or <code>DB::Transaction</code> no retry is performed since the code will state that certain connection object was expected to be used.</p>
+<p>&#x53EA;&#x6709;&#x7576;&#x6211;&#x5011;&#x4F7F;&#x7528; <code>DB::Database</code> &#x4F86;&#x57F7;&#x884C;&#x8CC7;&#x6599;&#x5EAB;&#x8A9E;&#x53E5;&#x7684;&#x6642;&#x5019;&#x624D;&#x6703;&#x91CD;&#x65B0;&#x57F7;&#x884C;&#x3002;&#x5982;&#x679C;&#x6211;&#x5011;&#x662F;&#x85C9;&#x7531; <code>DB::Connection</code> &#x6216;&#x662F; <code>DB::Transaction</code> &#x4F86;&#x57F7;&#x884C;&#x8CC7;&#x6599;&#x5EAB;&#x8A9E;&#x53E5;&#x5247;&#x4E0D;&#x6703;&#x91CD;&#x65B0;&#x57F7;&#x884C;&#xFF0C;&#x56E0;&#x70BA;&#x7A0B;&#x5F0F;&#x78BC;&#x6703;&#x9810;&#x671F; connection &#x7269;&#x4EF6;&#x61C9;&#x8A72;&#x6703;&#x88AB;&#x4F7F;&#x7528;&#x3002;</p>
 </blockquote>
-<h2 id="configuration">Configuration</h2>
-<p>The behavior of the pool can be configured from a set of parameters that can appear as query string in the connection URI.</p>
+<h2 id="&#x8A2D;&#x5B9A;">&#x8A2D;&#x5B9A;</h2>
+<p>&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x85C9;&#x7531;&#x9023;&#x7DDA; URI &#x4E2D;&#x7684;&#x53C3;&#x6578;&#x4F86;&#x8A2D;&#x5B9A;&#x9023;&#x7DDA;&#x6C60;&#x7684;&#x884C;&#x70BA;&#x3002;</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Default value</th>
+<th style="text-align:left">&#x540D;&#x7A31;</th>
+<th style="text-align:left">&#x9810;&#x8A2D;&#x503C;</th>
 </tr>
 </thead>
 <tbody>
@@ -2035,11 +2035,11 @@
 </tr>
 </tbody>
 </table>
-<p>When <code>DB::Database</code> is opened an initial number of <code>initial_pool_size</code> connections will be created. The pool will never hold more than <code>max_pool_size</code> connections. When returning/releasing a connection to the pool it will be closed if there are already <code>max_idle_pool_size</code> idle connections.</p>
-<p>If the <code>max_pool_size</code> was reached and a connection is needed, wait up to <code>checkout_timeout</code> seconds for an existing connection to become available.</p>
-<p>If a connection is lost or can&apos;t be established retry at most <code>retry_attempts</code> times waiting <code>retry_delay</code> seconds between each try.</p>
-<h2 id="sample">Sample</h2>
-<p>The following program will print the current time from MySQL but if the connection is lost or the whole server is down for a few seconds the program will still run without raising exceptions.</p>
+<p>&#x7576; <code>DB::Database</code> &#x88AB;&#x5EFA;&#x7ACB;&#x6642;&#xFF0C;&#x6703;&#x4EE5; <code>initial_pool_size</code> &#x6C7A;&#x5B9A;&#x521D;&#x59CB;&#x7684;&#x9023;&#x7DDA;&#x6578;&#x5EFA;&#x7ACB;&#x9023;&#x7DDA;&#x3002;&#x800C;&#x9023;&#x7DDA;&#x6C60;&#x9023;&#x7DDA;&#x6578;&#x7684;&#x4E0A;&#x9650;&#x4E0D;&#x6703;&#x8D85;&#x904E; <code>max_pool_size</code> &#x7684;&#x503C;&#x3002;&#x7576;&#x9023;&#x7DDA;&#x6C60;&#x4E2D;&#x7684;&#x9592;&#x7F6E;&#x9023;&#x7DDA;&#x9054;&#x5230; <code>max_idle_pool_size</code> &#x8A2D;&#x7F6E;&#x7684;&#x6578;&#x91CF;&#x6642;&#xFF0C;&#x8FD4;&#x56DE;&#x81F3;&#x9023;&#x7DDA;&#x6C60;&#x7684;&#x9023;&#x7DDA;&#x6703;&#x88AB;&#x95DC;&#x9589;&#x3002;</p>
+<p>&#x7576;&#x9023;&#x7DDA;&#x6578;&#x5DF2;&#x7D93;&#x9054;&#x5230;&#x6700;&#x5927;&#xFF0C;&#x800C;&#x6709;&#x9700;&#x8981;&#x65B0;&#x7684;&#x9023;&#x7DDA;&#x7684;&#x6642;&#x5019;&#xFF0C;&#x6703;&#x4EE5; <code>checkout_timeout</code> &#x8A2D;&#x7F6E;&#x7684;&#x79D2;&#x6578;&#x4F5C;&#x70BA;&#x7B49;&#x5F85;&#x53EF;&#x7528;&#x9023;&#x7DDA;&#x7684;&#x6642;&#x9593;&#x3002;</p>
+<p>&#x7576;&#x9023;&#x7DDA;&#x65B7;&#x958B;&#xFF0C;&#x6216;&#x662F;&#x7121;&#x6CD5;&#x5EFA;&#x7ACB;&#x6642;&#xFF0C;&#x6703;&#x4EE5; <code>retry_attempts</code> &#x505A;&#x70BA;&#x6700;&#x591A;&#x91CD;&#x65B0;&#x5617;&#x8A66;&#x7684;&#x6B21;&#x6578;&#xFF0C;&#x800C;&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>retry_delay</code> &#x4F86;&#x8A2D;&#x7F6E;&#x6BCF;&#x6B21;&#x91CD;&#x65B0;&#x5617;&#x8A66;&#x9023;&#x7DDA;&#x7684;&#x9593;&#x9694;&#x6642;&#x9593;&#x3002;</p>
+<h2 id="&#x7BC4;&#x4F8B;">&#x7BC4;&#x4F8B;</h2>
+<p>&#x4E0B;&#x9762;&#x7684;&#x7BC4;&#x4F8B;&#x7A0B;&#x5F0F;&#x6703;&#x5370;&#x51FA;&#x5F9E; MySQL &#x62FF;&#x5230;&#x7684;&#x6642;&#x9593;&#xFF0C;&#x5982;&#x679C;&#x9023;&#x7DDA;&#x65B7;&#x958B;&#x6216;&#x662F; MySQL &#x4F3A;&#x670D;&#x5668;&#x66AB;&#x6642;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#xFF0C;&#x7A0B;&#x5F0F;&#x4ECD;&#x6703;&#x7E7C;&#x7E8C;&#x57F7;&#x884C;&#xFF0C;&#x4E0D;&#x767C;&#x751F;&#x4F8B;&#x5916;&#x3002;</p>
 <pre><code class="lang-crystal"><span class="hljs-comment"># file: sample.cr</span>
 <span class="hljs-keyword">require</span> <span class="hljs-string">&quot;mysql&quot;</span>
 
@@ -2057,7 +2057,7 @@ db.scalar(&quot;SELECT NOW()&quot;) # =&gt; 2016-12-16 16:36:58
 db.scalar(&quot;SELECT NOW()&quot;) # =&gt; 2016-12-16 16:36:58
 db.scalar(&quot;SELECT NOW()&quot;) # =&gt; 2016-12-16 16:36:59
 db.scalar(&quot;SELECT NOW()&quot;) # =&gt; 2016-12-16 16:36:59
-# stop mysql server for some seconds
+# &#x505C;&#x6B62; MySQL &#x4F3A;&#x670D;&#x5668;&#x5E7E;&#x79D2;&#x9418;
 db.scalar(&quot;SELECT NOW()&quot;) # =&gt; 2016-12-16 16:37:06
 db.scalar(&quot;SELECT NOW()&quot;) # =&gt; 2016-12-16 16:37:06
 db.scalar(&quot;SELECT NOW()&quot;) # =&gt; 2016-12-16 16:37:07
@@ -2104,7 +2104,7 @@ db.scalar(&quot;SELECT NOW()&quot;) # =&gt; 2016-12-16 16:37:07
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Connection pool","level":"1.7.2","depth":2,"next":{"title":"Transactions","level":"1.7.3","depth":2,"path":"database/transactions.md","ref":"database/transactions.md","articles":[]},"previous":{"title":"Connection","level":"1.7.1","depth":2,"path":"database/connection.md","ref":"database/connection.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","edit-link","offline"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"offline":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-128950624-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"編輯此頁","base":"https://github.com/crystal-tw/docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.2.2"},"file":{"path":"database/connection_pool.md","mtime":"2020-05-20T10:34:58.862Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2020-05-20T10:35:57.575Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Connection pool","level":"1.7.2","depth":2,"next":{"title":"Transactions","level":"1.7.3","depth":2,"path":"database/transactions.md","ref":"database/transactions.md","articles":[]},"previous":{"title":"Connection","level":"1.7.1","depth":2,"path":"database/connection.md","ref":"database/connection.md","articles":[]},"dir":"ltr"},"config":{"plugins":["ga","edit-link","offline"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"offline":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-128950624-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"編輯此頁","base":"https://github.com/crystal-tw/docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.2.2"},"file":{"path":"database/connection_pool.md","mtime":"2020-06-17T14:27:29.647Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2020-06-17T14:28:25.323Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

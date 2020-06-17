@@ -1971,39 +1971,40 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="connection">Connection</h1>
-<p>A connection is one of the key parts when working with databases. It represents the <em>runway</em> through which statements travel from our application to the database.</p>
-<p>In Crystal we have two ways of building this connection. And so, coming up next, we are going to present examples with some advice on when to use each one.</p>
-<h2 id="db-module">DB module</h2>
+                                <h1 id="&#x9023;&#x7DDA;">&#x9023;&#x7DDA;</h1>
+<p>&#x7576;&#x6211;&#x5011;&#x5728;&#x4F7F;&#x7528;&#x8CC7;&#x6599;&#x5EAB;&#x6642;&#xFF0C;&#x9023;&#x7DDA;&#x7D55;&#x5C0D;&#x626E;&#x6F14;&#x8457;&#x95DC;&#x9375;&#x7684;&#x89D2;&#x8272;&#x3002;&#x5B83;&#x4EE3;&#x8868;&#x4E86;&#x4E00;&#x689D;&#x5F9E;&#x7A0B;&#x5F0F;&#x901A;&#x5F80;&#x8CC7;&#x6599;&#x5EAB;&#x7684;<strong>&#x8DD1;&#x9053;</strong>&#x3002;</p>
+<p>&#x5728; Crystal &#x4E2D;&#x6211;&#x5011;&#x6709;&#x5169;&#x7A2E;&#x65B9;&#x5F0F;&#x4F86;&#x5EFA;&#x7ACB;&#x9023;&#x7DDA;&#x3002;&#x662F;&#x7684;&#xFF0C;&#x6211;&#x5011;&#x5C07;&#x6703;&#x5728;&#x63A5;&#x4E0B;&#x4F86;&#x7684;&#x7BC4;&#x4F8B;&#x4E2D;&#x793A;&#x7BC4;&#xFF0C;&#x4E26;&#x4E14;&#x63D0;&#x4F9B;&#x4E00;&#x4E9B;&#x5EFA;&#x8B70;&#xFF0C;&#x95DC;&#x65BC;&#x6211;&#x5011;&#x4EC0;&#x9EBC;&#x6642;&#x5019;&#x8A72;&#x4F7F;&#x7528;&#x90A3;&#x7A2E;&#x9023;&#x7DDA;&#x65B9;&#x5F0F;&#x3002;</p>
+<h2 id="db-&#x6A21;&#x7D44;">DB &#x6A21;&#x7D44;</h2>
 <blockquote>
-<p><em>Give me a place to stand, and I shall move the earth.</em><br>Archimedes</p>
+<p><strong>&#x7D66;&#x6211;&#x4E00;&#x500B;&#x652F;&#x9EDE;&#xFF0C;&#x6211;&#x5C31;&#x80FD;&#x8209;&#x8D77;&#x5730;&#x7403;&#x3002;</strong>
+&#x963F;&#x57FA;&#x7C73;&#x5FB7;</p>
 </blockquote>
-<p>The DB module, is our place to stand when working with databases in Crystal. As written in the documentation: <em>is a unified interface for database access</em>.</p>
-<p>One of the methods implemented in this module is <code>DB#connect</code>. Using this method is the <strong>first way</strong> for creating a connection. Let&apos;s see how to use it.</p>
+<p>DB &#x6A21;&#x7D44;&#xFF0C;&#x662F;&#x6211;&#x5011;&#x5728; Crystal &#x4E2D;&#x9032;&#x884C;&#x8CC7;&#x6599;&#x5EAB;&#x5DE5;&#x4F5C;&#x7684;&#x7ACB;&#x8DB3;&#x9EDE;&#x3002;&#x5982;&#x540C;&#x5728;&#x6587;&#x4EF6;&#x4E2D;&#x6240;&#x5BEB;&#x7684;&#x4E00;&#x6A23;&#xFF0C;<strong>&#x5B83;&#x662F;&#x4E00;&#x500B;&#x7528;&#x65BC;&#x9023;&#x7D50;&#x8CC7;&#x6599;&#x5EAB;&#x7684;&#x7D71;&#x4E00;&#x4ECB;&#x9762;</strong>&#x3002;</p>
+<p>&#x5728;&#x9019;&#x500B;&#x6A21;&#x7D44;&#x4E2D;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x500B; <code>DB#connect</code> &#x65B9;&#x6CD5;&#x3002;&#x9019;&#x500B;&#x65B9;&#x6CD5;&#xFF0C;&#x800C;&#x4F7F;&#x7528;&#x9019;&#x500B;&#x65B9;&#x6CD5;&#x662F;&#x8B93;&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x5EFA;&#x7ACB;&#x8CC7;&#x6599;&#x5EAB;&#x9023;&#x7DDA;&#x7684;<strong>&#x5176;&#x4E2D;&#x4E00;&#x500B;&#x505A;&#x6CD5;</strong>&#x3002;&#x8B93;&#x6211;&#x5011;&#x4F86;&#x770B;&#x770B;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5B83;&#x3002;</p>
 <h2 id="dbconnect">DB#connect</h2>
-<p>When using <code>DB#connect</code> we are indeed opening a connection to the database. The <code>uri</code> passed as the parameter is used by the module to determine which driver to use (for example: <code>mysql://</code>, <code>postgres://</code>, <code>sqlite://</code>, etc.) i.e. we do not need to specify which database we are using.</p>
-<p>The <code>uri</code> for this example is <code>mysql://root:root@localhost/test</code>, and so the module will use the <code>mysql driver</code> to connect to the MySQL database.</p>
-<p>Here is the example:</p>
+<p>&#x4F7F;&#x7528; <code>DB#connect</code> &#x6642;&#xFF0C;&#x6211;&#x5011;&#x6B63;&#x5728;&#x6253;&#x958B;&#x4E00;&#x689D;&#x8CC7;&#x6599;&#x5EAB;&#x7684;&#x9023;&#x7DDA;&#x3002;&#x53C3;&#x6578; <code>uri</code> &#x6703;&#x88AB;&#x50B3;&#x905E;&#x7D66;&#x6A21;&#x7D44;&#x7528;&#x4F86;&#x6C7A;&#x5B9A;&#x8A72;&#x4F7F;&#x7528;&#x90A3;&#x7A2E;&#x9A45;&#x52D5;&#x7A0B;&#x5F0F;&#xFF08;&#x5982;&#xFF1A;<code>mysql://</code>&#x3001;<code>postgres://</code>&#x3001;<code>sqlite://</code> ...&#x7B49;&#xFF09;&#x4E5F;&#x5C31;&#x662F;&#x8AAA;&#xFF0C;&#x6211;&#x5011;&#x4E0D;&#x9700;&#x8981;&#x7279;&#x5225;&#x6307;&#x660E;&#x6211;&#x5011;&#x5728;&#x4F7F;&#x7528;&#x54EA;&#x7A2E;&#x8CC7;&#x6599;&#x5EAB;&#x3002;</p>
+<p>&#x4EE5;&#x7BC4;&#x4F8B;&#x7684; <code>uri</code>&#xFF08;<code>mysql://root:root@localhost/test</code>&#xFF09; &#x4F86;&#x8AAA;&#xFF0C;&#x6A21;&#x7D44;&#x5C07;&#x6703;&#x4F7F;&#x7528; <code>mysql driver</code> &#x4F86;&#x9023;&#x63A5; MySQL &#x8CC7;&#x6599;&#x5EAB;&#x3002;</p>
+<p>&#x9019;&#x908A;&#x662F;&#x5BE6;&#x969B;&#x7684;&#x7BC4;&#x4F8B;&#xFF1A;</p>
 <pre><code class="lang-crystal"><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;mysql&quot;</span>
 
 cnn = DB.connect(<span class="hljs-string">&quot;mysql://root:root@localhost/test&quot;</span>)
 puts <span class="hljs-keyword">typeof</span>(cnn) <span class="hljs-comment"># =&gt; DB::Connection</span>
 cnn.close
 </code></pre>
-<p>It&apos;s worth mentioning that the method returns a <code>DB::Connection</code> object. Although more specifically, it returns a <code>MySql::Connection</code> object, it doesn&apos;t matter because all types of connections should be polymorphic. So hereinafter we will work with a <code>DB::Connection</code> instance, helping us to abstract from specific issues of each database engine.</p>
-<p>When creating a connection <em>manually</em> (as we are doing here) we are responsible for managing this resource, and so we must close the connection when we are done using it. Regarding the latter, this little details can be the cause of huge bugs! Crystal, being <em>a language for humans</em>, give us a more safe way of <em>manually</em> creating a connection using blocks, like this:</p>
+<p>&#x503C;&#x5F97;&#x4E00;&#x63D0;&#x7684;&#x662F;&#x9019;&#x500B;&#x65B9;&#x6CD5;&#x6703;&#x56DE;&#x50B3; <code>DB::Connection</code> &#x7269;&#x4EF6;&#x3002;&#x66F4;&#x7CBE;&#x78BA;&#x9EDE;&#x4F86;&#x8AAA;&#xFF0C;&#x5B83;&#x56DE;&#x50B3;&#x7684;&#x662F; <code>MySql::Connection</code> &#x7269;&#x4EF6;&#xFF0C;&#x4E0D;&#x904E;&#x9019;&#x4E26;&#x4E0D;&#x5F71;&#x97FF;&#x4EC0;&#x9EBC;&#xFF0C;&#x56E0;&#x70BA;&#x6240;&#x6709;&#x7684;&#x9023;&#x7DDA;&#x578B;&#x5225;&#x90FD;&#x662F;&#x7E7C;&#x627F;&#x81EA; <code>DB::Connection</code>&#x3002;&#x56E0;&#x6B64;&#x4EE5;&#x4E0B;&#x6211;&#x5011;&#x5C07;&#x6703;&#x4F7F;&#x7528; <code>DB::Connection</code> &#x5BE6;&#x4F8B;&#x9032;&#x884C;&#x64CD;&#x4F5C;&#xFF0C;&#x8B93;&#x62BD;&#x8C61;&#x578B;&#x5225;&#x5E6B;&#x52A9;&#x6211;&#x5011;&#x89E3;&#x6C7A;&#x8A31;&#x591A;&#x500B;&#x5225;&#x65BC;&#x8CC7;&#x6599;&#x5EAB;&#x5F15;&#x64CE;&#x7684;&#x554F;&#x984C;&#x3002;</p>
+<p>&#x7576;&#x6211;&#x5011;<strong>&#x624B;&#x52D5;</strong>&#x5EFA;&#x7ACB;&#x9023;&#x7DDA;&#xFF08;&#x5C31;&#x5982;&#x540C;&#x6211;&#x5011;&#x73FE;&#x5728;&#x505A;&#x7684;&#x4E00;&#x6A23;&#xFF09;&#xFF0C;&#x6211;&#x5011;&#x5FC5;&#x9808;&#x8CA0;&#x8CAC;&#x7BA1;&#x7406;&#x5B83;&#x7684;&#x8CC7;&#x6E90;&#xFF0C;&#x800C;&#x4E14;&#x5FC5;&#x9808;&#x8981;&#x5728;&#x4F7F;&#x7528;&#x7D50;&#x675F;&#x6642;&#x95DC;&#x9589;&#x9023;&#x7DDA;&#x3002;&#x95DC;&#x65BC;&#x5F8C;&#x8005;&#xFF0C;&#x9019;&#x500B;&#x5C0F;&#x5C0F;&#x7684;&#x7D30;&#x7BC0;&#x53EF;&#x80FD;&#x5C0E;&#x81F4;&#x5DE8;&#x5927;&#x7684; Bug &#xFF01;Crystal &#x4F5C;&#x70BA;&#x4E00;&#x500B;<strong>&#x4EBA;&#x6027;&#x5316;</strong>&#x7684;&#x8A9E;&#x8A00;&#xFF0C;&#x63D0;&#x4F9B;&#x4E86;&#x66F4;&#x52A0;&#x5B89;&#x5168;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x4F7F;&#x7528;&#x5340;&#x584A;&#x4F86;&#x8B93;&#x6211;&#x5011;<strong>&#x624B;&#x52D5;</strong>&#x5EFA;&#x7ACB;&#x9023;&#x7DDA;&#xFF0C;&#x5C31;&#x50CF;&#x9019;&#x6A23;&#xFF1A;</p>
 <pre><code class="lang-crystal"><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;mysql&quot;</span>
 
 DB.connect <span class="hljs-string">&quot;mysql://root:root@localhost/test&quot;</span> <span class="hljs-keyword">do</span> |cnn|
   puts <span class="hljs-keyword">typeof</span>(cnn) <span class="hljs-comment"># =&gt; DB::Connection</span>
-<span class="hljs-keyword">end</span> <span class="hljs-comment"># the connection will be closed here</span>
+<span class="hljs-keyword">end</span> <span class="hljs-comment"># &#x9023;&#x7DDA;&#x6703;&#x5728;&#x9019;&#x908A;&#x88AB;&#x95DC;&#x9589;</span>
 </code></pre>
-<p>Ok, now we have a connection, let&apos;s use it!</p>
+<p>&#x8B9A;&#x5594;&#xFF0C;&#x6211;&#x5011;&#x73FE;&#x5728;&#x6709;&#x4E00;&#x500B;&#x9023;&#x7DDA;&#x4E86;&#xFF0C;&#x8B93;&#x6211;&#x5011;&#x4F86;&#x4F7F;&#x7528;&#x5B83;&#x5427;&#xFF01;</p>
 <pre><code class="lang-crystal"><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;mysql&quot;</span>
 
 DB.connect <span class="hljs-string">&quot;mysql://root:root@localhost/test&quot;</span> <span class="hljs-keyword">do</span> |cnn|
   puts <span class="hljs-keyword">typeof</span>(cnn)                         <span class="hljs-comment"># =&gt; DB::Connection</span>
-  puts <span class="hljs-string">&quot;Connection closed: <span class="hljs-subst">#{cnn.closed?}</span>&quot;</span> <span class="hljs-comment"># =&gt; false</span>
+  puts <span class="hljs-string">&quot;&#x9023;&#x7DDA;&#x7D50;&#x675F;: <span class="hljs-subst">#{cnn.closed?}</span>&quot;</span> <span class="hljs-comment"># =&gt; false</span>
 
   result = cnn.exec(<span class="hljs-string">&quot;drop table if exists contacts&quot;</span>)
   puts result
@@ -2013,21 +2014,21 @@ DB.connect <span class="hljs-string">&quot;mysql://root:root@localhost/test&quot
 
   cnn.transaction <span class="hljs-keyword">do</span> |tx|
     cnn2 = tx.connection
-    puts <span class="hljs-string">&quot;Yep, it is the same connection! <span class="hljs-subst">#{cnn == cnn2}</span>&quot;</span>
+    puts <span class="hljs-string">&quot;&#x8036;&#x9ED1;&#xFF0C;&#x9019;&#x662F;&#x540C;&#x4E00;&#x689D;&#x9023;&#x7DDA;&#xFF01; <span class="hljs-subst">#{cnn == cnn2}</span>&quot;</span>
 
     cnn2.exec(<span class="hljs-string">&quot;insert into contacts values (&apos;Joe&apos;, 42)&quot;</span>)
     cnn2.exec(<span class="hljs-string">&quot;insert into contacts values (?, ?)&quot;</span>, <span class="hljs-string">&quot;Sarah&quot;</span>, <span class="hljs-number">43</span>)
   <span class="hljs-keyword">end</span>
 
   cnn.query_each <span class="hljs-string">&quot;select * from contacts&quot;</span> <span class="hljs-keyword">do</span> |rs|
-    puts <span class="hljs-string">&quot;name: <span class="hljs-subst">#{rs.read}</span>, age: <span class="hljs-subst">#{rs.read}</span>&quot;</span>
+    puts <span class="hljs-string">&quot;&#x540D;&#x5B50;&#xFF1A; <span class="hljs-subst">#{rs.read}</span>&#xFF0C; &#x5E74;&#x9F61;&#xFF1A; <span class="hljs-subst">#{rs.read}</span>&quot;</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>First, in this example, we are using a transaction (check the <a href="https://crystal-lang.org/reference/database/transactions.html" target="_blank">transactions</a> section for more information on this topic)
-Second, it&apos;s important to notice that the connection given by the transaction <strong>is the same connection</strong> that we were working with, before the transaction begin. That is, there is only <strong>one</strong> connection at all times in our program.
-And last, we are using the method <code>#exec</code> and <code>#query</code>. You may read more about executing queries in the <a href="https://crystal-lang.org/reference/database/" target="_blank">database</a> section.</p>
-<p>Now that we have a good idea about creating a connection, let&apos;s present the <strong>second way</strong> for creating one: <code>DB#open</code></p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x5728;&#x9019;&#x500B;&#x7BC4;&#x4F8B;&#x4E2D;&#xFF0C;&#x6211;&#x5011;&#x4F7F;&#x7528;&#x5230;&#x4EA4;&#x6613;&#xFF08;&#x53C3;&#x7167;<a href="https://crystal-lang.org/reference/database/transactions.html" target="_blank">&#x4EA4;&#x6613;</a>&#x7AE0;&#x7BC0;&#x4F86;&#x7372;&#x5F97;&#x66F4;&#x591A;&#x8CC7;&#x8A0A;&#xFF09;
+&#x5176;&#x6B21;&#xFF0C;&#x6CE8;&#x610F;&#x5230;&#x5F88;&#x91CD;&#x8981;&#x7684;&#x4E00;&#x9EDE;&#x662F;&#xFF0C;&#x4EA4;&#x6613;&#x6240;&#x4F7F;&#x7528;&#x7684;&#x9023;&#x7DDA;<strong>&#x8DDF;&#x539F;&#x672C;&#x7684;&#x9023;&#x7DDA;&#x662F;&#x540C;&#x4E00;&#x689D;</strong>&#x3002;&#x662F;&#x7684;&#xFF0C;&#x5F9E;&#x982D;&#x5230;&#x5C3E;&#xFF0C;&#x90FD;&#x53EA;&#x6709;<strong>&#x4E00;&#x689D;</strong>&#x9023;&#x7DDA;&#x5B58;&#x5728;&#x5728;&#x6211;&#x5011;&#x7684;&#x7A0B;&#x5F0F;&#x4E2D;&#x3002;
+&#x6700;&#x5F8C;&#xFF0C;&#x6211;&#x5011;&#x4F7F;&#x7528; <code>#exec</code> &#x548C; <code>#query</code> &#x65B9;&#x6CD5;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x5728;<a href="https://crystal-lang.org/reference/database/" target="_blank">&#x8CC7;&#x6599;&#x5EAB;</a>&#x7AE0;&#x7BC0;&#x4E2D;&#x627E;&#x5230;&#x66F4;&#x591A;&#x95DC;&#x65BC;&#x57F7;&#x884C;&#x67E5;&#x8A62;&#x7684;&#x8CC7;&#x8A0A;&#x3002;</p>
+<p>&#x73FE;&#x5728;&#x6211;&#x5011;&#x5DF2;&#x7D93;&#x6709;&#x4E00;&#x500B;&#x5F88;&#x68D2;&#x7684;&#x65B9;&#x6CD5;&#x4F86;&#x5EFA;&#x7ACB;&#x9023;&#x7DDA;&#xFF0C;&#x63A5;&#x8457;&#xFF0C;&#x8B93;&#x6211;&#x5011;&#x4F86;&#x4E86;&#x89E3;&#x5EFA;&#x7ACB;&#x8CC7;&#x6599;&#x5EAB;&#x9023;&#x7DDA;&#x7684;<strong>&#x53E6;&#x4E00;&#x7A2E;&#x65B9;&#x6CD5;</strong>&#xFF1A;<code>DB#open</code></p>
 <h2 id="dbopen">DB#open</h2>
 <pre><code class="lang-crystal"><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;mysql&quot;</span>
 
@@ -2035,34 +2036,33 @@ db = DB.open(<span class="hljs-string">&quot;mysql://root:root@localhost/test&qu
 puts <span class="hljs-keyword">typeof</span>(db) <span class="hljs-comment"># DB::Database</span>
 db.close
 </code></pre>
-<p>As with a connection, we should close the database once we don&apos;t need it anymore.
-Or instead, we could use a block and let Crystal close the database for us!</p>
-<p>But, where is the connection?
-Well, we should be asking for the <strong>connections</strong>. When a database is created, a pool of connections is created with connections to the database prepared and ready to use! (Do you want to read more about <strong>pool of connections</strong>? In the <a href="https://crystal-lang.org/reference/database/connection_pool.html" target="_blank">connection pool</a> section you may read all about this interesting topic!)</p>
-<p>How do we use a connection from the <code>database</code> object?
-For this, we could ask the database for a connection using the method <code>Database#checkout</code>. But, doing this will require to explicitly return the connection to the pool using <code>Connection#release</code>. Here is an example:</p>
+<p>&#x4E00;&#x65E6;&#x6211;&#x5011;&#x9023;&#x63A5;&#x4E0A;&#x4E86;&#xFF0C;&#x6211;&#x5011;&#x5C31;&#x61C9;&#x8A72;&#x5728;&#x4E0D;&#x9700;&#x8981;&#x9019;&#x500B;&#x8CC7;&#x6599;&#x5EAB;&#x6642;&#x5C07;&#x5B83;&#x95DC;&#x9589;&#x3002;&#x6216;&#x8005;&#x662F;&#xFF0C;&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5340;&#x584A;&#x4F86;&#x8B93; Crystal &#x66FF;&#x6211;&#x5011;&#x4EE3;&#x52DE;&#xFF01;</p>
+<p>&#x554A;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x8AAA;&#x90A3;&#x500B;&#x9023;&#x7DDA;&#x5462;&#xFF1F;
+&#x6069;...&#xFF0C;&#x95DC;&#x65BC;&#x9019;&#x4EF6;&#x4E8B;&#x60C5;&#xFF0C;&#x6211;&#x5011;&#x61C9;&#x8A72;&#x627E; <strong>connections</strong> &#x544A;&#x8A34;&#x6211;&#x5011;&#x3002;&#x4E00;&#x65E6;&#x8CC7;&#x6599;&#x5EAB;&#x88AB;&#x5EFA;&#x7ACB;&#x5F8C;&#xFF0C;&#x6703;&#x5EFA;&#x7ACB;&#x4E00;&#x7CFB;&#x5217;&#x53EF;&#x7528;&#x7684;&#x9023;&#x7DDA;&#x4E26;&#x653E;&#x7F6E;&#x65BC;&#x9023;&#x7DDA;&#x6C60;&#x4E2D;&#x3002;&#xFF08;&#x60F3;&#x77E5;&#x9053;&#x66F4;&#x591A;&#x95DC;&#x65BC;&#x9023;&#x7DDA;&#x6C60;&#x7684;&#x6280;&#x5DE7;&#x55CE;&#xFF1F;<small><del>&#x6309;&#x8B9A;&#x3001;&#x8A02;&#x95B1;&#xFF0C;&#x4E26;&#x958B;&#x555F;&#x5C0F;&#x9234;&#x943A;</del></small> &#x5728;<a href="https://crystal-lang.org/reference/database/connection_pool.html" target="_blank">&#x9023;&#x7DDA;&#x6C60;</a>&#x9019;&#x4E00;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x5B78;&#x7FD2;&#x5230;&#x95DC;&#x65BC;&#x9019;&#x500B;&#x6709;&#x8DA3;&#x7684;&#x4E3B;&#x984C;&#x7684;&#x6240;&#x6709;&#x77E5;&#x8B58;&#xFF01;&#xFF09;</p>
+<p>&#x6211;&#x5011;&#x8981;&#x5982;&#x4F55;&#x5F9E; <code>Database</code> &#x4E2D;&#x4F7F;&#x7528;&#x9023;&#x7DDA;&#x5462;&#xFF1F;
+&#x8981;&#x505A;&#x5230;&#x9019;&#x4EF6;&#x4E8B;&#x60C5;&#xFF0C;&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x7528; <code>Database#checkout</code> &#x65B9;&#x6CD5;&#x5411;&#x8CC7;&#x6599;&#x5EAB;&#x62FF;&#x5230;&#x9023;&#x7DDA;&#x3002;&#x4E0D;&#x904E;&#xFF0C;&#x9019;&#x6A23;&#x505A;&#x6211;&#x5011;&#x6703;&#x9700;&#x8981;&#x4F7F;&#x7528; <code>Connection#release</code> &#x5C07;&#x62FF;&#x51FA;&#x7684;&#x9023;&#x7DDA;&#x6B78;&#x9084;&#x7D66;&#x9023;&#x7DDA;&#x6C60;&#x3002;&#x9019;&#x908A;&#x662F;&#x5BE6;&#x969B;&#x7684;&#x7BC4;&#x4F8B;&#xFF1A;</p>
 <pre><code class="lang-crystal"><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;mysql&quot;</span>
 
 DB.open <span class="hljs-string">&quot;mysql://root:root@localhost/test&quot;</span> <span class="hljs-keyword">do</span> |db|
   cnn = db.checkout
   puts <span class="hljs-keyword">typeof</span>(cnn)
 
-  puts <span class="hljs-string">&quot;Connection closed: <span class="hljs-subst">#{cnn.closed?}</span>&quot;</span> <span class="hljs-comment"># =&gt; false</span>
+  puts <span class="hljs-string">&quot;&#x9023;&#x7DDA;&#x7D50;&#x675F;: <span class="hljs-subst">#{cnn.closed?}</span>&quot;</span> <span class="hljs-comment"># =&gt; false</span>
   cnn.release
-  puts <span class="hljs-string">&quot;Connection closed: <span class="hljs-subst">#{cnn.closed?}</span>&quot;</span> <span class="hljs-comment"># =&gt; false</span>
+  puts <span class="hljs-string">&quot;&#x9023;&#x7DDA;&#x7D50;&#x675F;: <span class="hljs-subst">#{cnn.closed?}</span>&quot;</span> <span class="hljs-comment"># =&gt; false</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>And we want a <em>safe</em> way (i.e. no need for us to release the connection) to request and use a connection from the <code>database</code>, we could use <code>Database#using_connection</code>:</p>
+<p>&#x800C;&#x6211;&#x5011;&#x5E0C;&#x671B;&#x6709;&#x4E00;&#x500B; <strong>&#x5B89;&#x5168;</strong> &#x7684;&#x65B9;&#x5F0F;&#xFF08;&#x4E5F;&#x5C31;&#x662F;&#x8AAA;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x6211;&#x5011;&#x81EA;&#x5DF1;&#x91CB;&#x653E;&#x9019;&#x689D;&#x9023;&#x7DDA;&#xFF09;&#x4F86;&#x5F9E; <code>Database</code> &#x4E2D;&#x7372;&#x5F97;&#x9023;&#x7DDA;&#xFF0C;&#x9019;&#x908A;&#x6211;&#x5011;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>Database#using_connection</code>&#xFF1A;</p>
 <pre><code class="lang-crystal"><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;mysql&quot;</span>
 
 DB.open <span class="hljs-string">&quot;mysql://root:root@localhost/test&quot;</span> <span class="hljs-keyword">do</span> |db|
   db.using_connection <span class="hljs-keyword">do</span> |cnn|
     puts <span class="hljs-keyword">typeof</span>(cnn)
-    <span class="hljs-comment"># use cnn</span>
+    <span class="hljs-comment"># &#x4F7F;&#x7528;&#x9023;&#x7DDA;</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>In the next example we will let the <code>database</code> object <em>to manage the connections by itself</em>, like this:</p>
+<p>&#x5728;&#x4E0B;&#x4E00;&#x500B;&#x7BC4;&#x4F8B;&#x4E2D;&#xFF0C;&#x6211;&#x5011;&#x5C07;&#x6703;&#x8B93; <code>Database</code> &#x7269;&#x4EF6;&#xFF0C;<strong>&#x81EA;&#x5DF1;&#x7BA1;&#x7406;&#x9023;&#x7DDA;</strong>&#xFF0C;&#x5C31;&#x50CF;&#x9019;&#x6A23;&#xFF1A;</p>
 <pre><code class="lang-crystal"><span class="hljs-keyword">require</span> <span class="hljs-string">&quot;mysql&quot;</span>
 
 DB.open <span class="hljs-string">&quot;mysql://root:root@localhost/test&quot;</span> <span class="hljs-keyword">do</span> |db|
@@ -2076,15 +2076,15 @@ DB.open <span class="hljs-string">&quot;mysql://root:root@localhost/test&quot;</
   <span class="hljs-keyword">end</span>
 
   db.query_each <span class="hljs-string">&quot;select * from contacts&quot;</span> <span class="hljs-keyword">do</span> |rs|
-    puts <span class="hljs-string">&quot;name: <span class="hljs-subst">#{rs.read}</span>, age: <span class="hljs-subst">#{rs.read}</span>&quot;</span>
+    puts <span class="hljs-string">&quot;&#x540D;&#x5B50;&#xFF1A; <span class="hljs-subst">#{rs.read}</span>&#xFF0C;&#x5E74;&#x9F61;&#xFF1A; <span class="hljs-subst">#{rs.read}</span>&quot;</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
 </code></pre>
-<p>As we may notice, the <code>database</code> is polymorphic with a <code>connection</code> object with regard to the <code>#exec</code> / <code>#query</code> / <code>#transaction</code> methods. The database is responsible for the use of the connections. Great!</p>
-<h2 id="when-to-use-one-or-the-other">When to use one or the other?</h2>
-<p>Given the examples, it may come to our attention that <strong>the number of connections is relevant</strong>.
-If we are programming a short living application with only one user starting requests to the  database then a single connection managed by us (i.e. a <code>DB::Connection</code> object) should be enough (think of a command line application that receives parameters, then starts a request to the database and finally displays the result to the user)
-On the other hand, if we are building a system with many concurrent users and with heavy database access, then we should use a <code>DB::Database</code> object; which by using a connection pool will have a number of connections already prepared and ready to use (no bootstrap/initialization-time penalizations). Or imagine that you are building a long-living application (like a background job) then a connection pool will free you from the responsibility of monitoring the state of the connection: is it alive or does it need to reconnect?</p>
+<p>&#x5982;&#x540C;&#x6211;&#x5011;&#x6240;&#x6CE8;&#x610F;&#x5230;&#x7684;&#xFF0C;<code>DB::Database</code> &#x662F; <code>DB::Connection</code> &#x7684;&#x591A;&#x578B;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8AAA; <code>DB::Database</code> &#x4E5F;&#x5BE6;&#x4F5C;&#x4E86; <code>#exec</code> &#x3001; <code>#query</code> &#x9084;&#x6709; <code>#transaction</code> &#x65B9;&#x6CD5;&#x3002;&#x4F7F;&#x7528;&#x4E26;&#x7BA1;&#x7406;&#x9019;&#x4E9B;&#x9023;&#x7DDA;&#xFF0C;&#x5176;&#x5BE6;&#x662F;&#x5C6C;&#x65BC;&#x8CC7;&#x6599;&#x5EAB;&#x7269;&#x4EF6;&#x8077;&#x8CAC;&#x7684;&#x4E00;&#x90E8;&#x4EFD;&#xFF0C;&#x6211;&#x5011;&#x4E0D;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x4F86;&#x7BA1;&#x7406;&#x9023;&#x7DDA;&#xFF0C;&#x9019;&#x771F;&#x662F;&#x592A;&#x68D2;&#x4E86;&#xFF01;</p>
+<h2 id="&#x4EC0;&#x9EBC;&#x6642;&#x5019;&#x8A72;&#x7528;&#x54EA;&#x4E00;&#x7A2E;&#x5462;&#xFF1F;">&#x4EC0;&#x9EBC;&#x6642;&#x5019;&#x8A72;&#x7528;&#x54EA;&#x4E00;&#x7A2E;&#x5462;&#xFF1F;</h2>
+<p>&#x6839;&#x64DA;&#x9019;&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x5462;&#xFF0C;&#x6211;&#x5011;&#x597D;&#x50CF;&#x80FD;&#x5920;&#x6CE8;&#x610F;&#x5230;&#xFF0C;&#x5169;&#x500B;&#x65B9;&#x6CD5;&#x7684;&#x5DEE;&#x5225;&#x5728;&#x65BC;<strong>&#x9023;&#x7DDA;&#x7684;&#x6578;&#x91CF;</strong>&#x3002;
+&#x5982;&#x679C;&#x6211;&#x5011;&#x662F;&#x958B;&#x767C;&#x7684;&#x662F;&#x4E00;&#x500B;&#x57F7;&#x884C;&#x5B8C;&#x5C31;&#x7D50;&#x675F;&#x7684;&#x7A0B;&#x5F0F;&#x800C;&#x4E14;&#x53EA;&#x6709;&#x4E00;&#x500B;&#x4F7F;&#x7528;&#x8005;&#x6703;&#x5B58;&#x53D6;&#x8CC7;&#x6599;&#x5EAB;&#x7684;&#x8A71;&#xFF0C;&#x90A3;&#x9EBC;&#x6211;&#x5011;&#x81EA;&#x5DF1;&#x4F86;&#x7BA1;&#x7406;&#x4E00;&#x689D;&#x9023;&#x7DDA;&#xFF08;&#x63DB;&#x8A00;&#x4E4B;&#xFF0C;&#x4E00;&#x500B; <code>DB::Connection</code> &#x7269;&#x4EF6;&#xFF09;&#x5C31;&#x5DF2;&#x7D93;&#x975E;&#x5E38;&#x5920;&#x7528;&#x4E86;&#xFF08;&#x60F3;&#x50CF;&#x4E00;&#x500B;&#x547D;&#x4EE4;&#x5217;&#x61C9;&#x7528;&#x7A0B;&#x5F0F;&#xFF0C;&#x63A5;&#x53D7;&#x53C3;&#x6578;&#x5F8C;&#x67E5;&#x8A62;&#x8CC7;&#x6599;&#x5EAB;&#xFF0C;&#x4E26;&#x5C07;&#x7D50;&#x679C;&#x986F;&#x793A;&#x7D66;&#x4F7F;&#x7528;&#x8005;&#xFF09;
+&#x53E6;&#x4E00;&#x65B9;&#x9762;&#xFF0C;&#x5982;&#x904E;&#x6211;&#x5011;&#x5EFA;&#x69CB;&#x7684;&#x662F;&#x4E00;&#x500B;&#x5927;&#x578B;&#x7684;&#x7CFB;&#x7D71;&#xFF0C;&#x53EF;&#x80FD;&#x6703;&#x6709;&#x8A31;&#x591A;&#x4F7F;&#x7528;&#x8005;&#x7684;&#x540C;&#x6642;&#x5728;&#x4F7F;&#x7528;&#xFF0C;&#x4E14;&#x6709;&#x5927;&#x91CF;&#x7684;&#x8CC7;&#x6599;&#x5EAB;&#x5B58;&#x53D6;&#xFF0C;&#x90A3;&#x6211;&#x5011;&#x5C31;&#x61C9;&#x8A72;&#x4F7F;&#x7528; <code>DB::Database</code> &#x7269;&#x4EF6;&#xFF1B;<code>DB::Database</code> &#x5EFA;&#x7ACB;&#x4E86;&#x4E00;&#x7CFB;&#x5217;&#x53EF;&#x7528;&#x7684;&#x9023;&#x7DDA;&#x4E26;&#x653E;&#x7F6E;&#x65BC;&#x9023;&#x7DDA;&#x6C60;&#x4E2D;(&#x4E0D;&#x6703;&#x5728;&#x6211;&#x5011;&#x9700;&#x8981;&#x9023;&#x7DDA;&#x7684;&#x6642;&#x5019;&#x6709;&#x5EFA;&#x7ACB;&#x9023;&#x7DDA;&#x7684;&#x6210;&#x672C;)&#x3002;&#x6216;&#x8005;&#x60F3;&#x50CF;&#x4F60;&#x6B63;&#x5728;&#x5EFA;&#x69CB;&#x4E00;&#x500B;&#x6703;&#x6301;&#x7E8C;&#x904B;&#x884C;&#x7684;&#x7A0B;&#x5F0F;&#xFF08;&#x50CF;&#x662F;&#x4E00;&#x4E9B;&#x80CC;&#x666F;&#x4F5C;&#x696D;&#x7A0B;&#x5F0F;&#xFF09;&#x90A3;&#x9EBC;&#x9023;&#x7DDA;&#x6C60;&#x53EF;&#x4EE5;&#x8B93;&#x4F60;&#x514D;&#x65BC;&#x76E3;&#x6E2C;&#x9019;&#x4E9B;&#x9023;&#x7DDA;&#x7684;&#x72C0;&#x614B;&#xFF1A;&#x9019;&#x689D;&#x9023;&#x7DDA;&#x662F;&#x6D3B;&#x8457;&#x7684;&#x55CE;&#xFF1F;&#x9084;&#x662F;&#x5B83;&#x9700;&#x8981;&#x88AB;&#x91CD;&#x65B0;&#x9023;&#x63A5;&#xFF1F;</p>
 
                                 
                                 </section>
@@ -2128,7 +2128,7 @@ On the other hand, if we are building a system with many concurrent users and wi
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Connection","level":"1.7.1","depth":2,"next":{"title":"Connection pool","level":"1.7.2","depth":2,"path":"database/connection_pool.md","ref":"database/connection_pool.md","articles":[]},"previous":{"title":"Database","level":"1.7","depth":1,"path":"database/README.md","ref":"database/README.md","articles":[{"title":"Connection","level":"1.7.1","depth":2,"path":"database/connection.md","ref":"database/connection.md","articles":[]},{"title":"Connection pool","level":"1.7.2","depth":2,"path":"database/connection_pool.md","ref":"database/connection_pool.md","articles":[]},{"title":"Transactions","level":"1.7.3","depth":2,"path":"database/transactions.md","ref":"database/transactions.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["ga","edit-link","offline"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"offline":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-128950624-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"編輯此頁","base":"https://github.com/crystal-tw/docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.2.2"},"file":{"path":"database/connection.md","mtime":"2020-05-20T10:34:58.862Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2020-05-20T10:35:57.575Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Connection","level":"1.7.1","depth":2,"next":{"title":"Connection pool","level":"1.7.2","depth":2,"path":"database/connection_pool.md","ref":"database/connection_pool.md","articles":[]},"previous":{"title":"Database","level":"1.7","depth":1,"path":"database/README.md","ref":"database/README.md","articles":[{"title":"Connection","level":"1.7.1","depth":2,"path":"database/connection.md","ref":"database/connection.md","articles":[]},{"title":"Connection pool","level":"1.7.2","depth":2,"path":"database/connection_pool.md","ref":"database/connection_pool.md","articles":[]},{"title":"Transactions","level":"1.7.3","depth":2,"path":"database/transactions.md","ref":"database/transactions.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["ga","edit-link","offline"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"offline":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-128950624-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"編輯此頁","base":"https://github.com/crystal-tw/docs/edit/master"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"contributePrefix":"https://github.com/crystal-lang/crystal-book/"},"gitbook":"3.2.2"},"file":{"path":"database/connection.md","mtime":"2020-06-17T14:27:29.647Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2020-06-17T14:28:25.323Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
