@@ -1,25 +1,25 @@
-# Connection
+# 連線
 
-A connection is one of the key parts when working with databases. It represents the *runway* through which statements travel from our application to the database.
+當我們在使用資料庫時，連線絕對扮演著關鍵的角色。它代表了一條從程式通往資料庫的**跑道**。
 
-In Crystal we have two ways of building this connection. And so, coming up next, we are going to present examples with some advice on when to use each one.
+在 Crystal 中我們有兩種方式來建立連線。是的，我們將會在接下來的範例中示範，並且提供一些建議，關於我們什麼時候該使用那種連線方式。
 
-## DB module
+## DB 模組
 
-> _Give me a place to stand, and I shall move the earth._  
-> Archimedes
+> **給我一個支點，我就能舉起地球。**
+> 阿基米德
 
-The DB module, is our place to stand when working with databases in Crystal. As written in the documentation: _is a unified interface for database access_.
+DB 模組，是我們在 Crystal 中進行資料庫工作的立足點。如同在文件中所寫的一樣，**它是一個用於連結資料庫的統一介面**。
 
-One of the methods implemented in this module is `DB#connect`. Using this method is the **first way** for creating a connection. Let's see how to use it.
+在這個模組中提供了一個 `DB#connect` 方法。這個方法，而使用這個方法是讓我們可以建立資料庫連線的**其中一個做法**。讓我們來看看如何使用它。
 
 ## DB#connect
 
-When using `DB#connect` we are indeed opening a connection to the database. The `uri` passed as the parameter is used by the module to determine which driver to use (for example: `mysql://`, `postgres://`, `sqlite://`, etc.) i.e. we do not need to specify which database we are using.
+使用 `DB#connect` 時，我們正在打開一條資料庫的連線。參數 `uri` 會被傳遞給模組用來決定該使用那種驅動程式（如：`mysql://`、`postgres://`、`sqlite://` ...等）也就是說，我們不需要特別指明我們在使用哪種資料庫。
 
-The `uri` for this example is `mysql://root:root@localhost/test`, and so the module will use the `mysql driver` to connect to the MySQL database.
+以範例的 `uri`（`mysql://root:root@localhost/test`） 來說，模組將會使用 `mysql driver` 來連接 MySQL 資料庫。
 
-Here is the example:
+這邊是實際的範例：
 
 ```crystal
 require "mysql"
@@ -29,26 +29,26 @@ puts typeof(cnn) # => DB::Connection
 cnn.close
 ```
 
-It's worth mentioning that the method returns a `DB::Connection` object. Although more specifically, it returns a `MySql::Connection` object, it doesn't matter because all types of connections should be polymorphic. So hereinafter we will work with a `DB::Connection` instance, helping us to abstract from specific issues of each database engine.
+值得一提的是這個方法會回傳 `DB::Connection` 物件。更精確點來說，它回傳的是 `MySql::Connection` 物件，不過這並不影響什麼，因為所有的連線型別都是繼承自 `DB::Connection`。因此以下我們將會使用 `DB::Connection` 實例進行操作，讓抽象型別幫助我們解決許多個別於資料庫引擎的問題。
 
-When creating a connection _manually_ (as we are doing here) we are responsible for managing this resource, and so we must close the connection when we are done using it. Regarding the latter, this little details can be the cause of huge bugs! Crystal, being _a language for humans_, give us a more safe way of _manually_ creating a connection using blocks, like this:
+當我們**手動**建立連線（就如同我們現在做的一樣），我們必須負責管理它的資源，而且必須要在使用結束時關閉連線。關於後者，這個小小的細節可能導致巨大的 Bug ！Crystal 作為一個**人性化**的語言，提供了更加安全的方式，也就是使用區塊來讓我們**手動**建立連線，就像這樣：
 
 ```crystal
 require "mysql"
 
 DB.connect "mysql://root:root@localhost/test" do |cnn|
   puts typeof(cnn) # => DB::Connection
-end # the connection will be closed here
+end # 連線會在這邊被關閉
 ```
 
-Ok, now we have a connection, let's use it!
+讚喔，我們現在有一個連線了，讓我們來使用它吧！
 
 ```crystal
 require "mysql"
 
 DB.connect "mysql://root:root@localhost/test" do |cnn|
   puts typeof(cnn)                         # => DB::Connection
-  puts "Connection closed: #{cnn.closed?}" # => false
+  puts "連線結束: #{cnn.closed?}" # => false
 
   result = cnn.exec("drop table if exists contacts")
   puts result
@@ -58,23 +58,23 @@ DB.connect "mysql://root:root@localhost/test" do |cnn|
 
   cnn.transaction do |tx|
     cnn2 = tx.connection
-    puts "Yep, it is the same connection! #{cnn == cnn2}"
+    puts "耶黑，這是同一條連線！ #{cnn == cnn2}"
 
     cnn2.exec("insert into contacts values ('Joe', 42)")
     cnn2.exec("insert into contacts values (?, ?)", "Sarah", 43)
   end
 
   cnn.query_each "select * from contacts" do |rs|
-    puts "name: #{rs.read}, age: #{rs.read}"
+    puts "名子： #{rs.read}， 年齡： #{rs.read}"
   end
 end
 ```
 
-First, in this example, we are using a transaction (check the [transactions](https://crystal-lang.org/reference/database/transactions.html) section for more information on this topic)
-Second, it's important to notice that the connection given by the transaction **is the same connection** that we were working with, before the transaction begin. That is, there is only **one** connection at all times in our program.
-And last, we are using the method `#exec` and `#query`. You may read more about executing queries in the [database](https://crystal-lang.org/reference/database/) section.
+首先，在這個範例中，我們使用到交易（參照[交易](https://crystal-lang.org/reference/database/transactions.html)章節來獲得更多資訊）
+其次，注意到很重要的一點是，交易所使用的連線**跟原本的連線是同一條**。是的，從頭到尾，都只有**一條**連線存在在我們的程式中。
+最後，我們使用 `#exec` 和 `#query` 方法。你可以在[資料庫](https://crystal-lang.org/reference/database/)章節中找到更多關於執行查詢的資訊。
 
-Now that we have a good idea about creating a connection, let's present the **second way** for creating one: `DB#open`
+現在我們已經有一個很棒的方法來建立連線，接著，讓我們來了解建立資料庫連線的**另一種方法**：`DB#open`
 
 ## DB#open
 
@@ -86,14 +86,13 @@ puts typeof(db) # DB::Database
 db.close
 ```
 
-As with a connection, we should close the database once we don't need it anymore.
-Or instead, we could use a block and let Crystal close the database for us!
+一旦我們連接上了，我們就應該在不需要這個資料庫時將它關閉。或者是，我們可以使用區塊來讓 Crystal 替我們代勞！
 
-But, where is the connection?
-Well, we should be asking for the **connections**. When a database is created, a pool of connections is created with connections to the database prepared and ready to use! (Do you want to read more about **pool of connections**? In the [connection pool](https://crystal-lang.org/reference/database/connection_pool.html) section you may read all about this interesting topic!)
+啊，所以我說那個連線呢？
+恩...，關於這件事情，我們應該找 **connections** 告訴我們。一旦資料庫被建立後，會建立一系列可用的連線並放置於連線池中。（想知道更多關於連線池的技巧嗎？<small>~~按讚、訂閱，並開啟小鈴鐺~~</small> 在[連線池](https://crystal-lang.org/reference/database/connection_pool.html)這一章中，我們可以學習到關於這個有趣的主題的所有知識！）
 
-How do we use a connection from the `database` object?
-For this, we could ask the database for a connection using the method `Database#checkout`. But, doing this will require to explicitly return the connection to the pool using `Connection#release`. Here is an example:
+我們要如何從 `Database` 中使用連線呢？
+要做到這件事情，我們可以用 `Database#checkout` 方法向資料庫拿到連線。不過，這樣做我們會需要使用 `Connection#release` 將拿出的連線歸還給連線池。這邊是實際的範例：
 
 ```crystal
 require "mysql"
@@ -102,13 +101,13 @@ DB.open "mysql://root:root@localhost/test" do |db|
   cnn = db.checkout
   puts typeof(cnn)
 
-  puts "Connection closed: #{cnn.closed?}" # => false
+  puts "連線結束: #{cnn.closed?}" # => false
   cnn.release
-  puts "Connection closed: #{cnn.closed?}" # => false
+  puts "連線結束: #{cnn.closed?}" # => false
 end
 ```
 
-And we want a _safe_ way (i.e. no need for us to release the connection) to request and use a connection from the `database`, we could use `Database#using_connection`:
+而我們希望有一個 __安全__ 的方式（也就是說，不需要我們自己釋放這條連線）來從 `Database` 中獲得連線，這邊我們可以使用 `Database#using_connection`：
 
 ```crystal
 require "mysql"
@@ -116,12 +115,12 @@ require "mysql"
 DB.open "mysql://root:root@localhost/test" do |db|
   db.using_connection do |cnn|
     puts typeof(cnn)
-    # use cnn
+    # 使用連線
   end
 end
 ```
 
-In the next example we will let the `database` object *to manage the connections by itself*, like this:
+在下一個範例中，我們將會讓 `Database` 物件，__自己管理連線__，就像這樣：
 
 ```crystal
 require "mysql"
@@ -137,16 +136,14 @@ DB.open "mysql://root:root@localhost/test" do |db|
   end
 
   db.query_each "select * from contacts" do |rs|
-    puts "name: #{rs.read}, age: #{rs.read}"
+    puts "名子： #{rs.read}，年齡： #{rs.read}"
   end
 end
 ```
 
-As we may notice, the `database` is polymorphic with a `connection` object with regard to the `#exec` / `#query` / `#transaction` methods. The database is responsible for the use of the connections. Great!
+如同我們所注意到的，`DB::Database` 是 `DB::Connection` 的多型，也就是說 `DB::Database` 也實作了 `#exec` 、 `#query` 還有 `#transaction` 方法。使用並管理這些連線，其實是屬於資料庫物件職責的一部份，我們不需要自己來管理連線，這真是太棒了！
 
-## When to use one or the other?
-Given the examples, it may come to our attention that **the number of connections is relevant**.
-If we are programming a short living application with only one user starting requests to the  database then a single connection managed by us (i.e. a `DB::Connection` object) should be enough (think of a command line application that receives parameters, then starts a request to the database and finally displays the result to the user)
-On the other hand, if we are building a system with many concurrent users and with heavy database access, then we should use a `DB::Database` object; which by using a connection pool will have a number of connections already prepared and ready to use (no bootstrap/initialization-time penalizations). Or imagine that you are building a long-living application (like a background job) then a connection pool will free you from the responsibility of monitoring the state of the connection: is it alive or does it need to reconnect?
-
-
+## 什麼時候該用哪一種呢？
+根據這上面的例子呢，我們好像能夠注意到，兩個方法的差別在於**連線的數量**。
+如果我們是開發的是一個執行完就結束的程式而且只有一個使用者會存取資料庫的話，那麼我們自己來管理一條連線（換言之，一個 `DB::Connection` 物件）就已經非常夠用了（想像一個命令列應用程式，接受參數後查詢資料庫，並將結果顯示給使用者）
+另一方面，如過我們建構的是一個大型的系統，可能會有許多使用者的同時在使用，且有大量的資料庫存取，那我們就應該使用 `DB::Database` 物件；`DB::Database` 建立了一系列可用的連線並放置於連線池中(不會在我們需要連線的時候有建立連線的成本)。或者想像你正在建構一個會持續運行的程式（像是一些背景作業程式）那麼連線池可以讓你免於監測這些連線的狀態：這條連線是活著的嗎？還是它需要被重新連接？
