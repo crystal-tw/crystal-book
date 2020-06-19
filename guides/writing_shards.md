@@ -1,4 +1,4 @@
-# Writing Shards
+# 撰寫 Shards
 
 How to write and release Crystal Shards.
 
